@@ -9,6 +9,7 @@ use App\Models\Facility;
 use App\Models\SpmiDocument;
 use App\Models\SiteSetting;
 use App\Models\Slide;
+use App\Models\Stat;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -16,12 +17,13 @@ class PublicController extends Controller
     public function home()
     {
         $slides = Slide::where('is_active', true)->orderBy('order', 'asc')->get();
+        $stats = Stat::where('is_active', true)->orderBy('order', 'asc')->get();
         $posts = Post::where('status', 'published')->orderBy('published_at', 'desc')->take(6)->get();
         $prodis = ProgramStudi::where('is_active', true)->get();
         $facilities = Facility::where('is_featured', true)->take(6)->get();
         $spmiDocs = SpmiDocument::orderBy('year', 'desc')->take(4)->get();
 
-        return view('public.home', compact('slides', 'posts', 'prodis', 'facilities', 'spmiDocs'));
+        return view('public.home', compact('slides', 'stats', 'posts', 'prodis', 'facilities', 'spmiDocs'));
     }
 
     public function prodiIndex()

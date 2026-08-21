@@ -38,7 +38,7 @@
                             950: '#090d16',
                         },
                         gold: {
-                            500: '#f59e0b',
+                            50: '#f59e0b',
                         }
                     },
                     fontFamily: {
@@ -71,9 +71,9 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <div class="flex items-center gap-4">
                 <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[11px] animate-pulse">
-                    <i class="fa-solid fa-bullhorn text-xs"></i> PMB 2026/2027
+                    <i class="fa-solid fa-bullhorn text-xs"></i> {{ \App\Models\SiteSetting::get('announcement_badge', 'PMB 2026/2027') }}
                 </span>
-                <span class="hidden sm:inline font-medium">Pendaftaran Mahasiswa Baru D3/S1/Profesi Telah Dibuka!</span>
+                <span class="hidden sm:inline font-medium">{{ \App\Models\SiteSetting::get('announcement_text', 'Pendaftaran Mahasiswa Baru D3/S1/Profesi Telah Dibuka!') }}</span>
             </div>
             <div class="flex items-center gap-5 text-slate-300">
                 <a href="tel:{{ \App\Models\SiteSetting::get('phone') }}" class="hover:text-amber-300 transition flex items-center gap-1.5">
@@ -81,9 +81,6 @@
                 </a>
                 <a href="mailto:{{ \App\Models\SiteSetting::get('email') }}" class="hover:text-amber-300 transition flex items-center gap-1.5 hidden md:flex">
                     <i class="fa-solid fa-envelope text-blue-400"></i> {{ \App\Models\SiteSetting::get('email') }}
-                </a>
-                <a href="{{ route('login') }}" class="text-amber-300 hover:text-white font-semibold flex items-center gap-1">
-                    <i class="fa-solid fa-lock text-xs"></i> Login Admin CMS
                 </a>
             </div>
         </div>
@@ -210,10 +207,10 @@
                         <div class="w-12 h-12 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md">
                             <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya Malang" class="h-10 w-auto object-contain">
                         </div>
-                        <span class="font-heading font-bold text-xl text-white">STIKes Panti Waluya</span>
+                        <span class="font-heading font-bold text-xl text-white">{{ \App\Models\SiteSetting::get('site_name', 'STIKes Panti Waluya') }}</span>
                     </div>
                     <p class="text-sm text-slate-400 mb-6 leading-relaxed">
-                        Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang melahirkan insan kesehatan yang profesional, adaptif, dan berkarakter kasih.
+                        {{ \App\Models\SiteSetting::get('footer_description', 'Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang melahirkan insan kesehatan yang profesional, adaptif, dan berkarakter kasih.') }}
                     </p>
                     <div class="space-y-3 text-sm">
                         <div class="flex items-start gap-3">
@@ -245,40 +242,48 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Link Cepat -->
+                <!-- Col 3: Link Cepat & Sosial Media -->
                 <div>
                     <h4 class="font-heading font-bold text-white text-lg mb-5 border-b border-blue-900 pb-2">Tautan Cepat</h4>
-                    <ul class="space-y-3 text-sm">
+                    <ul class="space-y-3 text-sm mb-6">
                         <li><a href="{{ route('news.index') }}" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-blue-500"></i> Berita & Pengumuman</a></li>
                         <li><a href="{{ route('spmi.index') }}" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-blue-500"></i> Repositori SPMI & Akreditasi</a></li>
                         <li><a href="{{ route('facilities.index') }}" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fa-solid fa-chevron-right text-xs text-blue-500"></i> Sarana & Laboratorium</a></li>
                         <li><a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="text-amber-400 font-semibold hover:underline flex items-center gap-2"><i class="fa-solid fa-graduation-cap text-xs"></i> Portal PMB Online</a></li>
-                        <li><a href="{{ route('login') }}" class="hover:text-blue-400 transition flex items-center gap-2"><i class="fa-solid fa-user-gear text-xs text-blue-500"></i> Login CMS Admin</a></li>
                     </ul>
-                </div>
 
-                <!-- Col 4: Social & Media -->
-                <div>
-                    <h4 class="font-heading font-bold text-white text-lg mb-5 border-b border-blue-900 pb-2">Ikuti Kami</h4>
-                    <p class="text-xs text-slate-400 mb-4">Dapatkan informasi terkini seputar kegiatan akademik & informasi PMB melalui media sosial resmi.</p>
-                    <div class="flex gap-3 mb-6">
-                        <a href="{{ \App\Models\SiteSetting::get('facebook', '#') }}" target="_blank" class="w-10 h-10 rounded-xl bg-blue-950 border border-blue-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition">
+                    <h5 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Media Sosial Kampus</h5>
+                    <div class="flex gap-3">
+                        <a href="{{ \App\Models\SiteSetting::get('facebook', '#') }}" target="_blank" class="w-9 h-9 rounded-xl bg-blue-950 border border-blue-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 hover:border-blue-500 transition">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
-                        <a href="{{ \App\Models\SiteSetting::get('instagram', '#') }}" target="_blank" class="w-10 h-10 rounded-xl bg-blue-950 border border-blue-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-pink-600 hover:border-pink-500 transition">
+                        <a href="{{ \App\Models\SiteSetting::get('instagram', '#') }}" target="_blank" class="w-9 h-9 rounded-xl bg-blue-950 border border-blue-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-pink-600 hover:border-pink-500 transition">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="{{ \App\Models\SiteSetting::get('youtube', '#') }}" target="_blank" class="w-10 h-10 rounded-xl bg-blue-950 border border-blue-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 hover:border-red-500 transition">
+                        <a href="{{ \App\Models\SiteSetting::get('youtube', '#') }}" target="_blank" class="w-9 h-9 rounded-xl bg-blue-950 border border-blue-900 flex items-center justify-center text-slate-400 hover:text-white hover:bg-red-600 hover:border-red-500 transition">
                             <i class="fa-brands fa-youtube"></i>
                         </a>
                     </div>
                 </div>
 
+                <!-- Col 4: Google Maps Embed Kampus -->
+                <div>
+                    <h4 class="font-heading font-bold text-white text-lg mb-5 border-b border-blue-900 pb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-map-location-dot text-sky-400"></i> Lokasi Kampus
+                    </h4>
+                    <div class="rounded-2xl overflow-hidden shadow-xl border border-blue-900/80 h-48 bg-slate-900">
+                        <iframe src="{{ \App\Models\SiteSetting::get('maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.2721868351744!2d112.6247!3d-7.9708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e788280f5555555%3A0x0!2sSTIKes%20Panti%20Waluya%20Malang!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid') }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <a href="https://maps.google.com" target="_blank" class="text-xs text-sky-400 hover:underline mt-2 inline-block font-semibold">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px] mr-1"></i> Buka Petunjuk Arah Google Maps
+                    </a>
+                </div>
+
             </div>
 
             <div class="border-t border-blue-950 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
-                <p>&copy; {{ date('Y') }} STIKes Panti Waluya Malang. All rights reserved.</p>
-                <p class="mt-2 md:mt-0">CMS & Website Powered by Laravel Engine</p>
+                <p>{{ \App\Models\SiteSetting::get('footer_copyright', '© ' . date('Y') . ' STIKes Panti Waluya Malang. All rights reserved.') }}</p>
+                <p class="mt-2 md:mt-0">{{ \App\Models\SiteSetting::get('footer_credits', 'CMS & Website Powered by Laravel Engine') }}</p>
             </div>
         </div>
     </footer>

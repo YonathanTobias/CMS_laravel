@@ -30,7 +30,9 @@ class ProgramStudiController extends Controller
             'curriculum_summary' => 'nullable|string',
             'career_prospects' => 'nullable|string',
             'icon' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:5120',
+            'accreditation_certificate_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:10240',
+            'accreditation_certificate_url' => 'nullable|string',
         ]);
 
         $validated['slug'] = Str::slug($request->name);
@@ -39,6 +41,13 @@ class ProgramStudiController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('prodi', 'public');
             $validated['image'] = '/storage/' . $path;
+        }
+
+        if ($request->hasFile('accreditation_certificate_file')) {
+            $path = $request->file('accreditation_certificate_file')->store('prodi/certificates', 'public');
+            $validated['accreditation_certificate'] = '/storage/' . $path;
+        } elseif ($request->filled('accreditation_certificate_url')) {
+            $validated['accreditation_certificate'] = $request->accreditation_certificate_url;
         }
 
         ProgramStudi::create($validated);
@@ -61,7 +70,9 @@ class ProgramStudiController extends Controller
             'curriculum_summary' => 'nullable|string',
             'career_prospects' => 'nullable|string',
             'icon' => 'nullable|string',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:5120',
+            'accreditation_certificate_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:10240',
+            'accreditation_certificate_url' => 'nullable|string',
         ]);
 
         $validated['is_active'] = $request->has('is_active');
@@ -69,6 +80,13 @@ class ProgramStudiController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('prodi', 'public');
             $validated['image'] = '/storage/' . $path;
+        }
+
+        if ($request->hasFile('accreditation_certificate_file')) {
+            $path = $request->file('accreditation_certificate_file')->store('prodi/certificates', 'public');
+            $validated['accreditation_certificate'] = '/storage/' . $path;
+        } elseif ($request->filled('accreditation_certificate_url')) {
+            $validated['accreditation_certificate'] = $request->accreditation_certificate_url;
         }
 
         $prodi->update($validated);

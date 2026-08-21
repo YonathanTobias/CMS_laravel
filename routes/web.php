@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SpmiController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\StatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     
     // CRUD Banner Carousel Slides
     Route::resource('slides', SlideController::class);
+    
+    // CRUD Counter Stats Widget (Angka Statistik Kampus)
+    Route::resource('stats', StatController::class);
     
     // Site Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');

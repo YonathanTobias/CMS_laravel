@@ -24,4 +24,9 @@ class Post extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(PostImage::class)->orderBy('order', 'asc');
+    }
 }

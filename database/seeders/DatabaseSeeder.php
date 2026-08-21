@@ -11,6 +11,7 @@ use App\Models\SpmiDocument;
 use App\Models\SiteSetting;
 use App\Models\Menu;
 use App\Models\Slide;
+use App\Models\Stat;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -159,7 +160,7 @@ class DatabaseSeeder extends Seeder
         Menu::updateOrCreate(['name' => 'Fasilitas'], ['url' => '/fasilitas', 'order' => 6]);
         Menu::updateOrCreate(['name' => 'Kontak'], ['url' => '/kontak', 'order' => 7]);
 
-        // 6. Slides / Banner Carousel Seeding
+        // 6. Slides Seeding
         $slides = [
             [
                 'title' => 'Penerimaan Mahasiswa Baru (PMB) T.A. 2026/2027',
@@ -185,34 +186,42 @@ class DatabaseSeeder extends Seeder
                 'secondary_link' => '/spmi',
                 'order' => 2,
             ],
-            [
-                'title' => 'Peluang Karir Perawat Internasional ke Jepang & Jerman',
-                'subtitle' => 'STIKes Panti Waluya Malang menyediakan fasilitas pelatihan bahasa dan penyaluran kerja alumni ke Rumah Sakit Luar Negeri.',
-                'badge' => 'PROGRAM KERJASAMA GLOBAL',
-                'badge_color' => 'bg-sky-500 text-slate-950',
-                'image' => 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1920&q=80',
-                'cta_text' => 'Baca Berita Kerjasama',
-                'cta_link' => '/berita',
-                'secondary_text' => 'Hubungi Kami',
-                'secondary_link' => '/kontak',
-                'order' => 3,
-            ],
-            [
-                'title' => 'Fasilitas Laboratorium Klinis & CBT Computer Center',
-                'subtitle' => 'Dukung pengalaman praktikum nyata dengan Mini Hospital IGD simulasi, Lab Rekam Medis EHR, dan Perpustakaan Digital.',
-                'badge' => 'SARANA PRAKTIKUM MODERN',
-                'badge_color' => 'bg-indigo-600 text-white',
-                'image' => 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1920&q=80',
-                'cta_text' => 'Jelajahi Fasilitas Kampus',
-                'cta_link' => '/fasilitas',
-                'secondary_text' => 'Daftar PMB',
-                'secondary_link' => 'https://pmb.stikespantiwaluya.ac.id',
-                'order' => 4,
-            ],
         ];
 
         foreach ($slides as $s) {
             Slide::updateOrCreate(['title' => $s['title']], $s);
+        }
+
+        // 7. Counter Stats Bar Widget Seeding (Fitur Edit Widget Statistik Beranda)
+        $stats = [
+            [
+                'value' => '5',
+                'label' => 'Program Studi Pilihan',
+                'color' => 'text-blue-700',
+                'order' => 1,
+            ],
+            [
+                'value' => '96%',
+                'label' => 'Alumni Bekerja < 3 Bulan',
+                'color' => 'text-blue-700',
+                'order' => 2,
+            ],
+            [
+                'value' => '25+',
+                'label' => 'RS & Institusi Mitra Kerja',
+                'color' => 'text-blue-700',
+                'order' => 3,
+            ],
+            [
+                'value' => 'Unggul',
+                'label' => 'Akreditasi Perguruan Tinggi',
+                'color' => 'text-amber-500',
+                'order' => 4,
+            ],
+        ];
+
+        foreach ($stats as $st) {
+            Stat::updateOrCreate(['label' => $st['label']], $st);
         }
     }
 }

@@ -38,7 +38,7 @@
                     <div>
                         <div class="relative h-48 bg-slate-900 overflow-hidden">
                             @if($post->image)
-                                <img src="{{ $post->image }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
+                                <img src="{{ \Illuminate\Support\Str::startsWith($post->image, 'http') ? $post->image : asset($post->image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
                             @else
                                 <div class="w-full h-full bg-gradient-to-tr from-blue-950 to-blue-800 flex items-center justify-center text-blue-400 opacity-80">
                                     <i class="fa-solid fa-newspaper text-4xl"></i>

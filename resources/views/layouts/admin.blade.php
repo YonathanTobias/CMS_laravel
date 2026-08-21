@@ -112,6 +112,12 @@
                 <span x-show="sidebarOpen">Kelola Banner Carousel</span>
             </a>
 
+            <!-- Widget Angka Statistik -->
+            <a href="{{ route('admin.stats.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.stats.*') ? 'bg-wp-active text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+                <i class="fa-solid fa-chart-line w-5 text-center text-base"></i>
+                <span x-show="sidebarOpen">Kelola Widget Statistik</span>
+            </a>
+
             <!-- Menus / Sub-menus (WP Menus) -->
             <a href="{{ route('admin.menus.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.menus.*') ? 'bg-wp-active text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-bars-staggered w-5 text-center text-base"></i>
