@@ -119,7 +119,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
             <!-- Left Card: Banner PMB Info Callout -->
-            <div class="lg:col-span-4 bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 text-white rounded-3xl p-8 shadow-xl border border-blue-800/60 space-y-6 sticky top-24">
+            <div class="lg:col-span-4 bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 text-white rounded-3xl p-8 shadow-xl border border-blue-800/60 space-y-6 lg:sticky lg:top-24">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold uppercase">
                     <i class="fa-solid fa-graduation-cap"></i> {{ \App\Models\SiteSetting::get('pmb_widget_badge', 'Info PMB Online') }}
                 </div>
@@ -150,7 +150,7 @@
             </div>
 
             <!-- Right Grid: Berita & Kegiatan Terbaru (Interactive Carousel Slider) -->
-            <div class="lg:col-span-8 space-y-4 overflow-hidden" 
+            <div class="lg:col-span-8 min-w-0 space-y-4 overflow-hidden" 
                  x-data="{ 
                     scrollNextNews() {
                         this.$refs.newsCarousel.scrollBy({ left: 300, behavior: 'smooth' });
