@@ -121,22 +121,26 @@
             <!-- Left Card: Banner PMB Info Callout -->
             <div class="lg:col-span-4 bg-gradient-to-br from-blue-900 via-blue-950 to-slate-950 text-white rounded-3xl p-8 shadow-xl border border-blue-800/60 space-y-6 sticky top-24">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500 text-slate-950 text-xs font-extrabold uppercase">
-                    <i class="fa-solid fa-graduation-cap"></i> Info PMB Online
+                    <i class="fa-solid fa-graduation-cap"></i> {{ \App\Models\SiteSetting::get('pmb_widget_badge', 'Info PMB Online') }}
                 </div>
                 <div>
-                    <h3 class="font-heading font-extrabold text-2xl text-white mb-2 leading-tight">Pendaftaran Mahasiswa Baru D3 / S1 / Profesi</h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">Bergabunglah bersama kampus kesehatan berkualitas dengan fasilitas laboratorium medis modern & jaringan kerja luas.</p>
+                    <h3 class="font-heading font-extrabold text-2xl text-white mb-2 leading-tight">
+                        {{ \App\Models\SiteSetting::get('pmb_widget_title', 'Pendaftaran Mahasiswa Baru D3 / S1 / Profesi') }}
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        {{ \App\Models\SiteSetting::get('pmb_widget_desc', 'Bergabunglah bersama kampus kesehatan berkualitas dengan fasilitas laboratorium medis modern & jaringan kerja luas.') }}
+                    </p>
                 </div>
 
                 <div class="space-y-2.5 pt-2 text-xs border-t border-white/10">
                     <div class="flex items-center gap-2 text-sky-300 font-bold">
-                        <i class="fa-solid fa-circle-check text-amber-400"></i> Beasiswa Prestasi & Khusus
+                        <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point1', 'Beasiswa Prestasi & Khusus') }}
                     </div>
                     <div class="flex items-center gap-2 text-sky-300 font-bold">
-                        <i class="fa-solid fa-circle-check text-amber-400"></i> D3 Keperawatan & D4 MIK
+                        <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point2', 'D3 Keperawatan & D4 MIK') }}
                     </div>
                     <div class="flex items-center gap-2 text-sky-300 font-bold">
-                        <i class="fa-solid fa-circle-check text-amber-400"></i> S1 Keperawatan & Profesi Ners
+                        <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point3', 'S1 Keperawatan & Profesi Ners') }}
                     </div>
                 </div>
 
