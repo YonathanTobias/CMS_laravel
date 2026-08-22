@@ -149,20 +149,38 @@
                 </a>
             </div>
 
-            <!-- Right Grid: Berita & Kegiatan Terbaru -->
-            <div class="lg:col-span-8 space-y-6">
+            <!-- Right Grid: Berita & Kegiatan Terbaru (Interactive Carousel Slider) -->
+            <div class="lg:col-span-8 space-y-4 overflow-hidden" 
+                 x-data="{ 
+                    scrollNextNews() {
+                        this.$refs.newsCarousel.scrollBy({ left: 300, behavior: 'smooth' });
+                    },
+                    scrollPrevNews() {
+                        this.$refs.newsCarousel.scrollBy({ left: -300, behavior: 'smooth' });
+                    }
+                 }">
                 <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <h3 class="font-heading font-extrabold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
+                    <h3 class="font-heading font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white flex items-center gap-2">
                         <i class="fa-solid fa-newspaper text-blue-700 dark:text-sky-400"></i> Berita & Kegiatan Terbaru
                     </h3>
-                    <a href="{{ route('news.index') }}" class="text-xs text-blue-700 dark:text-sky-400 hover:underline font-bold">
-                        Lihat Semua Berita &rarr;
-                    </a>
+                    
+                    <div class="flex items-center gap-3">
+                        <a href="{{ route('news.index') }}" class="text-xs text-blue-700 dark:text-sky-400 hover:underline font-bold mr-1">
+                            Lihat Semua &rarr;
+                        </a>
+                        <button @click="scrollPrevNews()" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kiri">
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
+                        </button>
+                        <button @click="scrollNextNews()" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kanan">
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
+                        </button>
+                    </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                <!-- News Carousel Track -->
+                <div x-ref="newsCarousel" class="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none pb-4 pt-1">
                     @foreach($posts as $post)
-                        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
+                        <article class="w-64 sm:w-72 shrink-0 snap-start bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
                             <div>
                                 <div class="relative h-40 bg-slate-900 overflow-hidden">
                                     @if($post->image)

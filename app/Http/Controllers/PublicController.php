@@ -19,8 +19,8 @@ class PublicController extends Controller
     {
         $slides = Slide::where('is_active', true)->orderBy('order', 'asc')->get();
         $stats = Stat::where('is_active', true)->orderBy('order', 'asc')->get();
-        $achievements = Achievement::where('is_active', true)->orderBy('order', 'asc')->orderBy('created_at', 'desc')->get();
-        $posts = Post::where('status', 'published')->orderBy('published_at', 'desc')->take(6)->get();
+        $achievements = Achievement::where('is_active', true)->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(10)->get();
+        $posts = Post::where('status', 'published')->orderBy('published_at', 'desc')->take(10)->get();
         $prodis = ProgramStudi::where('is_active', true)->get();
         $facilities = Facility::where('is_featured', true)->take(6)->get();
         $spmiDocs = SpmiDocument::orderBy('year', 'desc')->take(4)->get();
