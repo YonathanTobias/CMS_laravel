@@ -206,7 +206,7 @@
                     <i class="fa-solid fa-trophy text-amber-600 dark:text-amber-400"></i> Congratulation & Ucapan Selamat
                 </span>
                 <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-                    Ukiran Prestasi & Pengakuan Civitas Academica
+                    Prestasi Civitas Akademika STIKes Panti Waluya Malang
                 </h2>
                 <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                     Apresiasi setinggi-tingginya atas sertifikasi dosen, pelantikan tim satgas baru, serta kejuaraan mahasiswa STIKes Panti Waluya Malang.
