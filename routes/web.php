@@ -42,7 +42,7 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
-| Admin CMS Routes (Gaya WordPress)
+| Admin CMS Routes
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

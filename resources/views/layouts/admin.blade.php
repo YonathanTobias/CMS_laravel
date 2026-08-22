@@ -51,7 +51,7 @@
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans antialiased flex h-screen overflow-hidden" x-data="{ sidebarOpen: true }">
 
-    <!-- WordPress Style Sidebar -->
+    <!-- Admin CMS Sidebar -->
     <aside :class="sidebarOpen ? 'w-64' : 'w-20'" class="bg-wp-sidebar text-slate-300 flex flex-col transition-all duration-300 z-30 shrink-0 select-none shadow-2xl">
         
         <!-- Header / Logo -->
@@ -69,7 +69,7 @@
             </button>
         </div>
 
-        <!-- Navigation Links (Gaya WordPress) -->
+        <!-- Navigation Links -->
         <nav class="flex-1 overflow-y-auto py-4 px-2 space-y-1 text-sm">
             
             <!-- Dashboard -->

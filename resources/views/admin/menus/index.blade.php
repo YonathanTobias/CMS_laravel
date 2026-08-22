@@ -7,7 +7,7 @@
 <div class="flex justify-between items-center mb-6">
     <div>
         <h2 class="font-heading font-bold text-xl text-slate-900">Kelola Navigation Menu & Sub-menu</h2>
-        <p class="text-xs text-slate-500">Pengaturan menu navigasi utama dan dropdown sub-menu gaya WordPress (Appearance &gt; Menus).</p>
+        <p class="text-xs text-slate-500">Pengaturan menu navigasi utama dan dropdown sub-menu pada website.</p>
     </div>
     <a href="{{ route('admin.menus.create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
         <i class="fa-solid fa-plus"></i> Tambah Menu / Sub-menu

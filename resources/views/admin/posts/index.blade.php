@@ -7,7 +7,7 @@
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
     <div>
         <h2 class="font-heading font-bold text-xl text-slate-900">Daftar Berita & Pengumuman</h2>
-        <p class="text-xs text-slate-500">Kelola artikel publikasi kampus gaya WordPress.</p>
+        <p class="text-xs text-slate-500">Kelola artikel dan pengumuman publikasi kampus.</p>
     </div>
     <a href="{{ route('admin.posts.create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
         <i class="fa-solid fa-plus"></i> Tambah Berita Baru

@@ -6,7 +6,7 @@
 
 <div class="mb-6 flex items-center justify-between">
     <div>
-        <h2 class="font-heading font-bold text-xl text-slate-900">Buat Halaman Statis Baru (WordPress Page Builder)</h2>
+        <h2 class="font-heading font-bold text-xl text-slate-900">Buat Halaman Statis Baru</h2>
         <p class="text-xs text-slate-500">Buat halaman profil, informasi beasiswa, LPPM, atau halaman baru lainnya.</p>
     </div>
     <a href="{{ route('admin.pages.index') }}" class="text-xs text-slate-600 font-bold hover:underline">&larr; Kembali ke Daftar Halaman</a>
@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <!-- Sidebar Settings (WordPress Style Page Attributes) -->
+    <!-- Sidebar Settings -->
     <div class="lg:col-span-4 space-y-6">
         
         <!-- Status & Publish -->

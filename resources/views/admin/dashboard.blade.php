@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    <!-- Right Col: Quick Draft Form (Gaya WordPress) -->
+    <!-- Right Col: Quick Draft Form -->
     <div class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
         <div class="border-b border-slate-100 pb-3">
             <h3 class="font-heading font-bold text-lg text-slate-900">Draft Cepat (Quick Draft)</h3>
