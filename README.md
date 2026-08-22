@@ -1,59 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CMS STIKes Panti Waluya Malang
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Manajemen Konten (CMS) dan Website Resmi **Sekolah Tinggi Ilmu Kesehatan (STIKes) Panti Waluya Malang** berbasis Laravel & Tailwind CSS.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Fitur Utama Website & Admin CMS
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. **Tampilan Beranda Utama Modern (8 Seksi)**:
+   - **Hero Image Carousel Slider** (Slide banner interaktif otomatis).
+   - **Ribbon Tagline Banner Blue Accent**.
+   - **Info PMB Online Widget Callout** (100% dinamis dari Admin Settings).
+   - **Berita & Kegiatan Terbaru Carousel Slider** (10 Berita terbaru dengan tombol panah navigasi).
+   - **Prestasi Civitas Akademika Carousel Slider** (10 Item Ucapan Selamat atas Sertifikasi Dosen, Satgas PPKS Baru, & Kejuaraan Mahasiswa + Fullscreen Lightbox Zoom).
+   - **Profil Kampus & Sekilas Mengenai Kami** (Foto Gedung Utama, Visi, Akreditasi Institusi).
+   - **Dedicated Standalone Widget Sertifikat Akreditasi & Piagam Institusi** (Carousel Slider dokumen legalitas BAN-PT, LAM-PTKes, LLDIKTI VII, & Kemenkes RI).
+   - **Organizational Culture "DIC4" Banner**.
+   - **Program Studi & Sertifikat Akreditasi Utuh** (D3 Keperawatan, S1 Keperawatan, Profesi Ners, D3 RMIK, D3 Farmasi).
+   - **8 Circle Action Icon Grid Layanan Digital Kampus** (PMB, LMS, CBT, E-Library, SPMI, Jurnal, Lab).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. **Fitur Interactive Dark Mode & Light Mode Switcher**:
+   - Tersedia tombol sakelar **`Mode Terang (☀️)`** / **`Mode Gelap (🌙)`** di header Admin CMS dan Navbar Publik.
+   - Pilihan tema tersimpan secara konsisten di `localStorage` browser.
 
-## Learning Laravel
+3. **Modul Pengaturan CMS Terpadu (`/admin/settings`)**:
+   - Pengaturan Pengumuman Running Text Top Bar Header.
+   - Pengaturan Isi Widget Info PMB Online.
+   - Pengaturan Embed Google Maps Peta Kampus Footer.
+   - Pengaturan Kontak (Telepon, WA, Email, Alamat) & Sosial Media.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+4. **Sistem Halaman Statis Anti-404 Fallback**:
+   - Seluruh tautan menu (`/halaman/profil`, `/halaman/visi-misi`, `/halaman/sambutan-ketua`, `/halaman/kemahasiswaan`, `/halaman/beasiswa`, `/halaman/akreditasi`, `/halaman/kerjasama`, `/halaman/alumni`, `/halaman/struktur-organisasi`) memiliki halaman dinamis dan fallback template rapi.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🏡 Panduan Menjalankan Project Di Rumah / Laptop Lain
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Update Kodingan Terbaru dari GitHub:
+```bash
+git pull origin main
+```
 
-### Premium Partners
+### 2. Menjalankan Website (Local Development):
+```bash
+php artisan serve
+```
+Akses di browser: [`http://127.0.0.1:8000`](http://127.0.0.1:8000)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3. Akses Dashboard Admin CMS:
+- **URL Login Admin**: [`http://127.0.0.1:8000/admin/login`](http://127.0.0.1:8000/admin/login)
+- **Email**: `admin@stikespantiwaluya.ac.id`
+- **Password**: `password123`
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 📂 Struktur Database & Seeder
 
-## Code of Conduct
+- `DatabaseSeeder`: Mengisi data admin, site settings, 5 prodi, 10 berita sampel, slide hero, dan fasilitas.
+- `AchievementSeeder`: Mengisi 10 ucapan selamat & prestasi civitas akademika (Dosen, Satgas, Mahasiswa).
+- `PageSeeder`: Mengisi 9 halaman statis kampus.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Untuk mereset/mengisi ulang database sampel:
+```bash
+php artisan migrate:fresh --seed
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📌 Repository GitHub Status
+- **Repository URL**: [https://github.com/YonathanTobias/CMS_laravel.git](https://github.com/YonathanTobias/CMS_laravel.git)
+- **Branch**: `main`
