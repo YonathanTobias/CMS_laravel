@@ -195,12 +195,22 @@
     </div>
 </section>
 
-<!-- 4. Congratulation & Ucapan Selamat -->
+<!-- 4. Congratulation & Ucapan Selamat (Interactive Carousel Slider) -->
 @if(isset($achievements) && $achievements->count() > 0)
-<section class="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
+<section class="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200" 
+         x-data="{ 
+            activePoster: null,
+            scrollNext() {
+                this.$refs.carousel.scrollBy({ left: 340, behavior: 'smooth' });
+            },
+            scrollPrev() {
+                this.$refs.carousel.scrollBy({ left: -340, behavior: 'smooth' });
+            }
+         }">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
+        <!-- Header & Nav Buttons -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
             <div class="space-y-2 max-w-2xl">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-xs font-extrabold uppercase tracking-wider">
                     <i class="fa-solid fa-trophy text-amber-600 dark:text-amber-400"></i> Congratulation & Ucapan Selamat
@@ -213,19 +223,27 @@
                 </p>
             </div>
 
-            <div class="shrink-0">
-                <span class="text-xs font-bold text-blue-900 dark:text-sky-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-4 py-2 rounded-xl">
-                    <i class="fa-solid fa-medal text-amber-500 mr-1.5"></i> {{ $achievements->count() }} Ucapan & Prestasi Terkini
+            <!-- Controls: Left & Right Navigation Arrows -->
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 mr-2 hidden sm:inline">
+                    <i class="fa-solid fa-sliders text-amber-500 mr-1"></i> Geser Kartu
                 </span>
+                <button @click="scrollPrev()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kiri">
+                    <i class="fa-solid fa-chevron-left text-base"></i>
+                </button>
+                <button @click="scrollNext()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kanan">
+                    <i class="fa-solid fa-chevron-right text-base"></i>
+                </button>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" x-data="{ activePoster: null }">
+        <!-- Horizontal Carousel Slider Track -->
+        <div x-ref="carousel" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none pb-4 pt-1">
             @foreach($achievements as $ach)
                 @php
                     $posterUrl = \Illuminate\Support\Str::startsWith($ach->poster_image, 'http') ? $ach->poster_image : asset($ach->poster_image);
                 @endphp
-                <div class="bg-white dark:bg-slate-950 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                <div class="w-72 sm:w-80 shrink-0 snap-start bg-white dark:bg-slate-950 rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
                     <div class="relative h-72 bg-slate-100 dark:bg-slate-800 overflow-hidden cursor-pointer" @click="activePoster = '{{ $posterUrl }}'">
                         @if($ach->poster_image)
                             <img src="{{ $posterUrl }}" alt="{{ $ach->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -274,15 +292,19 @@
                     </div>
                 </div>
             @endforeach
+        </div>
 
-            <!-- Lightbox Zoom Modal -->
-            <div x-show="activePoster" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="activePoster = null">
-                <div class="relative max-w-4xl w-full">
-                    <button @click="activePoster = null" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
-                    <img :src="activePoster" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
-                </div>
+        <!-- Lightbox Zoom Modal -->
+        <div x-show="activePoster" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="activePoster = null">
+            <div class="relative max-w-4xl w-full">
+                <button @click="activePoster = null" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
+                <img :src="activePoster" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
             </div>
         </div>
+
+    </div>
+</section>
+@endif
 
     </div>
 </section>
