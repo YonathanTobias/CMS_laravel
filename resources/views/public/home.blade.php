@@ -195,7 +195,7 @@
     </div>
 </section>
 
-<!-- 4. Congratulation & Prestasi Mahasiswa -->
+<!-- 4. Congratulation & Ucapan Selamat -->
 @if(isset($achievements) && $achievements->count() > 0)
 <section class="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -203,19 +203,19 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
             <div class="space-y-2 max-w-2xl">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-xs font-extrabold uppercase tracking-wider">
-                    <i class="fa-solid fa-trophy text-amber-600 dark:text-amber-400"></i> Congratulation & Prestasi Mahasiswa
+                    <i class="fa-solid fa-trophy text-amber-600 dark:text-amber-400"></i> Congratulation & Ucapan Selamat
                 </span>
                 <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-                    Ukiran Prestasi & Kejuaraan Mahasiswa
+                    Ukiran Prestasi & Pengakuan Civitas Academica
                 </h2>
                 <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                    Apresiasi setinggi-tingginya atas pencapaian dan kejuaraan nasional mahasiswa STIKes Panti Waluya Malang.
+                    Apresiasi setinggi-tingginya atas sertifikasi dosen, pelantikan tim satgas baru, serta kejuaraan mahasiswa STIKes Panti Waluya Malang.
                 </p>
             </div>
 
             <div class="shrink-0">
                 <span class="text-xs font-bold text-blue-900 dark:text-sky-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-4 py-2 rounded-xl">
-                    <i class="fa-solid fa-medal text-amber-500 mr-1.5"></i> {{ $achievements->count() }} Prestasi Terkini
+                    <i class="fa-solid fa-medal text-amber-500 mr-1.5"></i> {{ $achievements->count() }} Ucapan & Prestasi Terkini
                 </span>
             </div>
         </div>

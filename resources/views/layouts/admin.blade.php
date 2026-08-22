@@ -96,10 +96,10 @@
                 <span x-show="sidebarOpen">Berita & Artikel</span>
             </a>
 
-            <!-- Prestasi Mahasiswa -->
+            <!-- Prestasi & Ucapan Selamat -->
             <a href="{{ route('admin.achievements.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.achievements.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-trophy w-5 text-center text-base text-amber-400"></i>
-                <span x-show="sidebarOpen">Prestasi Mahasiswa</span>
+                <span x-show="sidebarOpen">Prestasi & Ucapan Selamat</span>
             </a>
 
             <!-- Halaman Statis -->
