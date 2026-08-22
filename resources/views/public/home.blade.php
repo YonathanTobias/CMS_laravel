@@ -306,10 +306,6 @@
 </section>
 @endif
 
-    </div>
-</section>
-@endif
-
 <!-- 5. Sekilas Mengenai Kami & Akreditasi Perguruan Tinggi -->
 <section class="py-16 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
