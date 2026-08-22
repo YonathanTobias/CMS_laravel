@@ -84,7 +84,26 @@ class PublicController extends Controller
 
     public function pageShow($slug)
     {
-        $page = Page::where('slug', $slug)->where('status', 'published')->firstOrFail();
+        $page = Page::where('slug', $slug)->where('is_active', true)->first();
+
+        if (!$page) {
+            $formattedTitle = ucwords(str_replace(['-', '_'], ' ', $slug));
+            $page = new Page([
+                'title' => $formattedTitle . ' - STIKes Panti Waluya Malang',
+                'slug' => $slug,
+                'is_active' => true,
+                'content' => '
+                    <div class="space-y-6">
+                        <div class="p-6 bg-blue-50 border border-blue-200 rounded-2xl">
+                            <h3 class="font-bold text-blue-900 text-lg mb-2">' . $formattedTitle . '</h3>
+                            <p class="text-sm text-slate-700 leading-relaxed">Informasi resmi seputar ' . strtolower($formattedTitle) . ' Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang.</p>
+                        </div>
+                        <p class="text-slate-700 leading-relaxed">STIKes Panti Waluya Malang berkomitmen menghadirkan informasi transparan dan akuntabel untuk mendukung proses belajar mengajar serta layanan akademik publik.</p>
+                    </div>
+                ',
+            ]);
+        }
+
         return view('public.pages.show', compact('page'));
     }
 

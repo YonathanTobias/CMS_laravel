@@ -213,7 +213,7 @@ class DatabaseSeeder extends Seeder
                 'order' => 3,
             ],
             [
-                'value' => 'Unggul',
+                'value' => 'Baik Sekali',
                 'label' => 'Akreditasi Perguruan Tinggi',
                 'color' => 'text-amber-500',
                 'order' => 4,
@@ -225,5 +225,6 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(AchievementSeeder::class);
+        $this->call(PageSeeder::class);
     }
 }
