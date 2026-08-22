@@ -1,0 +1,62 @@
+====================================================================
+  PANDUAN CARA MENGERJAKAN PROJECT CMS STIKES PANTI WALUYA DI RUMAH
+====================================================================
+
+Repository GitHub: https://github.com/YonathanTobias/CMS_laravel.git
+Branch Utama: main
+
+--------------------------------------------------------------------
+1. JIKA DI PC RUMAH SUDAH ADA FOLDER PROJECT INI SEBELUMNYA:
+--------------------------------------------------------------------
+   - Buka Terminal / Command Prompt (CMD) di folder project.
+   - Jalankan perintah berikut untuk mengambil kodingan terbaru:
+
+     git pull origin main
+
+   - Jalankan server local Laravel:
+
+     php artisan serve
+
+   - Buka browser dan akses:
+     http://127.0.0.1:8000
+
+--------------------------------------------------------------------
+2. JIKA BARU PERTAMA KALI INGIN DOWNLOAD PROJECT DI PC RUMAH:
+--------------------------------------------------------------------
+   - Buka Terminal / CMD di lokasi folder penyimpanan Anda.
+   - Jalankan perintah clone:
+
+     git clone https://github.com/YonathanTobias/CMS_laravel.git
+     cd CMS_laravel
+
+   - Copy file environment & instalasi database:
+
+     copy .env.example .env
+     php artisan key:generate
+     touch database/database.sqlite
+     php artisan migrate:fresh --seed
+
+   - Jalankan server local Laravel:
+
+     php artisan serve
+
+   - Buka browser dan akses:
+     http://127.0.0.1:8000
+
+--------------------------------------------------------------------
+3. AKSES LOGIN DASHBOARD ADMIN CMS:
+--------------------------------------------------------------------
+   - URL Login Admin : http://127.0.0.1:8000/admin/login
+   - Email Admin     : admin@stikespantiwaluya.ac.id
+   - Password Admin  : password123
+
+--------------------------------------------------------------------
+4. SETELAH SELESAI CODING DI RUMAH & MAU DISIMPAN KE GITHUB:
+--------------------------------------------------------------------
+   - Jalankan perintah ini:
+
+     git add .
+     git commit -m "Update CMS"
+     git push origin main
+
+====================================================================
