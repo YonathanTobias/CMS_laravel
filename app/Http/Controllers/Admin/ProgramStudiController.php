@@ -24,6 +24,7 @@ class ProgramStudiController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
             'degree' => 'required|string',
             'accreditation' => 'required|string',
             'description' => 'required|string',
@@ -35,7 +36,7 @@ class ProgramStudiController extends Controller
             'accreditation_certificate_url' => 'nullable|string',
         ]);
 
-        $validated['slug'] = Str::slug($request->name);
+        $validated['slug'] = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->name);
         $validated['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('image')) {
@@ -64,6 +65,7 @@ class ProgramStudiController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|max:255',
             'degree' => 'required|string',
             'accreditation' => 'required|string',
             'description' => 'required|string',
@@ -75,6 +77,7 @@ class ProgramStudiController extends Controller
             'accreditation_certificate_url' => 'nullable|string',
         ]);
 
+        $validated['slug'] = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->name);
         $validated['is_active'] = $request->has('is_active');
 
         if ($request->hasFile('image')) {

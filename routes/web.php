@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\StatController;
+use App\Http\Controllers\Admin\AchievementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,19 +60,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // CRUD Fasilitas Kampus
     Route::resource('facilities', FacilityController::class);
     
-    // CRUD SPMI & Dokumen Akreditasi
+    // CRUD SPMI & Repositori
     Route::resource('spmi', SpmiController::class);
-    
-    // CRUD Menus & Sub-menus (Gaya WordPress Menus)
+
+    // CMS Slide Banner Hero Manager
+    Route::resource('slides', SlideController::class);
+
+    // CMS Stat Counter Manager
+    Route::resource('stats', StatController::class);
+
+    // CMS Prestasi Mahasiswa Manager
+    Route::resource('achievements', AchievementController::class);
+
+    // CMS Menu Navigation Builder
     Route::resource('menus', MenuController::class);
     
-    // CRUD Banner Carousel Slides
-    Route::resource('slides', SlideController::class);
-    
-    // CRUD Counter Stats Widget (Angka Statistik Kampus)
-    Route::resource('stats', StatController::class);
-    
-    // Site Settings
+    // Pengaturan Situs & PMB Online
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
 });

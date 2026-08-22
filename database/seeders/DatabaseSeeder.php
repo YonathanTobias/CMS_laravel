@@ -223,5 +223,7 @@ class DatabaseSeeder extends Seeder
         foreach ($stats as $st) {
             Stat::updateOrCreate(['label' => $st['label']], $st);
         }
+
+        $this->call(AchievementSeeder::class);
     }
 }

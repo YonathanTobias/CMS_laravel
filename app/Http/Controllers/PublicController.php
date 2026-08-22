@@ -10,6 +10,7 @@ use App\Models\SpmiDocument;
 use App\Models\SiteSetting;
 use App\Models\Slide;
 use App\Models\Stat;
+use App\Models\Achievement;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
@@ -18,12 +19,13 @@ class PublicController extends Controller
     {
         $slides = Slide::where('is_active', true)->orderBy('order', 'asc')->get();
         $stats = Stat::where('is_active', true)->orderBy('order', 'asc')->get();
+        $achievements = Achievement::where('is_active', true)->orderBy('order', 'asc')->orderBy('created_at', 'desc')->get();
         $posts = Post::where('status', 'published')->orderBy('published_at', 'desc')->take(6)->get();
         $prodis = ProgramStudi::where('is_active', true)->get();
         $facilities = Facility::where('is_featured', true)->take(6)->get();
         $spmiDocs = SpmiDocument::orderBy('year', 'desc')->take(4)->get();
 
-        return view('public.home', compact('slides', 'stats', 'posts', 'prodis', 'facilities', 'spmiDocs'));
+        return view('public.home', compact('slides', 'stats', 'achievements', 'posts', 'prodis', 'facilities', 'spmiDocs'));
     }
 
     public function prodiIndex()
@@ -35,7 +37,7 @@ class PublicController extends Controller
     public function prodiShow($slug)
     {
         $prodi = ProgramStudi::where('slug', $slug)->where('is_active', true)->firstOrFail();
-        $otherProdis = ProgramStudi::where('is_active', true)->where('id', '!=', $prodi->id)->get();
+        $otherProdis = ProgramStudi::where('id', '!=', $prodi->id)->where('is_active', true)->get();
         return view('public.prodi.show', compact('prodi', 'otherProdis'));
     }
 
@@ -43,22 +45,19 @@ class PublicController extends Controller
     {
         $query = Post::where('status', 'published');
 
-        if ($request->filled('category')) {
+        if ($request->has('category') && $request->category != '') {
             $query->where('category', $request->category);
         }
 
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('content', 'like', "%{$search}%");
+        if ($request->has('search') && $request->search != '') {
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('content', 'like', '%' . $request->search . '%');
             });
         }
 
         $posts = $query->orderBy('published_at', 'desc')->paginate(9);
-        $categories = Post::where('status', 'published')->pluck('category')->unique();
-
-        return view('public.news.index', compact('posts', 'categories'));
+        return view('public.news.index', compact('posts'));
     }
 
     public function newsShow($slug)
@@ -71,38 +70,22 @@ class PublicController extends Controller
         return view('public.news.show', compact('post', 'recentPosts'));
     }
 
-    public function pageShow($slug)
+    public function spmiIndex()
     {
-        $page = Page::where('slug', $slug)->where('is_active', true)->firstOrFail();
-        return view('public.pages.show', compact('page'));
-    }
-
-    public function spmiIndex(Request $request)
-    {
-        $query = SpmiDocument::query();
-
-        if ($request->filled('category')) {
-            $query->where('category', $request->category);
-        }
-
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('document_number', 'like', "%{$search}%");
-            });
-        }
-
-        $documents = $query->orderBy('year', 'desc')->paginate(10);
-        $categories = SpmiDocument::pluck('category')->unique();
-
-        return view('public.spmi.index', compact('documents', 'categories'));
+        $docs = SpmiDocument::orderBy('year', 'desc')->get();
+        return view('public.spmi.index', compact('docs'));
     }
 
     public function facilitiesIndex()
     {
         $facilities = Facility::all();
         return view('public.facilities.index', compact('facilities'));
+    }
+
+    public function pageShow($slug)
+    {
+        $page = Page::where('slug', $slug)->where('status', 'published')->firstOrFail();
+        return view('public.pages.show', compact('page'));
     }
 
     public function contact()

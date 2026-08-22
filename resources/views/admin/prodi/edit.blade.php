@@ -33,6 +33,15 @@
         </div>
     </div>
 
+    <div>
+        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">URL Slug Halaman (Menyesuaikan Otomatis)</label>
+        <div class="flex items-center gap-2">
+            <span class="text-xs text-slate-400 font-mono">{{ url('/program-studi') }}/</span>
+            <input type="text" name="slug" value="{{ old('slug', $prodi->slug) }}" class="flex-1 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
+        </div>
+        <p class="text-[11px] text-slate-400 mt-1">URL ini akan otomatis menyesuaikan jika Nama Prodi diubah, atau Anda dapat mengetikkan URL kustom di atas.</p>
+    </div>
+
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Status Akreditasi</label>

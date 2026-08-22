@@ -185,8 +185,115 @@
     </div>
 </section>
 
+<!-- Prestasi Mahasiswa Section (Clean Light Theme) -->
+@if(isset($achievements) && $achievements->count() > 0)
+<section class="py-20 bg-white border-t border-slate-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-14">
+            <div class="space-y-3 max-w-2xl">
+                <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300/60 text-xs font-extrabold uppercase tracking-wider shadow-sm">
+                    <i class="fa-solid fa-trophy text-amber-600"></i> Hall of Fame & Prestasi Mahasiswa
+                </span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 leading-tight">
+                    Ukiran Prestasi Mahasiswa
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    Apresiasi setinggi-tingginya bagi mahasiswa STIKes Panti Waluya Malang yang berhasil menorehkan kejuaraan dan karya membanggakan di tingkat nasional.
+                </p>
+            </div>
+
+            <div class="shrink-0">
+                <span class="text-xs font-bold text-blue-900 bg-blue-50 border border-blue-200 px-4 py-2.5 rounded-2xl shadow-sm">
+                    <i class="fa-solid fa-medal text-amber-500 mr-1.5"></i> {{ $achievements->count() }} Prestasi Terkini
+                </span>
+            </div>
+        </div>
+
+        <!-- Student Achievement Cards Grid (Clean Light Theme) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" x-data="{ activePoster: null }">
+            @foreach($achievements as $ach)
+                @php
+                    $posterUrl = \Illuminate\Support\Str::startsWith($ach->poster_image, 'http') ? $ach->poster_image : asset($ach->poster_image);
+                @endphp
+                <div class="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-2xl hover:border-blue-400 transition duration-300 flex flex-col justify-between group">
+                    
+                    <!-- Poster Image Header -->
+                    <div class="relative h-72 bg-slate-100 overflow-hidden cursor-pointer" @click="activePoster = '{{ $posterUrl }}'">
+                        @if($ach->poster_image)
+                            <img src="{{ $posterUrl }}" alt="{{ $ach->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        @else
+                            <div class="w-full h-full bg-gradient-to-tr from-blue-900 to-blue-700 flex items-center justify-center text-blue-200">
+                                <i class="fa-solid fa-award text-5xl"></i>
+                            </div>
+                        @endif
+
+                        <!-- Floating Award Badge Ribbon -->
+                        <div class="absolute top-3 left-3">
+                            <span class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold shadow-lg border border-white/40 backdrop-blur-md {{ $ach->badge_color }}">
+                                <i class="fa-solid fa-crown mr-1 text-[10px]"></i> {{ $ach->badge_title }}
+                            </span>
+                        </div>
+
+                        <!-- Hover Zoom Overlay -->
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="bg-white text-slate-900 text-xs font-bold px-4 py-2 rounded-xl shadow-lg border border-slate-200 flex items-center gap-1.5">
+                                <i class="fa-solid fa-magnifying-glass-plus text-amber-500"></i> Perbesar Poster
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Card Content Body -->
+                    <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <!-- Student Profile Pill -->
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-blue-100 border border-blue-200 text-blue-700 font-bold flex items-center justify-center text-sm shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-user-graduate"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <h4 class="font-bold text-slate-900 text-base leading-tight group-hover:text-blue-700 transition truncate">{{ $ach->student_name }}</h4>
+                                    <p class="text-[11px] text-slate-500 font-medium truncate">{!! $ach->student_prodi !!}</p>
+                                </div>
+                            </div>
+
+                            <div class="pt-3 border-t border-slate-100 space-y-1.5">
+                                <h3 class="font-heading font-bold text-base text-slate-900 line-clamp-2 leading-snug hover:text-blue-700 transition">
+                                    {{ $ach->title }}
+                                </h3>
+                                @if($ach->event_name)
+                                    <p class="text-xs text-slate-500 line-clamp-1 flex items-center gap-1.5 font-medium">
+                                        <i class="fa-solid fa-building-columns text-[11px] text-amber-500"></i> {{ $ach->event_name }}
+                                    </p>
+                                @endif
+                                @if($ach->description)
+                                    <p class="text-xs text-amber-800 font-semibold bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200/60 inline-block mt-1">
+                                        {{ $ach->description }}
+                                    </p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            @endforeach
+
+            <!-- Lightbox Zoom Modal for Poster -->
+            <div x-show="activePoster" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="activePoster = null">
+                <div class="relative max-w-4xl w-full">
+                    <button @click="activePoster = null" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
+                    <img :src="activePoster" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+@endif
+
 <!-- Latest News Section -->
-<section class="py-20 bg-white border-t border-slate-200">
+<section class="py-20 bg-slate-50 border-t border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12">
