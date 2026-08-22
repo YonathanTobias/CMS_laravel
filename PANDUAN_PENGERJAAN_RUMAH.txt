@@ -1,0 +1,69 @@
+================================================================================
+          MASTER PLAN & PANDUAN PENGERJAAN CMS STIKES PANTI WALUYA DI RUMAH
+================================================================================
+
+Repository GitHub: https://github.com/YonathanTobias/CMS_laravel.git
+Branch Utama: main (Single Clean Branch)
+
+--------------------------------------------------------------------------------
+1. RINGKASAN DATA KAMPUS & SETUP DATABASE UTUH
+--------------------------------------------------------------------------------
+   - File Database SQLite (database/database.sqlite) dan Seluruh Foto Upload
+     (public/storage/) SUDAH TER-PUSH UTUH KE GITHUB.
+   - Tidak perlu lagi meng-import database atau upload ulang foto berita/sertifikat
+     saat berada di PC rumah.
+
+--------------------------------------------------------------------------------
+2. LANGKAH PENGERJAAN DI PC RUMAH
+--------------------------------------------------------------------------------
+   A. JIKA DI PC RUMAH SUDAH ADA FOLDER PROJECT INI SEBELUMNYA:
+      1. Buka Command Prompt (CMD) di folder project.
+      2. Jalankan perintah untuk menarik kodingan, database, & gambar terbaru:
+
+         git pull origin main
+
+      3. Jalankan server local Laravel:
+
+         php artisan serve
+
+      4. Buka browser dan akses:
+         - Website Utama : http://127.0.0.1:8000
+         - Dashboard CMS : http://127.0.0.1:8000/admin/login
+
+   B. JIKA BARU PERTAMA KALI INGIN DOWNLOAD PROJECT DI PC RUMAH:
+      1. Buka Command Prompt (CMD) di lokasi folder penyimpanan Anda (misal D:\).
+      2. Jalankan perintah clone:
+
+         git clone https://github.com/YonathanTobias/CMS_laravel.git
+         cd CMS_laravel
+
+      3. Copy file environment (.env):
+
+         copy .env.example .env
+         php artisan key:generate
+
+      4. Jalankan server local Laravel:
+
+         php artisan serve
+
+      5. Buka browser dan akses:
+         - Website Utama : http://127.0.0.1:8000
+         - Dashboard CMS : http://127.0.0.1:8000/admin/login
+
+--------------------------------------------------------------------------------
+3. KREDENSIAL LOGIN DASHBOARD ADMIN CMS
+--------------------------------------------------------------------------------
+   - URL Login Admin : http://127.0.0.1:8000/admin/login
+   - Email Admin     : admin@stikespantiwaluya.ac.id
+   - Password Admin  : password123
+
+--------------------------------------------------------------------------------
+4. PERINTAH MENYIMPAN HASIL CODING DARI RUMAH KEMBALI KE GITHUB
+--------------------------------------------------------------------------------
+   Setelah selesai coding di rumah, jalankan 3 perintah ini:
+
+     git add .
+     git commit -m "Update CMS"
+     git push origin main
+
+================================================================================
