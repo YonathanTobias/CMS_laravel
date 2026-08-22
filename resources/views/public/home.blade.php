@@ -75,7 +75,7 @@
         @endforeach
     </div>
 
-    <!-- Navigation Controls (Prev / Next Buttons) -->
+    <!-- Navigation Controls -->
     <button @click="activeSlide = (activeSlide - 1 + slides.length) % slides.length" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-slate-950/40 hover:bg-blue-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition opacity-0 group-hover:opacity-100">
         <i class="fa-solid fa-chevron-left text-lg"></i>
     </button>
@@ -84,7 +84,7 @@
         <i class="fa-solid fa-chevron-right text-lg"></i>
     </button>
 
-    <!-- Indicators (Dots Bar) -->
+    <!-- Indicators -->
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2.5 z-20">
         <template x-for="(slide, index) in slides" :key="index">
             <button @click="activeSlide = index" 
@@ -104,7 +104,7 @@
             </div>
             <div>
                 <h3 class="font-heading font-extrabold text-lg sm:text-xl text-white">Kenapa STIKes Panti Waluya Malang?</h3>
-                <p class="text-xs text-sky-200 font-medium">Pendidikan Kesehatan Terakreditasi Unggul & Siap Kerja Nasional / Internasional</p>
+                <p class="text-xs text-sky-200 font-medium">Pendidikan Kesehatan Terakreditasi Baik Sekali & Siap Kerja Nasional / Internasional</p>
             </div>
         </div>
         <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-5 py-2 rounded-xl text-xs shadow transition shrink-0">
@@ -114,7 +114,7 @@
 </div>
 
 <!-- 3. Top Section: Info PMB Banner (Left) + Berita Berkelanjutan (Right) -->
-<section class="py-16 bg-slate-50">
+<section class="py-16 bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
@@ -145,20 +145,20 @@
                 </a>
             </div>
 
-            <!-- Right Grid: Berita & Kegiatan Terbaru (6 Cards Grid) -->
+            <!-- Right Grid: Berita & Kegiatan Terbaru -->
             <div class="lg:col-span-8 space-y-6">
-                <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                    <h3 class="font-heading font-extrabold text-2xl text-slate-900 flex items-center gap-2">
-                        <i class="fa-solid fa-newspaper text-blue-700"></i> Berita & Kegiatan Terbaru
+                <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-800 pb-3">
+                    <h3 class="font-heading font-extrabold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-newspaper text-blue-700 dark:text-sky-400"></i> Berita & Kegiatan Terbaru
                     </h3>
-                    <a href="{{ route('news.index') }}" class="text-xs text-blue-700 hover:underline font-bold">
+                    <a href="{{ route('news.index') }}" class="text-xs text-blue-700 dark:text-sky-400 hover:underline font-bold">
                         Lihat Semua Berita &rarr;
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     @foreach($posts as $post)
-                        <article class="bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
+                        <article class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-lg transition duration-300 flex flex-col justify-between group">
                             <div>
                                 <div class="relative h-40 bg-slate-900 overflow-hidden">
                                     @if($post->image)
@@ -174,10 +174,10 @@
                                 </div>
 
                                 <div class="p-4 space-y-2">
-                                    <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
-                                        <i class="fa-regular fa-calendar text-blue-600"></i> {{ $post->published_at ? $post->published_at->format('d M Y') : $post->created_at->format('d M Y') }}
+                                    <div class="text-[11px] text-slate-400 dark:text-slate-400 flex items-center gap-1.5">
+                                        <i class="fa-regular fa-calendar text-blue-600 dark:text-sky-400"></i> {{ $post->published_at ? $post->published_at->format('d M Y') : $post->created_at->format('d M Y') }}
                                     </div>
-                                    <h4 class="font-heading font-bold text-xs sm:text-sm text-slate-900 line-clamp-2 hover:text-blue-700 transition leading-snug">
+                                    <h4 class="font-heading font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 hover:text-blue-700 dark:hover:text-sky-400 transition leading-snug">
                                         <a href="{{ route('news.show', $post->slug) }}">{{ $post->title }}</a>
                                     </h4>
                                 </div>
@@ -191,26 +191,26 @@
     </div>
 </section>
 
-<!-- 4. Congratulation & Prestasi Mahasiswa (Clean Light Theme) -->
+<!-- 4. Congratulation & Prestasi Mahasiswa -->
 @if(isset($achievements) && $achievements->count() > 0)
-<section class="py-16 bg-white border-t border-slate-200">
+<section class="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
             <div class="space-y-2 max-w-2xl">
-                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-xs font-extrabold uppercase tracking-wider">
-                    <i class="fa-solid fa-trophy text-amber-600"></i> Congratulation & Prestasi Mahasiswa
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-900 dark:text-amber-300 border border-amber-300 dark:border-amber-800 text-xs font-extrabold uppercase tracking-wider">
+                    <i class="fa-solid fa-trophy text-amber-600 dark:text-amber-400"></i> Congratulation & Prestasi Mahasiswa
                 </span>
-                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900">
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
                     Ukiran Prestasi & Kejuaraan Mahasiswa
                 </h2>
-                <p class="text-slate-600 text-sm leading-relaxed">
+                <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                     Apresiasi setinggi-tingginya atas pencapaian dan kejuaraan nasional mahasiswa STIKes Panti Waluya Malang.
                 </p>
             </div>
 
             <div class="shrink-0">
-                <span class="text-xs font-bold text-blue-900 bg-blue-50 border border-blue-200 px-4 py-2 rounded-xl">
+                <span class="text-xs font-bold text-blue-900 dark:text-sky-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 px-4 py-2 rounded-xl">
                     <i class="fa-solid fa-medal text-amber-500 mr-1.5"></i> {{ $achievements->count() }} Prestasi Terkini
                 </span>
             </div>
@@ -221,8 +221,8 @@
                 @php
                     $posterUrl = \Illuminate\Support\Str::startsWith($ach->poster_image, 'http') ? $ach->poster_image : asset($ach->poster_image);
                 @endphp
-                <div class="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
-                    <div class="relative h-72 bg-slate-100 overflow-hidden cursor-pointer" @click="activePoster = '{{ $posterUrl }}'">
+                <div class="bg-white dark:bg-slate-950 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                    <div class="relative h-72 bg-slate-100 dark:bg-slate-800 overflow-hidden cursor-pointer" @click="activePoster = '{{ $posterUrl }}'">
                         @if($ach->poster_image)
                             <img src="{{ $posterUrl }}" alt="{{ $ach->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                         @else
@@ -247,21 +247,21 @@
                     <div class="p-5 space-y-3 flex-grow flex flex-col justify-between">
                         <div class="space-y-2">
                             <div class="flex items-center gap-2.5">
-                                <div class="w-8 h-8 rounded-full bg-blue-100 border border-blue-200 text-blue-700 font-bold flex items-center justify-center text-xs shrink-0">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 text-blue-700 dark:text-sky-300 font-bold flex items-center justify-center text-xs shrink-0">
                                     <i class="fa-solid fa-user-graduate"></i>
                                 </div>
                                 <div class="overflow-hidden">
-                                    <h4 class="font-bold text-slate-900 text-sm leading-tight truncate">{{ $ach->student_name }}</h4>
-                                    <p class="text-[11px] text-slate-500 truncate">{!! $ach->student_prodi !!}</p>
+                                    <h4 class="font-bold text-slate-900 dark:text-white text-sm leading-tight truncate">{{ $ach->student_name }}</h4>
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">{!! $ach->student_prodi !!}</p>
                                 </div>
                             </div>
 
-                            <div class="pt-2 border-t border-slate-100 space-y-1">
-                                <h3 class="font-heading font-bold text-xs text-slate-900 line-clamp-2 leading-snug">
+                            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1">
+                                <h3 class="font-heading font-bold text-xs text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                                     {{ $ach->title }}
                                 </h3>
                                 @if($ach->event_name)
-                                    <p class="text-[11px] text-slate-500 truncate flex items-center gap-1">
+                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate flex items-center gap-1">
                                         <i class="fa-solid fa-building-columns text-[10px] text-amber-500"></i> {{ $ach->event_name }}
                                     </p>
                                 @endif
@@ -285,20 +285,20 @@
 @endif
 
 <!-- 5. Sekilas Mengenai Kami & Akreditasi Perguruan Tinggi -->
-<section class="py-16 bg-slate-50 border-t border-slate-200">
+<section class="py-16 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-12">
-            <span class="px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-extrabold uppercase">
-                Profil & Legalisasi Resm
+            <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
+                Profil & Legalisasi Resmi
             </span>
-            <h2 class="font-heading font-extrabold text-3xl text-slate-900">Sekilas Mengenai Kami</h2>
-            <p class="text-slate-600 text-sm">Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang dengan izin resmi institusi & sertifikasi akreditasi BAN-PT & LAM-PTKes.</p>
+            <h2 class="font-heading font-extrabold text-3xl text-slate-900 dark:text-white">Sekilas Mengenai Kami</h2>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang dengan izin resmi institusi & sertifikasi akreditasi BAN-PT & LAM-PTKes.</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" x-data="{ modalCert: null }">
             <!-- Left: Foto Gedung Kampus -->
-            <div class="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-80 bg-slate-900 group">
+            <div class="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 h-80 bg-slate-900 group">
                 <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" alt="Gedung STIKes Panti Waluya Malang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white space-y-1">
@@ -308,31 +308,31 @@
                 </div>
             </div>
 
-            <!-- Right: 2 Sertifikat Akreditasi Perguruan Tinggi (BAN-PT / LAM-PTKes) -->
+            <!-- Right: 2 Sertifikat Akreditasi Perguruan Tinggi -->
             <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'">
-                    <div class="h-44 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 relative">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'">
+                    <div class="h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
                         <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <div class="absolute inset-0 bg-slate-950/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
                             <i class="fa-solid fa-magnifying-glass-plus mr-1 text-amber-400"></i> Lihat Sertifikat
                         </div>
                     </div>
                     <div>
-                        <div class="text-xs font-bold text-slate-900">Sertifikat Akreditasi Perguruan Tinggi</div>
-                        <p class="text-[11px] text-slate-500">Badan Akreditasi Nasional Perguruan Tinggi (BAN-PT)</p>
+                        <div class="text-xs font-bold text-slate-900 dark:text-white">Sertifikat Akreditasi Perguruan Tinggi</div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Badan Akreditasi Nasional Perguruan Tinggi (BAN-PT)</p>
                     </div>
                 </div>
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop'">
-                    <div class="h-44 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 relative">
+                <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop'">
+                    <div class="h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
                         <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         <div class="absolute inset-0 bg-slate-950/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
                             <i class="fa-solid fa-magnifying-glass-plus mr-1 text-amber-400"></i> Lihat Piagam
                         </div>
                     </div>
                     <div>
-                        <div class="text-xs font-bold text-slate-900">Piagam Penghargaan Institusi</div>
-                        <p class="text-[11px] text-slate-500">Lembaga Akreditasi Mandiri Kesehatan (LAM-PTKes)</p>
+                        <div class="text-xs font-bold text-slate-900 dark:text-white">Piagam Penghargaan Institusi</div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">Lembaga Akreditasi Mandiri Kesehatan (LAM-PTKes)</p>
                     </div>
                 </div>
             </div>
@@ -377,64 +377,64 @@
     </div>
 </section>
 
-<!-- 7. Program Studi & Akreditasi (Circle Avatar Cards & Uncropped Certificates) -->
-<section class="py-20 bg-slate-50">
+<!-- 7. Program Studi & Akreditasi -->
+<section class="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
-            <span class="px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-extrabold uppercase">
+            <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
                 Program Studi & Akreditasi
             </span>
-            <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900">
+            <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
                 Pilihan Program Studi Berstandar Unggul
             </h2>
-            <p class="text-slate-600 text-sm">
+            <p class="text-slate-600 dark:text-slate-300 text-sm">
                 Sertifikat akreditasi BAN-PT & LAM-PTKes untuk setiap program studi ditampilkan secara utuh dan transparan.
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($prodis as $prodi)
-                <div class="bg-white rounded-3xl border border-slate-200/90 p-8 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-8 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
                     <div>
                         <!-- Circle Avatar Header -->
                         <div class="flex flex-col items-center text-center mb-6">
                             <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-600 to-blue-800 p-1 shadow-lg mb-4 group-hover:scale-105 transition duration-300">
-                                <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-blue-700 text-3xl font-bold border border-blue-100">
+                                <div class="w-full h-full rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-blue-700 dark:text-sky-300 text-3xl font-bold border border-blue-100 dark:border-slate-700">
                                     <i class="fa-solid {{ $prodi->icon ?? 'fa-user-nurse' }}"></i>
                                 </div>
                             </div>
                             <div class="flex gap-2 mb-2">
                                 <span class="px-3 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">{{ $prodi->degree }}</span>
-                                <span class="px-3 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-bold">Akred: {{ $prodi->accreditation }}</span>
+                                <span class="px-3 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[11px] font-bold">Akred: {{ $prodi->accreditation }}</span>
                             </div>
-                            <h3 class="font-heading font-bold text-2xl text-slate-900 group-hover:text-blue-700 transition">
+                            <h3 class="font-heading font-bold text-2xl text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-sky-400 transition">
                                 {{ $prodi->name }}
                             </h3>
                         </div>
 
-                        <p class="text-slate-600 text-xs leading-relaxed text-center mb-4">
+                        <p class="text-slate-600 dark:text-slate-300 text-xs leading-relaxed text-center mb-4">
                             {{ $prodi->description }}
                         </p>
 
-                        <!-- Tampilan Langsung Sertifikat Akreditasi Utuh FULL Tanpa Terpotong -->
+                        <!-- Tampilan Langsung Sertifikat Akreditasi Utuh FULL -->
                         @if($prodi->accreditation_certificate)
                             @php
                                 $certUrl = \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate);
                                 $isPdf = \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf');
                             @endphp
-                            <div class="mt-4 mb-3 p-3 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
-                                <div class="text-[11px] font-extrabold uppercase text-slate-600 flex items-center justify-between">
+                            <div class="mt-4 mb-3 p-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-2">
+                                <div class="text-[11px] font-extrabold uppercase text-slate-600 dark:text-slate-400 flex items-center justify-between">
                                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi</span>
-                                    <a href="{{ $certUrl }}" download target="_blank" class="text-emerald-700 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh</a>
+                                    <a href="{{ $certUrl }}" download target="_blank" class="text-emerald-700 dark:text-emerald-400 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh</a>
                                 </div>
 
                                 @if($isPdf)
-                                    <div class="w-full h-64 rounded-xl overflow-hidden border border-slate-200 bg-white">
+                                    <div class="w-full h-64 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white">
                                         <iframe src="{{ $certUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
                                     </div>
                                 @else
-                                    <div class="w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-900/5 p-1 flex items-center justify-center">
+                                    <div class="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900/5 p-1 flex items-center justify-center">
                                         <img src="{{ $certUrl }}" alt="Sertifikat Akreditasi {{ $prodi->name }}" class="w-full h-auto rounded-lg object-contain shadow-sm">
                                     </div>
                                 @endif
@@ -454,92 +454,84 @@
     </div>
 </section>
 
-<!-- 8. Fasilitas & Layanan Digital Kampus (8 Circle Icon Action Grid) -->
-<section class="py-20 bg-white border-t border-slate-200">
+<!-- 8. Fasilitas & Layanan Digital Kampus -->
+<section class="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
-            <span class="px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-extrabold uppercase">
+            <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
                 Fasilitas & Portal Layanan
             </span>
-            <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900">
+            <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
                 Ekosistem Pembelajaran & Layanan Akademik
             </h2>
-            <p class="text-slate-600 text-sm">Akses cepat ke portal layanan digital mahasiswa, perpustakaan online, laboratorium, dan sistem ujian.</p>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">Akses cepat ke portal layanan digital mahasiswa, perpustakaan online, laboratorium, dan sistem ujian.</p>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
             
-            <!-- 1. PMB Online -->
             <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-amber-100 border border-amber-300 text-amber-600 group-hover:bg-amber-500 group-hover:text-slate-950 transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-amber-600 transition">PMB Online</h4>
-                <p class="text-xs text-slate-500">Pendaftaran Mahasiswa Baru</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-600 transition">PMB Online</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Pendaftaran Mahasiswa Baru</p>
             </a>
 
-            <!-- 2. Kemahasiswaan & Alumni -->
             <a href="{{ route('pages.show', 'kemahasiswaan') }}" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-blue-100 border border-blue-300 text-blue-700 group-hover:bg-blue-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-950/60 border border-blue-300 dark:border-blue-800 text-blue-700 dark:text-sky-400 group-hover:bg-blue-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-users"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-blue-700 transition">Kemahasiswaan</h4>
-                <p class="text-xs text-slate-500">UKM & Organisasi Kampus</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-700 transition">Kemahasiswaan</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">UKM & Organisasi Kampus</p>
             </a>
 
-            <!-- 3. LMS (E-Learning) -->
             <a href="#" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-laptop-code"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-emerald-700 transition">LMS E-Learning</h4>
-                <p class="text-xs text-slate-500">Pembelajaran Digital</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-emerald-700 transition">LMS E-Learning</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Pembelajaran Digital</p>
             </a>
 
-            <!-- 4. CBT (Ujian Online) -->
             <a href="#" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-indigo-100 border border-indigo-300 text-indigo-700 group-hover:bg-indigo-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-indigo-100 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-square-check"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-indigo-700 transition">CBT Ujian Online</h4>
-                <p class="text-xs text-slate-500">Sistem Evaluasi Digital</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-indigo-700 transition">CBT Ujian Online</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Sistem Evaluasi Digital</p>
             </a>
 
-            <!-- 5. E-Library -->
             <a href="#" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-purple-100 border border-purple-300 text-purple-700 group-hover:bg-purple-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-300 dark:border-purple-800 text-purple-700 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-book-bookmark"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-purple-700 transition">E-Library</h4>
-                <p class="text-xs text-slate-500">Perpustakaan Digital</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-purple-700 transition">E-Library</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Perpustakaan Digital</p>
             </a>
 
-            <!-- 6. Repositori SPMI -->
             <a href="{{ route('spmi.index') }}" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-sky-100 border border-sky-300 text-sky-700 group-hover:bg-sky-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-sky-100 dark:bg-sky-950/60 border border-sky-300 dark:border-sky-800 text-sky-700 dark:text-sky-400 group-hover:bg-sky-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-folder-open"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-sky-700 transition">Repositori SPMI</h4>
-                <p class="text-xs text-slate-500">Dokumen Penjaminan Mutu</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-700 transition">Repositori SPMI</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Dokumen Penjaminan Mutu</p>
             </a>
 
-            <!-- 7. Jurnal Online -->
             <a href="#" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-rose-100 border border-rose-300 text-rose-700 group-hover:bg-rose-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-400 group-hover:bg-rose-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-newspaper"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-rose-700 transition">Jurnal Online</h4>
-                <p class="text-xs text-slate-500">Publikasi Riset Kesehatan</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-rose-700 transition">Jurnal Online</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Publikasi Riset Kesehatan</p>
             </a>
 
-            <!-- 8. Sarana & Laboratorium -->
             <a href="{{ route('facilities.index') }}" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-teal-100 border border-teal-300 text-teal-700 group-hover:bg-teal-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                <div class="w-20 h-20 rounded-full bg-teal-100 dark:bg-teal-950/60 border border-teal-300 dark:border-teal-800 text-teal-700 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-microscope"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 group-hover:text-teal-700 transition">Laboratorium</h4>
-                <p class="text-xs text-slate-500">Sarana Practical Medis</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-teal-700 transition">Laboratorium</h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Sarana Practical Medis</p>
             </a>
 
         </div>
