@@ -321,140 +321,182 @@
 </section>
 @endif
 
-<!-- 5. Sekilas Mengenai Kami & Akreditasi Perguruan Tinggi -->
+<!-- 5. Sekilas Mengenai Kami & Profil Kampus -->
 <section class="py-16 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="text-center max-w-3xl mx-auto space-y-3 mb-12">
-            <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
-                Profil & Legalisasi Resmi
-            </span>
-            <h2 class="font-heading font-extrabold text-3xl text-slate-900 dark:text-white">Sekilas Mengenai Kami</h2>
-            <p class="text-slate-600 dark:text-slate-300 text-sm">Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang dengan izin resmi institusi & sertifikasi akreditasi BAN-PT & LAM-PTKes.</p>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center" x-data="{ modalCert: null }">
-            <!-- Left: Foto Gedung Kampus -->
-            <div class="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 h-80 bg-slate-900 group">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Column: Foto Gedung Kampus Utama -->
+            <div class="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 h-96 bg-slate-900 group">
                 <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" alt="Gedung STIKes Panti Waluya Malang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                    <span class="px-3 py-1 bg-amber-500 text-slate-950 font-extrabold rounded-full text-[11px]">Kampus Terakreditasi Baik Sekali (BAN-PT)</span>
-                    <h3 class="font-heading font-bold text-xl text-white">Gedung Utama STIKes Panti Waluya</h3>
+                    <span class="px-3 py-1 bg-amber-500 text-slate-950 font-extrabold rounded-full text-[11px]">Terakreditasi Baik Sekali (BAN-PT)</span>
+                    <h3 class="font-heading font-bold text-2xl text-white">STIKes Panti Waluya Malang</h3>
                     <p class="text-xs text-slate-300">Jl. Yulius Riefbuilder No. 5, Oro-Oro Dowo, Klojen, Malang</p>
                 </div>
             </div>
 
-            <!-- Right: Carousel Slider Piagam Penghargaan & Sertifikat Institusi -->
-            <div class="lg:col-span-7 space-y-4 overflow-hidden"
-                 x-data="{ 
-                    scrollNextCert() {
-                        this.$refs.certCarousel.scrollBy({ left: 280, behavior: 'smooth' });
-                    },
-                    scrollPrevCert() {
-                        this.$refs.certCarousel.scrollBy({ left: -280, behavior: 'smooth' });
-                    }
-                 }">
-                
-                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                    <div>
-                        <h4 class="font-heading font-extrabold text-lg text-slate-900 dark:text-white flex items-center gap-2">
-                            <i class="fa-solid fa-award text-amber-500"></i> Piagam & Sertifikat Institusi
-                        </h4>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Geser untuk melihat seluruh piagam penghargaan & akreditasi kampus</p>
+            <!-- Right Column: Profil Singkat, Visi Misi & Sambutan -->
+            <div class="lg:col-span-7 space-y-6">
+                <div class="space-y-2">
+                    <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
+                        Profil Kampus Kesehatan
+                    </span>
+                    <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
+                        Sekilas Mengenai STIKes Panti Waluya Malang
+                    </h2>
+                </div>
+                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang adalah perguruan tinggi kesehatan terkemuka di Kota Malang yang melahirkan tenaga kesehatan profesional, berintegritas tinggi, dan siap kerja nasional maupun internasional.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-bold text-slate-800 dark:text-slate-200">
+                    <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-sky-400 flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <div class="text-slate-900 dark:text-white font-bold">Visi Kampus Unggul</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">Berdaya Saing Global</div>
+                        </div>
                     </div>
-
-                    <!-- Navigation Arrow Buttons -->
-                    <div class="flex items-center gap-2">
-                        <button @click="scrollPrevCert()" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kiri">
-                            <i class="fa-solid fa-chevron-left text-xs"></i>
-                        </button>
-                        <button @click="scrollNextCert()" class="w-9 h-9 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kanan">
-                            <i class="fa-solid fa-chevron-right text-xs"></i>
-                        </button>
+                    <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-400 flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <div class="text-slate-900 dark:text-white font-bold">Akreditasi BAN-PT</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">Terakreditasi Baik Sekali</div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Carousel Slider Track -->
-                <div x-ref="certCarousel" class="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none pb-4 pt-1">
-                    
-                    <!-- Card 1: BAN-PT -->
-                    <div class="w-64 sm:w-72 shrink-0 snap-start bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'">
-                        <div class="h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <div class="absolute top-2 left-2 bg-amber-500 text-slate-950 font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow">
-                                Baik Sekali
-                            </div>
-                            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                                <i class="fa-solid fa-magnifying-glass-plus mr-1 text-amber-400"></i> Perbesar Sertifikat
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">Sertifikat Akreditasi Perguruan Tinggi</div>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Badan Akreditasi Nasional PT (BAN-PT)</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: LAM-PTKes -->
-                    <div class="w-64 sm:w-72 shrink-0 snap-start bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop'">
-                        <div class="h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                            <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <div class="absolute top-2 left-2 bg-blue-600 text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow">
-                                Akred Kesehatan
-                            </div>
-                            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                                <i class="fa-solid fa-magnifying-glass-plus mr-1 text-amber-400"></i> Perbesar Piagam
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">Piagam Akreditasi Kesehatan</div>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Lembaga Akreditasi Mandiri Kes (LAM-PTKes)</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: LLDIKTI VII -->
-                    <div class="w-64 sm:w-72 shrink-0 snap-start bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop'">
-                        <div class="h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <div class="absolute top-2 left-2 bg-emerald-600 text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow">
-                                Penghargaan LLDIKTI
-                            </div>
-                            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                                <i class="fa-solid fa-magnifying-glass-plus mr-1 text-amber-400"></i> Perbesar Piagam
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">Piagam Implementasi SPMI Terbaik</div>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">LLDIKTI Wilayah VII Jawa Timur</p>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Kemenkes RI -->
-                    <div class="w-64 sm:w-72 shrink-0 snap-start bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop'">
-                        <div class="h-44 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                            <div class="absolute top-2 left-2 bg-indigo-600 text-white font-extrabold text-[10px] px-2.5 py-0.5 rounded-full shadow">
-                                Standar Kemenkes
-                            </div>
-                            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                                <i class="fa-solid fa-magnifying-glass-plus mr-1 text-amber-400"></i> Perbesar Sertifikat
-                            </div>
-                        </div>
-                        <div>
-                            <div class="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">Sertifikat Standar Laboratorium Medis</div>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Kementerian Kesehatan Republik Indonesia</p>
-                        </div>
-                    </div>
-
+                <div class="pt-2">
+                    <a href="{{ route('pages.show', 'profil') }}" class="inline-flex items-center gap-2 bg-blue-700 hover:bg-blue-800 text-white font-bold px-6 py-3 rounded-xl shadow transition text-xs">
+                        Lihat Selengkapnya Profil Kampus &rarr;
+                    </a>
                 </div>
             </div>
 
-            <!-- Lightbox Modal untuk Sertifikat Institusi -->
-            <div x-show="modalCert" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="modalCert = null">
-                <div class="relative max-w-4xl w-full">
-                    <button @click="modalCert = null" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
-                    <img :src="modalCert" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+        </div>
+    </div>
+</section>
+
+<!-- 5B. Dedicated Standalone Widget: Sertifikat Akreditasi & Piagam Institusi -->
+<section class="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200"
+         x-data="{ 
+            modalCert: null,
+            scrollNextCert() {
+                this.$refs.certCarousel.scrollBy({ left: 340, behavior: 'smooth' });
+            },
+            scrollPrevCert() {
+                this.$refs.certCarousel.scrollBy({ left: -340, behavior: 'smooth' });
+            }
+         }">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header & Nav Buttons -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
+            <div class="space-y-2 max-w-2xl">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 text-xs font-extrabold uppercase tracking-wider">
+                    <i class="fa-solid fa-award text-emerald-600 dark:text-emerald-400"></i> Sertifikasi & Legalisasi Resmi Kampus
+                </span>
+                <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
+                    Sertifikat Akreditasi & Piagam Penghargaan Institusi
+                </h2>
+                <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                    Dokumen legalitas akreditasi institusi BAN-PT, LAM-PTKes, penghargaan LLDIKTI VII, dan standar laboratorium Kemenkes RI yang ditampilkan transparan.
+                </p>
+            </div>
+
+            <!-- Controls: Left & Right Navigation Arrows -->
+            <div class="flex items-center gap-3">
+                <button @click="scrollPrevCert()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kiri">
+                    <i class="fa-solid fa-chevron-left text-base"></i>
+                </button>
+                <button @click="scrollNextCert()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kanan">
+                    <i class="fa-solid fa-chevron-right text-base"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Full-Width Horizontal Carousel Slider Track -->
+        <div x-ref="certCarousel" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none pb-4 pt-1">
+            
+            <!-- Card 1: BAN-PT -->
+            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'">
+                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-3 left-3 bg-amber-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
+                        Baik Sekali (BAN-PT)
+                    </div>
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
+                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Sertifikat
+                    </div>
                 </div>
+                <div>
+                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Sertifikat Akreditasi Perguruan Tinggi</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Badan Akreditasi Nasional Perguruan Tinggi (BAN-PT)</p>
+                </div>
+            </div>
+
+            <!-- Card 2: LAM-PTKes -->
+            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop'">
+                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
+                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-3 left-3 bg-blue-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
+                        Akred Kesehatan (LAM-PTKes)
+                    </div>
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
+                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Piagam
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Piagam Akreditasi Bidang Kesehatan</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Lembaga Akreditasi Mandiri Kesehatan (LAM-PTKes)</p>
+                </div>
+            </div>
+
+            <!-- Card 3: LLDIKTI VII -->
+            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop'">
+                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-3 left-3 bg-emerald-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
+                        Penghargaan LLDIKTI VII
+                    </div>
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
+                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Piagam
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Piagam Implementasi SPMI Terbaik</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">LLDIKTI Wilayah VII Jawa Timur</p>
+                </div>
+            </div>
+
+            <!-- Card 4: Kemenkes RI -->
+            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop'">
+                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
+                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                    <div class="absolute top-3 left-3 bg-indigo-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
+                        Standar Kemenkes RI
+                    </div>
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
+                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Sertifikat
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Sertifikat Standar Laboratorium Medis</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kementerian Kesehatan Republik Indonesia</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Fullscreen Lightbox Zoom Modal -->
+        <div x-show="modalCert" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="modalCert = null">
+            <div class="relative max-w-4xl w-full">
+                <button @click="modalCert = null" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
+                <img :src="modalCert" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
             </div>
         </div>
 
