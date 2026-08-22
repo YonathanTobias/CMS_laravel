@@ -225,9 +225,6 @@
 
             <!-- Controls: Left & Right Navigation Arrows -->
             <div class="flex items-center gap-3">
-                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 mr-2 hidden sm:inline">
-                    <i class="fa-solid fa-sliders text-amber-500 mr-1"></i> Geser Kartu
-                </span>
                 <button @click="scrollPrev()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kiri">
                     <i class="fa-solid fa-chevron-left text-base"></i>
                 </button>
