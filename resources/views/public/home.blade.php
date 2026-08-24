@@ -137,7 +137,7 @@
                         <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point1', 'Beasiswa Prestasi & Khusus') }}
                     </div>
                     <div class="flex items-center gap-2 text-sky-300 font-bold">
-                        <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point2', 'D3 Keperawatan & D4 MIK') }}
+                        <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point2', 'D4 Manajemen Informasi Kesehatan & D3 Farmasi') }}
                     </div>
                     <div class="flex items-center gap-2 text-sky-300 font-bold">
                         <i class="fa-solid fa-circle-check text-amber-400"></i> {{ \App\Models\SiteSetting::get('pmb_widget_point3', 'S1 Keperawatan & Profesi Ners') }}

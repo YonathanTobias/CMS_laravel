@@ -53,16 +53,6 @@ class DatabaseSeeder extends Seeder
         // 3. Program Studi
         $prodis = [
             [
-                'name' => 'D3 Keperawatan',
-                'slug' => 'd3-keperawatan',
-                'degree' => 'D3',
-                'accreditation' => 'Unggul',
-                'description' => 'Menghasilkan Ahli Madya Keperawatan yang unggul dalam asuhan keperawatan kegawatdaruratan, berkarakter Kasih, dan siap kerja profesional baik di dalam maupun luar negeri.',
-                'curriculum_summary' => '110 SKS mencakup Keperawatan Dasar, Keperawatan Medikal Bedah, Gawat Darurat, Maternitas, Anak, Jiwa, Komunitas, dan Praktik Klinik Keperawatan.',
-                'career_prospects' => 'Perawat Rumah Sakit, Perawat Klinik, Homecare Specialist, Perawat Internasional (Jepang, Arab Saudi, Jerman), Tenaga Kesehatan Instansi Pemerintah.',
-                'icon' => 'fa-user-nurse',
-            ],
-            [
                 'name' => 'S1 Keperawatan',
                 'slug' => 's1-keperawatan',
                 'degree' => 'S1',
@@ -83,13 +73,13 @@ class DatabaseSeeder extends Seeder
                 'icon' => 'fa-stethoscope',
             ],
             [
-                'name' => 'D3 Rekam Medis & Informasi Kesehatan (RMIK)',
-                'slug' => 'd3-rmik',
-                'degree' => 'D3',
+                'name' => 'D4 Manajemen Informasi Kesehatan',
+                'slug' => 'd4-manajemen-informasi-kesehatan',
+                'degree' => 'D4',
                 'accreditation' => 'Unggul',
-                'description' => 'Program studi pelopor di Jawa Timur yang mendidik tenaga ahli pengelola data kesehatan digital, koding klinis ICD-10/ICD-9-CM, dan sistem EHR (Electronic Health Record).',
-                'curriculum_summary' => '108 SKS Koding Diagnosis, Klasifikasi Penyakit, Manajemen Informasi Kesehatan Digital, Analisis Data Rekam Medis, Hukum Kesehatan.',
-                'career_prospects' => 'Perekam Medis Rumah Sakit, Coder Klinis BPJS, Data Analyst Kesehatan, System Analyst SIMRS, Auditor Rekam Medis.',
+                'description' => 'Program studi sarjana terapan pelopor di Jawa Timur yang mendidik tenaga ahli pengelola data kesehatan digital, koding klinis ICD-10/ICD-9-CM, dan sistem EHR (Electronic Health Record).',
+                'curriculum_summary' => '144 SKS Koding Diagnosis, Klasifikasi Penyakit, Manajemen Informasi Kesehatan Digital, Analisis Data Rekam Medis, Hukum Kesehatan, SIMRS.',
+                'career_prospects' => 'Perekam Medis & Manajer MIK Rumah Sakit, Coder Klinis BPJS, Data Analyst Kesehatan, System Analyst SIMRS, Auditor Rekam Medis.',
                 'icon' => 'fa-notes-medical',
             ],
             [
@@ -150,11 +140,10 @@ class DatabaseSeeder extends Seeder
         Menu::updateOrCreate(['name' => 'Sambutan Ketua'], ['url' => '/halaman/sambutan-ketua', 'parent_id' => $mProfil->id, 'order' => 3, 'icon' => 'fa-user-tie']);
 
         $mProdi = Menu::updateOrCreate(['name' => 'Program Studi'], ['url' => '/program-studi', 'order' => 3]);
-        Menu::updateOrCreate(['name' => 'D3 Keperawatan'], ['url' => '/program-studi/d3-keperawatan', 'parent_id' => $mProdi->id, 'order' => 1]);
-        Menu::updateOrCreate(['name' => 'S1 Keperawatan'], ['url' => '/program-studi/s1-keperawatan', 'parent_id' => $mProdi->id, 'order' => 2]);
-        Menu::updateOrCreate(['name' => 'Profesi Ners'], ['url' => '/program-studi/profesi-ners', 'parent_id' => $mProdi->id, 'order' => 3]);
-        Menu::updateOrCreate(['name' => 'D3 Rekam Medis (RMIK)'], ['url' => '/program-studi/d3-rmik', 'parent_id' => $mProdi->id, 'order' => 4]);
-        Menu::updateOrCreate(['name' => 'D3 Farmasi'], ['url' => '/program-studi/d3-farmasi', 'parent_id' => $mProdi->id, 'order' => 5]);
+        Menu::updateOrCreate(['name' => 'S1 Keperawatan'], ['url' => '/program-studi/s1-keperawatan', 'parent_id' => $mProdi->id, 'order' => 1]);
+        Menu::updateOrCreate(['name' => 'Profesi Ners'], ['url' => '/program-studi/profesi-ners', 'parent_id' => $mProdi->id, 'order' => 2]);
+        Menu::updateOrCreate(['name' => 'D4 Manajemen Informasi Kesehatan'], ['url' => '/program-studi/d4-manajemen-informasi-kesehatan', 'parent_id' => $mProdi->id, 'order' => 3]);
+        Menu::updateOrCreate(['name' => 'D3 Farmasi'], ['url' => '/program-studi/d3-farmasi', 'parent_id' => $mProdi->id, 'order' => 4]);
 
         Menu::updateOrCreate(['name' => 'Berita & Pengumuman'], ['url' => '/berita', 'order' => 4]);
         Menu::updateOrCreate(['name' => 'Fasilitas'], ['url' => '/fasilitas', 'order' => 5]);
