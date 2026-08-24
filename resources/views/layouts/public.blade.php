@@ -236,8 +236,6 @@
                     <ul class="space-y-2 text-xs text-slate-400">
                         <li><a href="{{ route('home') }}" class="hover:text-amber-400 transition">&bull; Beranda Utama</a></li>
                         <li><a href="{{ route('prodi.index') }}" class="hover:text-amber-400 transition">&bull; Program Studi D3/S1/Profesi</a></li>
-                        <li><a href="{{ route('news.index') }}" class="hover:text-amber-400 transition">&bull; Berita & Kegiatan Kampus</a></li>
-                        <li><a href="{{ route('spmi.index') }}" class="hover:text-amber-400 transition">&bull; Repositori SPMI</a></li>
                         <li><a href="{{ route('facilities.index') }}" class="hover:text-amber-400 transition">&bull; Fasilitas Kampus</a></li>
                     </ul>
                 </div>

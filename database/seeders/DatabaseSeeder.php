@@ -142,13 +142,6 @@ class DatabaseSeeder extends Seeder
             Facility::updateOrCreate(['name' => $fac['name']], $fac);
         }
 
-        $documents = [
-            ['title' => 'Manual Mutu Akademik STIKes Panti Waluya Malang', 'document_number' => 'SPMI-STIKES-MM-2026/001', 'category' => 'Manual Mutu', 'year' => '2026'],
-        ];
-        foreach ($documents as $doc) {
-            SpmiDocument::updateOrCreate(['title' => $doc['title']], $doc);
-        }
-
         // 5. Menus Seeding
         $mHome = Menu::updateOrCreate(['name' => 'Beranda'], ['url' => '/', 'order' => 1]);
         $mProfil = Menu::updateOrCreate(['name' => 'Profil Kampus'], ['url' => '#', 'order' => 2]);
@@ -164,9 +157,8 @@ class DatabaseSeeder extends Seeder
         Menu::updateOrCreate(['name' => 'D3 Farmasi'], ['url' => '/program-studi/d3-farmasi', 'parent_id' => $mProdi->id, 'order' => 5]);
 
         Menu::updateOrCreate(['name' => 'Berita & Pengumuman'], ['url' => '/berita', 'order' => 4]);
-        Menu::updateOrCreate(['name' => 'SPMI & Akreditasi'], ['url' => '/spmi', 'order' => 5]);
-        Menu::updateOrCreate(['name' => 'Fasilitas'], ['url' => '/fasilitas', 'order' => 6]);
-        Menu::updateOrCreate(['name' => 'Kontak'], ['url' => '/kontak', 'order' => 7]);
+        Menu::updateOrCreate(['name' => 'Fasilitas'], ['url' => '/fasilitas', 'order' => 5]);
+        Menu::updateOrCreate(['name' => 'Kontak'], ['url' => '/kontak', 'order' => 6]);
 
         // 6. Slides Seeding
         $slides = [

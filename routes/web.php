@@ -8,7 +8,6 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProgramStudiController;
 use App\Http\Controllers\Admin\FacilityController;
-use App\Http\Controllers\Admin\SpmiController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\SlideController;
@@ -26,7 +25,6 @@ Route::get('/program-studi', [PublicController::class, 'prodiIndex'])->name('pro
 Route::get('/program-studi/{slug}', [PublicController::class, 'prodiShow'])->name('prodi.show');
 Route::get('/berita', [PublicController::class, 'newsIndex'])->name('news.index');
 Route::get('/berita/{slug}', [PublicController::class, 'newsShow'])->name('news.show');
-Route::get('/spmi', [PublicController::class, 'spmiIndex'])->name('spmi.index');
 Route::get('/fasilitas', [PublicController::class, 'facilitiesIndex'])->name('facilities.index');
 Route::get('/halaman/{slug}', [PublicController::class, 'pageShow'])->name('pages.show');
 Route::get('/kontak', [PublicController::class, 'contact'])->name('contact');
@@ -60,9 +58,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // CRUD Fasilitas Kampus
     Route::resource('facilities', FacilityController::class);
     
-    // CRUD SPMI & Repositori
-    Route::resource('spmi', SpmiController::class);
-
     // CMS Slide Banner Hero Manager
     Route::resource('slides', SlideController::class);
 

@@ -26,7 +26,7 @@
 </div>
 
 <!-- Stat Cards Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
     
     <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors">
         <div>
@@ -64,19 +64,6 @@
         </div>
         <div class="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl font-bold border border-emerald-100 dark:border-emerald-900/60">
             <i class="fa-solid fa-user-doctor"></i>
-        </div>
-    </div>
-
-    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm flex items-center justify-between transition-colors">
-        <div>
-            <div class="text-xs font-extrabold uppercase text-slate-600 dark:text-slate-400 mb-1">Dokumen SPMI</div>
-            <div class="font-heading font-extrabold text-3xl text-slate-900 dark:text-white">{{ $totalSpmi }}</div>
-            <div class="text-xs text-indigo-700 dark:text-indigo-400 font-bold mt-1.5 flex items-center gap-1">
-                <i class="fa-solid fa-shield-halved text-[10px]"></i> Penjaminan Mutu
-            </div>
-        </div>
-        <div class="w-12 h-12 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xl font-bold border border-indigo-100 dark:border-indigo-900/60">
-            <i class="fa-solid fa-file-shield"></i>
         </div>
     </div>
 

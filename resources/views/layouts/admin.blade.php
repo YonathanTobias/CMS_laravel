@@ -120,12 +120,6 @@
                 <span x-show="sidebarOpen">Fasilitas Kampus</span>
             </a>
 
-            <!-- Repositori SPMI -->
-            <a href="{{ route('admin.spmi.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.spmi.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
-                <i class="fa-solid fa-folder-open w-5 text-center text-base"></i>
-                <span x-show="sidebarOpen">Repositori SPMI</span>
-            </a>
-
             <div class="pt-4 pb-1" x-show="sidebarOpen">
                 <div class="text-[11px] font-bold text-sky-400/80 uppercase tracking-wider px-3">Tampilan & Widget</div>
             </div>

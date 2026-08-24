@@ -664,13 +664,6 @@
                 <p class="text-xs text-slate-500 dark:text-slate-400">Perpustakaan Digital</p>
             </a>
 
-            <a href="{{ route('spmi.index') }}" class="group flex flex-col items-center space-y-3">
-                <div class="w-20 h-20 rounded-full bg-sky-100 dark:bg-sky-950/60 border border-sky-300 dark:border-sky-800 text-sky-700 dark:text-sky-400 group-hover:bg-sky-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
-                    <i class="fa-solid fa-folder-open"></i>
-                </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-700 transition">Repositori SPMI</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Dokumen Penjaminan Mutu</p>
-            </a>
 
             <a href="#" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-400 group-hover:bg-rose-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
