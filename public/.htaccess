@@ -5,21 +5,61 @@
 
     RewriteEngine On
 
-    # Handle Authorization Header
+    # ==================================================================
+    # 🔒 ANTI-BACKDOOR & SECURITY HARDENING RULES FOR LARAVEL
+    # ==================================================================
+
+    # 1. Block Execution of PHP Scripts in Upload & Storage Directories
+    RewriteCond %{REQUEST_URI} ^/(storage|uploads|images|files)/.*\.(php|php[0-9]|phtml|phar|inc|asp|aspx|cgi|pl|exe|sh|bat)$ [NC]
+    RewriteRule .* - [F,L]
+
+    # 2. Block Access to Hidden & Sensitive System Files (.env, .git, .sqlite, logs, etc.)
+    RewriteCond %{REQUEST_URI} ^/.*(\.env|\.git|\.htaccess|\.config|\.sql|\.sqlite|\.log|\.sh|composer\.(json|lock)|package\.(json|lock)|artisan)$ [NC,OR]
+    RewriteCond %{REQUEST_URI} ^/(app|bootstrap|config|database|resources|routes|storage|vendor)/ [NC]
+    RewriteRule .* - [F,L]
+
+    # 3. Block Malicious Attack Payloads (SQL Injection, Path Traversal, Script Injection)
+    RewriteCond %{QUERY_STRING} (base64_encode|GLOBALS|_REQUEST|eval\(|concat\(|union.*select|select.*from|insert.*into|delete.*from|drop.*table|<script|%3Cscript) [NC,OR]
+    RewriteCond %{QUERY_STRING} (\.\./|\.\.\\|/etc/passwd|/proc/self/environ) [NC]
+    RewriteRule .* - [F,L]
+
+    # 4. Handle Authorization & XSRF Token Headers
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Handle X-XSRF-Token Header
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
-    # Redirect Trailing Slashes If Not A Folder...
+    # 5. Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Send Requests To Front Controller...
+    # 6. Send Requests To Front Controller (index.php)
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# ==================================================================
+# 🛡️ SECURITY HEADERS (HTTP SECURITY PROTECTION)
+# ==================================================================
+<IfModule mod_headers.c>
+    # Protect against Clickjacking attacks
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Protect against MIME-type sniffing
+    Header set X-Content-Type-Options "nosniff"
+
+    # Enable XSS Filter in Browser
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Referrer Policy for Privacy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Disable unwanted browser features
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Disable Directory Browsing
+Options -Indexes

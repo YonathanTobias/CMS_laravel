@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Prevent direct access to sensitive system files & folders (.env, .git, app, database, etc.)
+    RewriteRule ^(\.env|\.git|\.htaccess|composer\.(json|lock)|package\.(json|lock)|artisan)$ - [F,L]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|vendor)(/.*)?$ - [F,L]
+
+    # Redirect all public requests to /public/ folder
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Disable Directory Browsing
+Options -Indexes

@@ -1,0 +1,24 @@
+# Disable PHP execution in uploads & storage directory
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# Deny access to any uploaded executable script or backdoor file
+<FilesMatch "\.(php|php[0-9]|phtml|phar|inc|asp|aspx|cgi|pl|exe|sh|bat|cmd)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order Allow,Deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Disable Directory Browsing
+Options -Indexes
