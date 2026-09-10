@@ -11,12 +11,14 @@ class MenuController extends Controller
     public function index()
     {
         $rootMenus = Menu::whereNull('parent_id')->orderBy('order', 'asc')->with('allChildren')->get();
+
         return view('admin.menus.index', compact('rootMenus'));
     }
 
     public function create()
     {
         $parentMenus = Menu::whereNull('parent_id')->orderBy('order', 'asc')->get();
+
         return view('admin.menus.create', compact('parentMenus'));
     }
 
@@ -42,6 +44,7 @@ class MenuController extends Controller
     public function edit(Menu $menu)
     {
         $parentMenus = Menu::whereNull('parent_id')->where('id', '!=', $menu->id)->orderBy('order', 'asc')->get();
+
         return view('admin.menus.edit', compact('menu', 'parentMenus'));
     }
 
@@ -72,6 +75,7 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         $menu->delete();
+
         return redirect()->route('admin.menus.index')->with('success', 'Menu beserta sub-menu didalamnya berhasil dihapus!');
     }
 }

@@ -31,10 +31,14 @@
                 </div>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Isi Konten Halaman (HTML Support)</label>
-                <textarea name="content" rows="14" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono focus:outline-none focus:border-blue-500 leading-relaxed">{{ old('content', $page->content) }}</textarea>
-            </div>
+            @include('admin.components.dual-editor', [
+                'name' => 'content',
+                'value' => old('content', $page->content),
+                'label' => 'Isi Konten Halaman Profil',
+                'required' => true,
+                'rows' => 14,
+                'placeholder' => 'Tuliskan informasi halaman di sini...'
+            ])
         </div>
     </div>
 

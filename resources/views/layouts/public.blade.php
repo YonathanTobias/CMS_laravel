@@ -18,8 +18,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- FontAwesome Library (Dukungan Free 6.7.2 & Pro Kit) -->
+    @if($proUrl = \App\Models\SiteSetting::get('fontawesome_pro_url'))
+        @if(\Illuminate\Support\Str::endsWith($proUrl, '.js'))
+            <script src="{{ $proUrl }}" crossorigin="anonymous"></script>
+        @else
+            <link rel="stylesheet" href="{{ $proUrl }}" crossorigin="anonymous">
+        @endif
+    @else
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    @endif
     
     <!-- Tailwind CSS CDN dengan Dark Mode Class Enabled -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -108,7 +116,7 @@
                             STIKes Panti Waluya
                         </div>
                         <div class="text-xs text-sky-300 font-semibold tracking-wider uppercase">
-                            Malang &bull; Indonesia
+                            Malang
                         </div>
                     </div>
                 </a>
@@ -125,7 +133,7 @@
                             <div class="relative" x-data="{ openDropdown: false }" @click.away="openDropdown = false">
                                 <button @click="openDropdown = !openDropdown" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-blue-900/60 hover:text-sky-300 transition flex items-center gap-1.5">
                                     @if($navMenu->icon)
-                                        <i class="fa-solid {{ $navMenu->icon }} text-xs text-sky-400"></i>
+                                        <i class="{{ \App\Helpers\IconHelper::format($navMenu->icon) }} text-xs text-sky-400"></i>
                                     @endif
                                     <span>{{ $navMenu->name }}</span>
                                     <i class="fa-solid fa-chevron-down text-xs transition duration-200" :class="{'rotate-180': openDropdown}"></i>
@@ -136,7 +144,7 @@
                                         <a href="{{ $child->url }}" target="{{ $child->target }}" class="block px-4 py-2.5 text-slate-300 hover:bg-blue-600 hover:text-white transition flex items-center justify-between">
                                             <span class="flex items-center gap-2">
                                                 @if($child->icon)
-                                                    <i class="fa-solid {{ $child->icon }} text-sky-400 text-xs w-4"></i>
+                                                    <i class="{{ \App\Helpers\IconHelper::format($child->icon) }} text-sky-400 text-xs w-4"></i>
                                                 @endif
                                                 <span>{{ $child->name }}</span>
                                             </span>
@@ -148,7 +156,7 @@
                             <!-- Single Link Menu -->
                             <a href="{{ $navMenu->url }}" target="{{ $navMenu->target }}" class="px-3.5 py-2 rounded-lg text-sm font-medium transition {{ request()->url() === url($navMenu->url) ? 'bg-blue-600 text-white font-semibold shadow-md' : 'text-slate-200 hover:bg-blue-900/60 hover:text-sky-300' }}">
                                 @if($navMenu->icon)
-                                    <i class="fa-solid {{ $navMenu->icon }} text-xs text-sky-400 mr-1"></i>
+                                    <i class="{{ \App\Helpers\IconHelper::format($navMenu->icon) }} text-xs text-sky-400 mr-1"></i>
                                 @endif
                                 {{ $navMenu->name }}
                             </a>
@@ -246,7 +254,7 @@
                         <i class="fa-solid fa-map-location-dot text-amber-500"></i> Lokasi Kampus
                     </h4>
                     <div class="w-full h-44 rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-md">
-                        <iframe src="{{ \App\Models\SiteSetting::get('maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.353787754567!2d112.62345!3d-7.97234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwNTgnMjAuNCJTIDExMsKwMzcnMjQuNCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid') }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="{{ \App\Models\SiteSetting::get('maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.1327435545477!2d112.62282707488443!3d-7.985224792040181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281ed19836a9%3A0xa3b7da4959b42040!2sSekolah%20Tinggi%20Ilmu%20kesehatan%20Panti%20Waluya!5e0!3m2!1sid!2sid!4v1789012783861!5m2!1sid!2sid') }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
 

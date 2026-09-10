@@ -11,6 +11,7 @@ class SlideController extends Controller
     public function index()
     {
         $slides = Slide::orderBy('order', 'asc')->get();
+
         return view('admin.slides.index', compact('slides'));
     }
 
@@ -42,7 +43,7 @@ class SlideController extends Controller
 
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('slides', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         } elseif ($request->filled('image_url')) {
             $validated['image'] = $request->image_url;
         } else {
@@ -80,7 +81,7 @@ class SlideController extends Controller
 
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('slides', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         } elseif ($request->filled('image_url')) {
             $validated['image'] = $request->image_url;
         }
@@ -93,6 +94,7 @@ class SlideController extends Controller
     public function destroy(Slide $slide)
     {
         $slide->delete();
+
         return redirect()->route('admin.slides.index')->with('success', 'Slide banner carousel berhasil dihapus!');
     }
 }

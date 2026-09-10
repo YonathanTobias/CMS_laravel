@@ -327,13 +327,17 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <!-- Left Column: Foto Gedung Kampus Utama -->
+            @php
+                $profileImgVal = \App\Models\SiteSetting::get('profile_image_url', 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop');
+                $profileImgSrcVal = \Illuminate\Support\Str::startsWith($profileImgVal, 'http') ? $profileImgVal : asset($profileImgVal);
+            @endphp
             <div class="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 h-96 bg-slate-900 group">
-                <img src="https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop" alt="Gedung STIKes Panti Waluya Malang" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <img src="{{ $profileImgSrcVal }}" alt="{{ \App\Models\SiteSetting::get('profile_image_title', 'STIKes Panti Waluya Malang') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white space-y-1">
-                    <span class="px-3 py-1 bg-amber-500 text-slate-950 font-extrabold rounded-full text-[11px]">Terakreditasi Baik Sekali (BAN-PT)</span>
-                    <h3 class="font-heading font-bold text-2xl text-white">STIKes Panti Waluya Malang</h3>
-                    <p class="text-xs text-slate-300">Jl. Yulius Riefbuilder No. 5, Oro-Oro Dowo, Klojen, Malang</p>
+                    <span class="px-3 py-1 bg-amber-500 text-slate-950 font-extrabold rounded-full text-[11px]">{{ \App\Models\SiteSetting::get('profile_image_badge', 'Terakreditasi Baik Sekali (BAN-PT)') }}</span>
+                    <h3 class="font-heading font-bold text-2xl text-white">{{ \App\Models\SiteSetting::get('profile_image_title', 'STIKes Panti Waluya Malang') }}</h3>
+                    <p class="text-xs text-slate-300">{{ \App\Models\SiteSetting::get('profile_image_subtitle', 'Jl. Yulius Riefbuilder No. 5, Oro-Oro Dowo, Klojen, Malang') }}</p>
                 </div>
             </div>
 
@@ -341,14 +345,14 @@
             <div class="lg:col-span-7 space-y-6">
                 <div class="space-y-2">
                     <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
-                        Profil Kampus Kesehatan
+                        {{ \App\Models\SiteSetting::get('profile_section_badge', 'Profil Kampus Kesehatan') }}
                     </span>
                     <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-                        Sekilas Mengenai STIKes Panti Waluya Malang
+                        {{ \App\Models\SiteSetting::get('profile_section_title', 'Sekilas Mengenai STIKes Panti Waluya Malang') }}
                     </h2>
                 </div>
                 <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
-                    Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang adalah perguruan tinggi kesehatan terkemuka di Kota Malang yang melahirkan tenaga kesehatan profesional, berintegritas tinggi, dan siap kerja nasional maupun internasional.
+                    {{ \App\Models\SiteSetting::get('profile_section_desc', 'Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang adalah perguruan tinggi kesehatan terkemuka di Kota Malang yang melahirkan tenaga kesehatan profesional, berintegritas tinggi, dan siap kerja nasional maupun internasional.') }}
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-bold text-slate-800 dark:text-slate-200">
                     <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
@@ -356,8 +360,8 @@
                             <i class="fa-solid fa-bullseye"></i>
                         </div>
                         <div>
-                            <div class="text-slate-900 dark:text-white font-bold">Visi Kampus Unggul</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">Berdaya Saing Global</div>
+                            <div class="text-slate-900 dark:text-white font-bold">{{ \App\Models\SiteSetting::get('profile_box1_title', 'Visi Kampus Unggul') }}</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">{{ \App\Models\SiteSetting::get('profile_box1_sub', 'Berdaya Saing Global') }}</div>
                         </div>
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
@@ -365,8 +369,8 @@
                             <i class="fa-solid fa-shield-halved"></i>
                         </div>
                         <div>
-                            <div class="text-slate-900 dark:text-white font-bold">Akreditasi BAN-PT</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">Terakreditasi Baik Sekali</div>
+                            <div class="text-slate-900 dark:text-white font-bold">{{ \App\Models\SiteSetting::get('profile_box2_title', 'Akreditasi BAN-PT') }}</div>
+                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">{{ \App\Models\SiteSetting::get('profile_box2_sub', 'Terakreditasi Baik Sekali') }}</div>
                         </div>
                     </div>
                 </div>
@@ -381,7 +385,7 @@
     </div>
 </section>
 
-<!-- 5B. Dedicated Standalone Widget: Sertifikat Akreditasi & Piagam Institusi -->
+<!-- 5B. Dedicated Standalone Widget: Sertifikat Akreditasi & Piagam Penghargaan Institusi -->
 <section class="py-16 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-200"
          x-data="{ 
             modalCert: null,
@@ -398,13 +402,13 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10">
             <div class="space-y-2 max-w-2xl">
                 <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 text-xs font-extrabold uppercase tracking-wider">
-                    <i class="fa-solid fa-award text-emerald-600 dark:text-emerald-400"></i> Sertifikasi & Legalisasi Resmi Kampus
+                    <i class="fa-solid fa-award text-emerald-600 dark:text-emerald-400"></i> {{ \App\Models\SiteSetting::get('cert_section_badge', 'Sertifikasi & Legalisasi Resmi Kampus') }}
                 </span>
                 <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-                    Sertifikat Akreditasi & Piagam Penghargaan Institusi
+                    {{ \App\Models\SiteSetting::get('cert_section_title', 'Sertifikat Akreditasi & Piagam Penghargaan Institusi') }}
                 </h2>
                 <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                    Dokumen legalitas akreditasi institusi BAN-PT, LAM-PTKes, penghargaan LLDIKTI VII, dan standar laboratorium Kemenkes RI yang ditampilkan transparan.
+                    {{ \App\Models\SiteSetting::get('cert_section_desc', 'Dokumen legalitas akreditasi institusi BAN-PT, LAM-PTKes, penghargaan LLDIKTI VII, dan standar laboratorium Kemenkes RI yang ditampilkan transparan.') }}
                 </p>
             </div>
 
@@ -422,73 +426,32 @@
         <!-- Full-Width Horizontal Carousel Slider Track -->
         <div x-ref="certCarousel" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none pb-4 pt-1">
             
-            <!-- Card 1: BAN-PT -->
-            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop'">
-                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <div class="absolute top-3 left-3 bg-amber-500 text-slate-950 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
-                        Baik Sekali (BAN-PT)
+            @forelse($certificates as $cert)
+                @php
+                    $imgUrl = \Illuminate\Support\Str::startsWith($cert->image, 'http') ? $cert->image : asset($cert->image);
+                @endphp
+                <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = '{{ $imgUrl }}'">
+                    <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
+                        <img src="{{ $imgUrl }}" alt="{{ $cert->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        @if($cert->badge)
+                            <div class="absolute top-3 left-3 font-extrabold text-xs px-3 py-1 rounded-full shadow-lg {{ $cert->badge_color }}">
+                                {{ $cert->badge }}
+                            </div>
+                        @endif
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
+                            <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Dokumen
+                        </div>
                     </div>
-                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Sertifikat
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Sertifikat Akreditasi Perguruan Tinggi</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Badan Akreditasi Nasional Perguruan Tinggi (BAN-PT)</p>
-                </div>
-            </div>
-
-            <!-- Card 2: LAM-PTKes -->
-            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop'">
-                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                    <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <div class="absolute top-3 left-3 bg-blue-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
-                        Akred Kesehatan (LAM-PTKes)
-                    </div>
-                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Piagam
+                    <div>
+                        <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">{{ $cert->title }}</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ $cert->issuer ?? '-' }}</p>
                     </div>
                 </div>
-                <div>
-                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Piagam Akreditasi Bidang Kesehatan</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Lembaga Akreditasi Mandiri Kesehatan (LAM-PTKes)</p>
+            @empty
+                <div class="w-full py-8 text-center text-slate-400 text-xs font-bold">
+                    Belum ada dokumen sertifikat akreditasi yang diunggah.
                 </div>
-            </div>
-
-            <!-- Card 3: LLDIKTI VII -->
-            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop'">
-                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <div class="absolute top-3 left-3 bg-emerald-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
-                        Penghargaan LLDIKTI VII
-                    </div>
-                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Piagam
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Piagam Implementasi SPMI Terbaik</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">LLDIKTI Wilayah VII Jawa Timur</p>
-                </div>
-            </div>
-
-            <!-- Card 4: Kemenkes RI -->
-            <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-4 group cursor-pointer" @click="modalCert = 'https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop'">
-                <div class="h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 relative">
-                    <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                    <div class="absolute top-3 left-3 bg-indigo-600 text-white font-extrabold text-xs px-3 py-1 rounded-full shadow-lg">
-                        Standar Kemenkes RI
-                    </div>
-                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold">
-                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Perbesar Sertifikat
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">Sertifikat Standar Laboratorium Medis</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kementerian Kesehatan Republik Indonesia</p>
-                </div>
-            </div>
+            @endforelse
 
         </div>
 
@@ -555,7 +518,7 @@
                         <div class="flex flex-col items-center text-center mb-6">
                             <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-600 to-blue-800 p-1 shadow-lg mb-4 group-hover:scale-105 transition duration-300">
                                 <div class="w-full h-full rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-blue-700 dark:text-sky-300 text-3xl font-bold border border-blue-100 dark:border-slate-700">
-                                    <i class="fa-solid {{ $prodi->icon ?? 'fa-user-nurse' }}"></i>
+                                    <i class="{{ \App\Helpers\IconHelper::format($prodi->icon, 'fa-solid fa-user-nurse') }}"></i>
                                 </div>
                             </div>
                             <div class="flex gap-2 mb-2">
@@ -614,71 +577,120 @@
         
         <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
             <span class="px-3.5 py-1 rounded-full bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-sky-300 text-xs font-extrabold uppercase">
-                Fasilitas & Portal Layanan
+                {{ \App\Models\SiteSetting::get('service_section_badge', 'Fasilitas & Portal Layanan') }}
             </span>
             <h2 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 dark:text-white">
-                Ekosistem Pembelajaran & Layanan Akademik
+                {{ \App\Models\SiteSetting::get('service_section_title', 'Ekosistem Pembelajaran & Layanan Akademik') }}
             </h2>
-            <p class="text-slate-600 dark:text-slate-300 text-sm">Akses cepat ke portal layanan digital mahasiswa, perpustakaan online, laboratorium, dan sistem ujian.</p>
+            <p class="text-slate-600 dark:text-slate-300 text-sm">
+                {{ \App\Models\SiteSetting::get('service_section_desc', 'Akses cepat ke portal layanan digital mahasiswa, perpustakaan online, laboratorium, dan sistem ujian.') }}
+            </p>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
             
-            <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="group flex flex-col items-center space-y-3">
+            <!-- Item 1: PMB Online -->
+            <a href="{{ \App\Models\SiteSetting::get('icon1_link', \App\Models\SiteSetting::get('pmb_link', '#')) }}" target="_blank" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-600 transition">PMB Online</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Pendaftaran Mahasiswa Baru</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-600 transition">
+                    {{ \App\Models\SiteSetting::get('icon1_title', 'PMB Online') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon1_sub', 'Pendaftaran Mahasiswa Baru') }}
+                </p>
             </a>
 
-            <a href="{{ route('pages.show', 'kemahasiswaan') }}" class="group flex flex-col items-center space-y-3">
+            <!-- Item 2: Kemahasiswaan -->
+            <a href="{{ \App\Models\SiteSetting::get('icon2_link', route('pages.show', 'kemahasiswaan')) }}" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-950/60 border border-blue-300 dark:border-blue-800 text-blue-700 dark:text-sky-400 group-hover:bg-blue-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-users"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-700 transition">Kemahasiswaan</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">UKM & Organisasi Kampus</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon2_title', 'Kemahasiswaan') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon2_sub', 'UKM & Organisasi Kampus') }}
+                </p>
             </a>
 
-            <a href="#" class="group flex flex-col items-center space-y-3">
+            <!-- Item 3: LMS E-Learning -->
+            <a href="{{ \App\Models\SiteSetting::get('icon3_link', \App\Models\SiteSetting::get('link_lms', '#')) }}" target="_blank" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-laptop-code"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-emerald-700 transition">LMS E-Learning</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Pembelajaran Digital</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-emerald-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon3_title', 'LMS E-Learning') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon3_sub', 'Pembelajaran Digital') }}
+                </p>
             </a>
 
-            <a href="#" class="group flex flex-col items-center space-y-3">
+            <!-- Item 4: CBT Ujian Online -->
+            <a href="{{ \App\Models\SiteSetting::get('icon4_link', \App\Models\SiteSetting::get('link_cbt', '#')) }}" target="_blank" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-indigo-100 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-square-check"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-indigo-700 transition">CBT Ujian Online</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Sistem Evaluasi Digital</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-indigo-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon4_title', 'CBT Ujian Online') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon4_sub', 'Sistem Evaluasi Digital') }}
+                </p>
             </a>
 
-            <a href="#" class="group flex flex-col items-center space-y-3">
+            <!-- Item 5: E-Library -->
+            <a href="{{ \App\Models\SiteSetting::get('icon5_link', \App\Models\SiteSetting::get('link_elibrary', '#')) }}" target="_blank" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-300 dark:border-purple-800 text-purple-700 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-book-bookmark"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-purple-700 transition">E-Library</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Perpustakaan Digital</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-purple-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon5_title', 'E-Library') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon5_sub', 'Perpustakaan Digital') }}
+                </p>
             </a>
 
-
-            <a href="#" class="group flex flex-col items-center space-y-3">
+            <!-- Item 6: Jurnal Online -->
+            <a href="{{ \App\Models\SiteSetting::get('icon6_link', \App\Models\SiteSetting::get('link_jurnal', '#')) }}" target="_blank" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-400 group-hover:bg-rose-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-newspaper"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-rose-700 transition">Jurnal Online</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Publikasi Riset Kesehatan</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-rose-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon6_title', 'Jurnal Online') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon6_sub', 'Publikasi Riset Kesehatan') }}
+                </p>
             </a>
 
-            <a href="{{ route('facilities.index') }}" class="group flex flex-col items-center space-y-3">
+            <!-- Item 7: Laboratorium -->
+            <a href="{{ \App\Models\SiteSetting::get('icon7_link', route('facilities.index')) }}" class="group flex flex-col items-center space-y-3">
                 <div class="w-20 h-20 rounded-full bg-teal-100 dark:bg-teal-950/60 border border-teal-300 dark:border-teal-800 text-teal-700 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-microscope"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-teal-700 transition">Laboratorium</h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Sarana Practical Medis</p>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-teal-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon7_title', 'Laboratorium') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon7_sub', 'Sarana Practical Medis') }}
+                </p>
+            </a>
+
+            <!-- Item 8: SIAKAD Online -->
+            <a href="{{ \App\Models\SiteSetting::get('icon8_link', 'https://siakad.stikespantiwaluya.ac.id') }}" target="_blank" class="group flex flex-col items-center space-y-3">
+                <div class="w-20 h-20 rounded-full bg-sky-100 dark:bg-sky-950/60 border border-sky-300 dark:border-sky-800 text-sky-700 dark:text-sky-400 group-hover:bg-sky-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-700 transition">
+                    {{ \App\Models\SiteSetting::get('icon8_title', 'SIAKAD Online') }}
+                </h4>
+                <p class="text-xs text-slate-500 dark:text-slate-400">
+                    {{ \App\Models\SiteSetting::get('icon8_sub', 'Sistem Informasi Akademik') }}
+                </p>
             </a>
 
         </div>

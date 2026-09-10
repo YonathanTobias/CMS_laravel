@@ -2,19 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Post;
-use App\Models\Page;
-use App\Models\ProgramStudi;
 use App\Models\Facility;
-use App\Models\SpmiDocument;
-use App\Models\SiteSetting;
 use App\Models\Menu;
+use App\Models\Page;
+use App\Models\Post;
+use App\Models\ProgramStudi;
+use App\Models\SiteSetting;
 use App\Models\Slide;
 use App\Models\Stat;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -44,6 +42,7 @@ class DatabaseSeeder extends Seeder
             'facebook' => 'https://facebook.com/stikespantiwaluyamalang',
             'instagram' => 'https://instagram.com/stikespantiwaluya',
             'youtube' => 'https://youtube.com/@stikespantiwaluyaofficial',
+            'maps_embed_url' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.1327435545477!2d112.62282707488443!3d-7.985224792040181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281ed19836a9%3A0xa3b7da4959b42040!2sSekolah%20Tinggi%20Ilmu%20kesehatan%20Panti%20Waluya!5e0!3m2!1sid!2sid!4v1789012783861!5m2!1sid!2sid',
         ];
 
         foreach ($settings as $key => $val) {
@@ -215,5 +214,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AchievementSeeder::class);
         $this->call(PageSeeder::class);
+        $this->call(CertificateSeeder::class);
     }
 }

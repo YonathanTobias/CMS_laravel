@@ -17,7 +17,7 @@
                 <div>
                     <div class="flex items-center justify-between mb-6">
                         <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center text-2xl">
-                            <i class="fa-solid {{ $prodi->icon ?? 'fa-user-nurse' }}"></i>
+                            <i class="{{ \App\Helpers\IconHelper::format($prodi->icon, 'fa-solid fa-user-nurse') }}"></i>
                         </div>
                         <div class="flex gap-2">
                             <span class="px-3 py-1 rounded-md bg-blue-950 text-white text-xs font-bold">{{ $prodi->degree }}</span>

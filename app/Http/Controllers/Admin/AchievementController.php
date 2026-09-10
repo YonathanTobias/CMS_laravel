@@ -11,6 +11,7 @@ class AchievementController extends Controller
     public function index()
     {
         $achievements = Achievement::orderBy('order', 'asc')->orderBy('created_at', 'desc')->get();
+
         return view('admin.achievements.index', compact('achievements'));
     }
 
@@ -39,7 +40,7 @@ class AchievementController extends Controller
 
         if ($request->hasFile('poster_image')) {
             $path = $request->file('poster_image')->store('achievements', 'public');
-            $validated['poster_image'] = '/storage/' . $path;
+            $validated['poster_image'] = '/storage/'.$path;
         }
 
         Achievement::create($validated);
@@ -71,7 +72,7 @@ class AchievementController extends Controller
 
         if ($request->hasFile('poster_image')) {
             $path = $request->file('poster_image')->store('achievements', 'public');
-            $validated['poster_image'] = '/storage/' . $path;
+            $validated['poster_image'] = '/storage/'.$path;
         }
 
         $achievement->update($validated);
@@ -82,6 +83,7 @@ class AchievementController extends Controller
     public function destroy(Achievement $achievement)
     {
         $achievement->delete();
+
         return redirect()->route('admin.achievements.index')->with('success', 'Data Prestasi Mahasiswa berhasil dihapus!');
     }
 }

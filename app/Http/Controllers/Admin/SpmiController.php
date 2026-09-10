@@ -11,6 +11,7 @@ class SpmiController extends Controller
     public function index()
     {
         $documents = SpmiDocument::orderBy('year', 'desc')->get();
+
         return view('admin.spmi.index', compact('documents'));
     }
 
@@ -31,7 +32,7 @@ class SpmiController extends Controller
 
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store('spmi_docs', 'public');
-            $validated['file_path'] = '/storage/' . $path;
+            $validated['file_path'] = '/storage/'.$path;
         }
 
         SpmiDocument::create($validated);
@@ -56,7 +57,7 @@ class SpmiController extends Controller
 
         if ($request->hasFile('file')) {
             $path = $request->file('file')->store('spmi_docs', 'public');
-            $validated['file_path'] = '/storage/' . $path;
+            $validated['file_path'] = '/storage/'.$path;
         }
 
         $spmi->update($validated);
@@ -67,6 +68,7 @@ class SpmiController extends Controller
     public function destroy(SpmiDocument $spmi)
     {
         $spmi->delete();
+
         return redirect()->route('admin.spmi.index')->with('success', 'Dokumen SPMI berhasil dihapus!');
     }
 }

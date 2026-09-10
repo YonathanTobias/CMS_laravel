@@ -34,7 +34,7 @@
                         <td class="py-4 px-6 text-slate-900">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center text-xs">
-                                    <i class="fa-solid {{ $menu->icon ?? 'fa-bars' }}"></i>
+                                    <i class="{{ \App\Helpers\IconHelper::format($menu->icon, 'fa-solid fa-bars') }}"></i>
                                 </div>
                                 <span class="text-base">{{ $menu->name }}</span>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="flex items-center gap-2">
                                     <span class="text-slate-400 font-bold">&rdsh;</span>
                                     @if($child->icon)
-                                        <i class="fa-solid {{ $child->icon }} text-xs text-teal-600"></i>
+                                        <i class="{{ \App\Helpers\IconHelper::format($child->icon) }} text-xs text-teal-600"></i>
                                     @endif
                                     <span>{{ $child->name }}</span>
                                 </div>

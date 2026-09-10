@@ -12,6 +12,7 @@ class ProgramStudiController extends Controller
     public function index()
     {
         $prodis = ProgramStudi::all();
+
         return view('admin.prodi.index', compact('prodis'));
     }
 
@@ -41,12 +42,12 @@ class ProgramStudiController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('prodi', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         }
 
         if ($request->hasFile('accreditation_certificate_file')) {
             $path = $request->file('accreditation_certificate_file')->store('prodi/certificates', 'public');
-            $validated['accreditation_certificate'] = '/storage/' . $path;
+            $validated['accreditation_certificate'] = '/storage/'.$path;
         } elseif ($request->filled('accreditation_certificate_url')) {
             $validated['accreditation_certificate'] = $request->accreditation_certificate_url;
         }
@@ -82,12 +83,12 @@ class ProgramStudiController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('prodi', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         }
 
         if ($request->hasFile('accreditation_certificate_file')) {
             $path = $request->file('accreditation_certificate_file')->store('prodi/certificates', 'public');
-            $validated['accreditation_certificate'] = '/storage/' . $path;
+            $validated['accreditation_certificate'] = '/storage/'.$path;
         } elseif ($request->filled('accreditation_certificate_url')) {
             $validated['accreditation_certificate'] = $request->accreditation_certificate_url;
         }
@@ -100,6 +101,7 @@ class ProgramStudiController extends Controller
     public function destroy(ProgramStudi $prodi)
     {
         $prodi->delete();
+
         return redirect()->route('admin.prodi.index')->with('success', 'Data Program Studi berhasil dihapus!');
     }
 }

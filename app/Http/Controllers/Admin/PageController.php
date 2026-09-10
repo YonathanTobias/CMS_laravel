@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Page;
 use App\Models\Menu;
+use App\Models\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -13,12 +13,14 @@ class PageController extends Controller
     public function index()
     {
         $pages = Page::orderBy('updated_at', 'desc')->get();
+
         return view('admin.pages.index', compact('pages'));
     }
 
     public function create()
     {
         $parentMenus = Menu::whereNull('parent_id')->orderBy('order', 'asc')->get();
+
         return view('admin.pages.create', compact('parentMenus'));
     }
 
@@ -36,10 +38,10 @@ class PageController extends Controller
         ]);
 
         $slug = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->title);
-        
+
         // Ensure unique slug
         if (Page::where('slug', $slug)->exists()) {
-            $slug = $slug . '-' . time();
+            $slug = $slug.'-'.time();
         }
 
         $page = Page::create([
@@ -55,7 +57,7 @@ class PageController extends Controller
         if ($request->has('add_to_menu') && $page->is_active) {
             Menu::create([
                 'name' => $page->title,
-                'url' => '/halaman/' . $page->slug,
+                'url' => '/halaman/'.$page->slug,
                 'parent_id' => $request->input('parent_menu_id'),
                 'order' => 99,
                 'target' => '_self',
@@ -70,6 +72,7 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         $parentMenus = Menu::whereNull('parent_id')->orderBy('order', 'asc')->get();
+
         return view('admin.pages.edit', compact('page', 'parentMenus'));
     }
 
@@ -100,7 +103,7 @@ class PageController extends Controller
         // Opsional update atau tambahkan ke Menu Navigasi
         if ($request->has('add_to_menu') && $page->is_active) {
             Menu::updateOrCreate(
-                ['url' => '/halaman/' . $page->slug],
+                ['url' => '/halaman/'.$page->slug],
                 [
                     'name' => $page->title,
                     'parent_id' => $request->input('parent_menu_id'),
@@ -118,7 +121,7 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         // Hapus juga rute menu terkait jika ada
-        Menu::where('url', '/halaman/' . $page->slug)->delete();
+        Menu::where('url', '/halaman/'.$page->slug)->delete();
         $page->delete();
 
         return redirect()->route('admin.pages.index')->with('success', 'Halaman statis berhasil dihapus!');

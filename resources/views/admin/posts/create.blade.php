@@ -38,10 +38,14 @@
                 <textarea name="excerpt" rows="2" placeholder="Ringkasan 1-2 kalimat untuk kartu berita di beranda..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">{{ old('excerpt') }}</textarea>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Isi Artikel Berita (Mendukung HTML & Teks Lengkap)</label>
-                <textarea name="content" rows="12" required placeholder="Tuliskan berita secara lengkap di sini..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 leading-relaxed">{{ old('content') }}</textarea>
-            </div>
+            @include('admin.components.dual-editor', [
+                'name' => 'content',
+                'value' => old('content'),
+                'label' => 'Isi Artikel Berita Baru',
+                'required' => true,
+                'rows' => 14,
+                'placeholder' => 'Tuliskan berita secara lengkap di sini...'
+            ])
         </div>
 
         <!-- Multi-Image Upload (Galeri Foto Berita) -->

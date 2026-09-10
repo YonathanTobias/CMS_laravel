@@ -35,7 +35,7 @@
                         <td class="py-4 px-6 font-bold text-slate-900">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid {{ $page->icon ?? 'fa-file-lines' }}"></i>
+                                    <i class="{{ \App\Helpers\IconHelper::format($page->icon, 'fa-solid fa-file-lines') }}"></i>
                                 </div>
                                 <div>
                                     <a href="{{ route('admin.pages.edit', $page->id) }}" class="hover:text-blue-700 font-bold">

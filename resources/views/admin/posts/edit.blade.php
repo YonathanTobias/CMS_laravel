@@ -39,10 +39,14 @@
                 <textarea name="excerpt" rows="2" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">{{ old('excerpt', $post->excerpt) }}</textarea>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Isi Artikel Berita (Mendukung HTML)</label>
-                <textarea name="content" rows="12" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 leading-relaxed">{{ old('content', $post->content) }}</textarea>
-            </div>
+            @include('admin.components.dual-editor', [
+                'name' => 'content',
+                'value' => old('content', $post->content),
+                'label' => 'Isi Artikel Berita',
+                'required' => true,
+                'rows' => 14,
+                'placeholder' => 'Tuliskan artikel berita di sini...'
+            ])
         </div>
 
         <!-- Multi-Image Upload & Existing Gallery List -->

@@ -31,7 +31,7 @@
                     <tr class="hover:bg-slate-50 transition">
                         <td class="py-4 px-6 font-bold text-slate-900 flex items-center gap-3">
                             <div class="w-9 h-9 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center">
-                                <i class="fa-solid {{ $prodi->icon ?? 'fa-user-nurse' }}"></i>
+                                <i class="{{ \App\Helpers\IconHelper::format($prodi->icon, 'fa-solid fa-user-nurse') }}"></i>
                             </div>
                             <div>
                                 <div>{{ $prodi->name }}</div>

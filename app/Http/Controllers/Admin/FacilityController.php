@@ -11,6 +11,7 @@ class FacilityController extends Controller
     public function index()
     {
         $facilities = Facility::all();
+
         return view('admin.facilities.index', compact('facilities'));
     }
 
@@ -32,7 +33,7 @@ class FacilityController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('facilities', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         }
 
         Facility::create($validated);
@@ -58,7 +59,7 @@ class FacilityController extends Controller
 
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('facilities', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         }
 
         $facility->update($validated);
@@ -69,6 +70,7 @@ class FacilityController extends Controller
     public function destroy(Facility $facility)
     {
         $facility->delete();
+
         return redirect()->route('admin.facilities.index')->with('success', 'Fasilitas berhasil dihapus!');
     }
 }

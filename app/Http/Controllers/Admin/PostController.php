@@ -45,13 +45,13 @@ class PostController extends Controller
             'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
         ]);
 
-        $validated['slug'] = Str::slug($request->title) . '-' . time();
+        $validated['slug'] = Str::slug($request->title).'-'.time();
         $validated['published_at'] = $request->status === 'published' ? now() : null;
 
         // Upload Sampul Utama
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('posts', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         }
 
         $post = Post::create($validated);
@@ -63,7 +63,7 @@ class PostController extends Controller
                     $path = $file->store('posts/gallery', 'public');
                     PostImage::create([
                         'post_id' => $post->id,
-                        'image_path' => '/storage/' . $path,
+                        'image_path' => '/storage/'.$path,
                         'order' => $index + 1,
                     ]);
                 }
@@ -76,6 +76,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $post->load('images');
+
         return view('admin.posts.edit', compact('post'));
     }
 
@@ -94,17 +95,17 @@ class PostController extends Controller
         ]);
 
         if ($post->title !== $request->title) {
-            $validated['slug'] = Str::slug($request->title) . '-' . time();
+            $validated['slug'] = Str::slug($request->title).'-'.time();
         }
 
-        if ($request->status === 'published' && !$post->published_at) {
+        if ($request->status === 'published' && ! $post->published_at) {
             $validated['published_at'] = now();
         }
 
         // Update Sampul Utama jika ada
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('posts', 'public');
-            $validated['image'] = '/storage/' . $path;
+            $validated['image'] = '/storage/'.$path;
         }
 
         $post->update($validated);
@@ -122,7 +123,7 @@ class PostController extends Controller
                     $path = $file->store('posts/gallery', 'public');
                     PostImage::create([
                         'post_id' => $post->id,
-                        'image_path' => '/storage/' . $path,
+                        'image_path' => '/storage/'.$path,
                         'order' => $existingCount + $index + 1,
                     ]);
                 }
@@ -135,6 +136,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+
         return redirect()->route('admin.posts.index')->with('success', 'Artikel berita berhasil dihapus!');
     }
 }

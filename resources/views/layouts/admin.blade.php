@@ -18,8 +18,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- FontAwesome Library (Dukungan Free 6.7.2 & Pro Kit) -->
+    @if($proUrl = \App\Models\SiteSetting::get('fontawesome_pro_url'))
+        @if(\Illuminate\Support\Str::endsWith($proUrl, '.js'))
+            <script src="{{ $proUrl }}" crossorigin="anonymous"></script>
+        @else
+            <link rel="stylesheet" href="{{ $proUrl }}" crossorigin="anonymous">
+        @endif
+    @else
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    @endif
     
     <!-- Tailwind CSS CDN dengan Dark Mode Class Enabled -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -128,6 +136,12 @@
             <a href="{{ route('admin.slides.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.slides.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-images w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Slide Banner Hero</span>
+            </a>
+
+            <!-- Sertifikat Akreditasi & Piagam Institusi -->
+            <a href="{{ route('admin.certificates.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.certificates.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+                <i class="fa-solid fa-award w-5 text-center text-base text-emerald-400"></i>
+                <span x-show="sidebarOpen">Sertifikat & Piagam</span>
             </a>
 
             <!-- Counter Stats Bar -->

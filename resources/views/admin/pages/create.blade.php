@@ -32,10 +32,14 @@
                 <p class="text-[11px] text-slate-400 mt-1">Kosongkan jika ingin dibuat otomatis dari judul halaman.</p>
             </div>
 
-            <div>
-                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Isi Konten Halaman (Mendukung Format Teks & Tag HTML)</label>
-                <textarea name="content" rows="14" required placeholder="Tuliskan isi informasi halaman lengkap di sini (mendukung tag HTML <p>, <h3>, <ul>, <li>, <strong>, <table>)..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono focus:outline-none focus:border-blue-500 leading-relaxed">{{ old('content') }}</textarea>
-            </div>
+            @include('admin.components.dual-editor', [
+                'name' => 'content',
+                'value' => old('content'),
+                'label' => 'Isi Konten Halaman Baru',
+                'required' => true,
+                'rows' => 14,
+                'placeholder' => 'Tuliskan isi informasi halaman lengkap di sini...'
+            ])
         </div>
     </div>
 

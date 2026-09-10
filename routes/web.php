@@ -1,18 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PublicController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\ProgramStudiController;
 use App\Http\Controllers\Admin\FacilityController;
-use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProgramStudiController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\StatController;
-use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,21 +46,24 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 */
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // CRUD Posts / Berita
     Route::resource('posts', PostController::class);
-    
+
     // CRUD Pages / Halaman
     Route::resource('pages', PageController::class);
-    
+
     // CRUD Program Studi
     Route::resource('prodi', ProgramStudiController::class);
-    
+
     // CRUD Fasilitas Kampus
     Route::resource('facilities', FacilityController::class);
-    
+
     // CMS Slide Banner Hero Manager
     Route::resource('slides', SlideController::class);
+
+    // CMS Sertifikat & Piagam Manager
+    Route::resource('certificates', CertificateController::class);
 
     // CMS Stat Counter Manager
     Route::resource('stats', StatController::class);
@@ -69,7 +73,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // CMS Menu Navigation Builder
     Route::resource('menus', MenuController::class);
-    
+
     // Pengaturan Situs & PMB Online
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
