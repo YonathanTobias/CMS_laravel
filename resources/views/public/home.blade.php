@@ -487,7 +487,7 @@
             <span class="text-amber-400 font-bold">C</span>ollaborative
         </p>
         <div class="pt-2">
-            <a href="{{ route('pages.show', 'profil') }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold px-6 py-3 rounded-xl shadow-lg hover:from-amber-600 hover:to-amber-700 transition text-xs">
+            <a href="{{ route('pages.show', 'visi-misi') }}" class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-extrabold px-6 py-3 rounded-xl shadow-lg hover:from-amber-600 hover:to-amber-700 transition text-xs">
                 Pelajari Budaya Kampus &rarr;
             </a>
         </div>
