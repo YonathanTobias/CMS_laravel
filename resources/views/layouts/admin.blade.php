@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Library (Dukungan Free 6.7.2 & Pro Kit) -->
+    <!-- FontAwesome Pro v6.7.0 Local Library (Free & Pro Full Support) -->
     @if($proUrl = \App\Models\SiteSetting::get('fontawesome_pro_url'))
         @if(\Illuminate\Support\Str::endsWith($proUrl, '.js'))
             <script src="{{ $proUrl }}" crossorigin="anonymous"></script>
@@ -26,7 +26,7 @@
             <link rel="stylesheet" href="{{ $proUrl }}" crossorigin="anonymous">
         @endif
     @else
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <link rel="stylesheet" href="{{ asset('vendor/fontawesome-pro/css/all.min.css') }}">
     @endif
     
     <!-- Tailwind CSS CDN dengan Dark Mode Class Enabled -->
