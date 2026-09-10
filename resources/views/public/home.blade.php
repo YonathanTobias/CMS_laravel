@@ -330,9 +330,15 @@
             @php
                 $profileImgVal = \App\Models\SiteSetting::get('profile_image_url', 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=800&auto=format&fit=crop');
                 $profileImgSrcVal = \Illuminate\Support\Str::startsWith($profileImgVal, 'http') ? $profileImgVal : asset($profileImgVal);
+                $profileImgFitVal = \App\Models\SiteSetting::get('profile_image_fit', 'cover');
+                $fitClass = match($profileImgFitVal) {
+                    'contain' => 'object-contain bg-slate-900',
+                    'fill' => 'object-fill',
+                    default => 'object-cover',
+                };
             @endphp
             <div class="lg:col-span-5 relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 h-96 bg-slate-900 group">
-                <img src="{{ $profileImgSrcVal }}" alt="{{ \App\Models\SiteSetting::get('profile_image_title', 'STIKes Panti Waluya Malang') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                <img src="{{ $profileImgSrcVal }}" alt="{{ \App\Models\SiteSetting::get('profile_image_title', 'STIKes Panti Waluya Malang') }}" class="w-full h-full {{ $fitClass }} group-hover:scale-105 transition duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white space-y-1">
                     <span class="px-3 py-1 bg-amber-500 text-slate-950 font-extrabold rounded-full text-[11px]">{{ \App\Models\SiteSetting::get('profile_image_badge', 'Terakreditasi Baik Sekali (BAN-PT)') }}</span>

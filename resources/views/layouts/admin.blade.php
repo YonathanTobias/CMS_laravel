@@ -113,7 +113,7 @@
             <!-- Halaman Statis -->
             <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.pages.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-file-lines w-5 text-center text-base"></i>
-                <span x-show="sidebarOpen">Halaman Profil</span>
+                <span x-show="sidebarOpen">Halaman Statis</span>
             </a>
 
             <!-- Program Studi -->
