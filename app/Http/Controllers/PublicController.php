@@ -82,7 +82,7 @@ class PublicController extends Controller
 
     public function pageShow($slug)
     {
-        $page = Page::where('slug', $slug)->where('is_active', true)->first();
+        $page = Page::with('images')->where('slug', $slug)->where('is_active', true)->first();
 
         if (! $page) {
             $formattedTitle = ucwords(str_replace(['-', '_'], ' ', $slug));

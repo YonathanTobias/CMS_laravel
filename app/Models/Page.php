@@ -17,4 +17,9 @@ class Page extends Model
         'is_active',
         'order',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(PageImage::class)->orderBy('order', 'asc');
+    }
 }

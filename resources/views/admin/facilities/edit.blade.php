@@ -35,6 +35,17 @@
         <textarea name="description" rows="4" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-teal-500">{{ old('description', $facility->description) }}</textarea>
     </div>
 
+    <div>
+        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Foto / Gambar Fasilitas</label>
+        @if($facility->image)
+            <div class="mb-3 w-40 h-28 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 shadow-sm">
+                <img src="{{ \Illuminate\Support\Str::startsWith($facility->image, 'http') ? $facility->image : asset($facility->image) }}" class="w-full h-full object-cover">
+            </div>
+        @endif
+        <input type="file" name="image" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100">
+        <p class="text-[11px] text-slate-400 mt-1">Pilih foto baru jika ingin mengganti foto fasilitas saat ini.</p>
+    </div>
+
     <div class="flex items-center gap-2">
         <input type="checkbox" name="is_featured" id="is_featured" value="1" {{ $facility->is_featured ? 'checked' : '' }} class="rounded text-teal-600">
         <label for="is_featured" class="text-sm font-bold text-slate-700">Tampilkan di Beranda Utama</label>

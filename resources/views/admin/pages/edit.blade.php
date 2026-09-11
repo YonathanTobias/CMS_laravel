@@ -11,7 +11,7 @@
     <a href="{{ route('admin.pages.index') }}" class="text-xs text-slate-600 font-bold hover:underline">&larr; Kembali ke Daftar Halaman</a>
 </div>
 
-<form action="{{ route('admin.pages.update', $page->id) }}" method="POST" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<form action="{{ route('admin.pages.update', $page->id) }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     @csrf
     @method('PUT')
 
@@ -39,6 +39,35 @@
                 'rows' => 14,
                 'placeholder' => 'Tuliskan informasi halaman di sini...'
             ])
+        </div>
+
+        <!-- Multi-Image Upload & Existing Gallery List -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-images text-blue-700"></i> Kelola Galeri Foto Halaman (Banyak Gambar)
+            </h3>
+
+            @if($page->images->count() > 0)
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Foto Galeri Saat Ini (Centang untuk menghapus)</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        @foreach($page->images as $img)
+                            <div class="relative group rounded-xl overflow-hidden border border-slate-200 bg-slate-900 h-28">
+                                <img src="{{ \Illuminate\Support\Str::startsWith($img->image_path, 'http') ? $img->image_path : asset($img->image_path) }}" class="w-full h-full object-cover">
+                                <label class="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-xs font-bold cursor-pointer p-2 text-center">
+                                    <input type="checkbox" name="delete_images[]" value="{{ $img->id }}" class="mr-1.5 rounded text-red-600">
+                                    Hapus
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            <div class="pt-2 border-t border-slate-100">
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Tambah Foto Galeri Baru (Pilih Banyak File)</label>
+                <input type="file" name="gallery[]" multiple accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
         </div>
     </div>
 

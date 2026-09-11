@@ -8,18 +8,38 @@
 <div x-data="{ 
     activeSlide: 0, 
     slides: {{ json_encode($slides) }},
+    showLightbox: false,
+    lightboxImg: '',
+    lightboxTitle: '',
+    openLightbox(img, title) {
+        this.lightboxImg = img;
+        this.lightboxTitle = title;
+        this.showLightbox = true;
+    },
     autoSlide() {
         setInterval(() => {
-            if (this.slides.length > 0) {
+            if (this.slides.length > 0 && !this.showLightbox) {
                 this.activeSlide = (this.activeSlide + 1) % this.slides.length;
             }
         }, 6000);
     }
 }" x-init="autoSlide()" class="relative bg-slate-950 text-white overflow-hidden group">
     
+    <!-- Floating Top-Right Button: Lihat Banner Utuh -->
+    <button type="button" 
+            @click="openLightbox(\Illuminate\Support\Str::startsWith(slides[activeSlide].image, 'http') ? slides[activeSlide].image : '{{ asset('') }}' + slides[activeSlide].image, slides[activeSlide].title)" 
+            class="absolute top-6 right-6 z-20 bg-slate-950/70 hover:bg-blue-600 text-white px-3.5 py-2 rounded-xl backdrop-blur-md border border-white/20 text-xs font-bold transition flex items-center gap-2 opacity-90 hover:opacity-100 shadow-xl cursor-pointer" 
+            title="Lihat Foto Banner Full Utuh">
+        <i class="fa-solid fa-expand text-amber-400"></i>
+        <span class="hidden sm:inline">Lihat Banner Utuh</span>
+    </button>
+
     <!-- Carousel Slides Container -->
     <div class="relative h-[500px] sm:h-[580px] w-full">
         @foreach($slides as $index => $slide)
+            @php
+                $heroImgSrc = \Illuminate\Support\Str::startsWith($slide->image, 'http') ? $slide->image : asset($slide->image);
+            @endphp
             <div x-show="activeSlide === {{ $index }}" 
                  x-transition:enter="transition ease-out duration-700" 
                  x-transition:enter-start="opacity-0 scale-105" 
@@ -29,32 +49,36 @@
                  x-transition:leave-end="opacity-0 scale-95"
                  class="absolute inset-0 w-full h-full">
                 
-                <!-- Background Image & Gradient Overlays -->
-                <img src="{{ \Illuminate\Support\Str::startsWith($slide->image, 'http') ? $slide->image : asset($slide->image) }}" alt="{{ $slide->title }}" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/40"></div>
+                <!-- Background Image & Gradient Overlays (Directly Clickable) -->
+                <img src="{{ $heroImgSrc }}" 
+                     alt="{{ $slide->title }}" 
+                     @click="openLightbox(@js($heroImgSrc), @js($slide->title))" 
+                     class="w-full h-full object-cover cursor-pointer hover:scale-105 transition duration-700" 
+                     title="Klik gambar untuk melihat banner utuh">
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-transparent pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/40 pointer-events-none"></div>
 
                 <!-- Slide Content Overlay -->
-                <div class="absolute inset-0 flex items-center">
+                <div class="absolute inset-0 flex items-center pointer-events-none">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                         <div class="max-w-2xl space-y-5">
                             @if($slide->badge)
-                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full {{ $slide->badge_color }} text-xs font-extrabold uppercase tracking-wider shadow-lg">
+                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full {{ $slide->badge_color }} text-xs font-extrabold uppercase tracking-wider shadow-lg pointer-events-auto">
                                     <i class="fa-solid fa-star text-[10px]"></i> {{ $slide->badge }}
                                 </div>
                             @endif
                             
-                            <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight drop-shadow-md">
+                            <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight drop-shadow-md pointer-events-auto">
                                 {{ $slide->title }}
                             </h1>
                             
                             @if($slide->subtitle)
-                                <p class="text-slate-200 text-sm sm:text-lg leading-relaxed drop-shadow max-w-xl">
+                                <p class="text-slate-200 text-sm sm:text-lg leading-relaxed drop-shadow max-w-xl pointer-events-auto">
                                     {{ $slide->subtitle }}
                                 </p>
                             @endif
 
-                            <div class="flex flex-wrap gap-4 pt-2">
+                            <div class="flex flex-wrap gap-3 pt-2 pointer-events-auto">
                                 @if($slide->cta_text)
                                     <a href="{{ $slide->cta_link }}" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-xl transition duration-200 transform hover:-translate-y-0.5 flex items-center gap-2">
                                         <i class="fa-solid fa-paper-plane text-sm"></i> {{ $slide->cta_text }}
@@ -91,6 +115,66 @@
                     :class="activeSlide === index ? 'w-8 bg-amber-500' : 'w-2.5 bg-white/50 hover:bg-white'" 
                     class="h-2.5 rounded-full transition-all duration-300"></button>
         </template>
+    </div>
+
+    <!-- Lightbox Banner Modal Overlay -->
+    <div x-show="showLightbox" 
+         x-cloak 
+         @keydown.escape.window="showLightbox = false"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 select-none" 
+         style="display: none;">
+        
+        <!-- Backdrop Overlay -->
+        <div x-show="showLightbox" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             @click="showLightbox = false" 
+             class="fixed inset-0 bg-slate-950/90 backdrop-blur-md"></div>
+
+        <!-- Modal Content Box -->
+        <div x-show="showLightbox" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             class="relative bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden max-w-5xl w-full z-10 space-y-0">
+            
+            <!-- Header -->
+            <div class="p-4 sm:px-6 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2 overflow-hidden">
+                    <span class="px-2.5 py-0.5 rounded text-xs font-extrabold bg-amber-500 text-slate-950 shrink-0">Banner Carousel</span>
+                    <h3 x-text="lightboxTitle" class="font-bold text-sm sm:text-base text-white truncate"></h3>
+                </div>
+                
+                <div class="flex items-center gap-2 shrink-0">
+                    <a :href="lightboxImg" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Buka Tab Baru
+                    </a>
+                    <button type="button" @click="showLightbox = false" class="p-2 text-slate-400 hover:text-white rounded-xl transition cursor-pointer">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image Body -->
+            <div class="p-2 sm:p-4 bg-slate-950 flex items-center justify-center min-h-[300px] max-h-[80vh]">
+                <img :src="lightboxImg" :alt="lightboxTitle" class="max-h-[75vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl">
+            </div>
+
+            <!-- Footer -->
+            <div class="p-3 bg-slate-900 border-t border-slate-800 flex justify-between items-center text-xs text-slate-400 px-6">
+                <span>💡 Tekan <strong>Esc</strong> atau klik di mana saja di luar gambar untuk menutup.</span>
+                <button type="button" @click="showLightbox = false" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-1.5 rounded-xl transition cursor-pointer">
+                    Tutup Preview
+                </button>
+            </div>
+        </div>
     </div>
 
 </div>

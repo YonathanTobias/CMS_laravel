@@ -12,7 +12,7 @@
     <a href="{{ route('admin.pages.index') }}" class="text-xs text-slate-600 font-bold hover:underline">&larr; Kembali ke Daftar Halaman</a>
 </div>
 
-<form action="{{ route('admin.pages.store') }}" method="POST" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<form action="{{ route('admin.pages.store') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
     @csrf
 
     <!-- Main Content Editor -->
@@ -40,6 +40,17 @@
                 'rows' => 14,
                 'placeholder' => 'Tuliskan isi informasi halaman lengkap di sini...'
             ])
+        </div>
+
+        <!-- Multi-Image Upload Section -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-slate-900 border-b border-slate-100 pb-2 flex items-center gap-2">
+                <i class="fa-solid fa-images text-blue-700"></i> Kelola Galeri Foto Halaman (Banyak Gambar)
+            </h3>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Tambah Foto Galeri Baru (Pilih Banyak File)</label>
+                <input type="file" name="gallery[]" multiple accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            </div>
         </div>
     </div>
 

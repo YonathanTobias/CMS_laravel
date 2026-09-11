@@ -19,6 +19,7 @@
         <table class="w-full text-left border-collapse text-sm">
             <thead>
                 <tr class="bg-slate-900 text-white border-b border-slate-800 text-xs uppercase font-bold">
+                    <th class="py-4 px-6">Foto</th>
                     <th class="py-4 px-6">Nama Fasilitas</th>
                     <th class="py-4 px-6">Kategori</th>
                     <th class="py-4 px-6">Tampil di Beranda</th>
@@ -28,6 +29,15 @@
             <tbody class="divide-y divide-slate-100">
                 @foreach($facilities as $fac)
                     <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3 px-6">
+                            @if($fac->image)
+                                <img src="{{ \Illuminate\Support\Str::startsWith($fac->image, 'http') ? $fac->image : asset($fac->image) }}" alt="{{ $fac->name }}" class="w-16 h-12 rounded-lg object-cover border border-slate-200 shadow-sm">
+                            @else
+                                <div class="w-16 h-12 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400 text-xs font-bold">
+                                    <i class="fa-solid fa-microscope text-slate-400 text-lg"></i>
+                                </div>
+                            @endif
+                        </td>
                         <td class="py-4 px-6 font-bold text-slate-900">{{ $fac->name }}</td>
                         <td class="py-4 px-6">
                             <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-700 text-xs font-bold">{{ $fac->category }}</span>

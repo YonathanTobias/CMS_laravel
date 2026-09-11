@@ -40,101 +40,103 @@
     </div>
 </div>
 
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+<div class="bg-slate-50 dark:bg-slate-950 py-12 transition-colors duration-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
 
-    <!-- Photo Gallery Carousel Slider (Diposisikan di atas isi artikel, tanpa teks judul 'Galeri') -->
-    @if($post->images->count() > 0)
-        @php
-            $galleryItems = $post->images->map(function($img) {
-                return \Illuminate\Support\Str::startsWith($img->image_path, 'http') ? $img->image_path : asset($img->image_path);
-            });
-        @endphp
+        <!-- Photo Gallery Carousel Slider (Diposisikan di atas isi artikel, tanpa teks judul 'Galeri') -->
+        @if($post->images->count() > 0)
+            @php
+                $galleryItems = $post->images->map(function($img) {
+                    return \Illuminate\Support\Str::startsWith($img->image_path, 'http') ? $img->image_path : asset($img->image_path);
+                });
+            @endphp
 
-        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-4"
-             x-data="{ 
-                activeSlide: 0, 
-                gallery: {{ json_encode($galleryItems) }},
-                lightboxOpen: false,
-                next() { this.activeSlide = (this.activeSlide + 1) % this.gallery.length },
-                prev() { this.activeSlide = (this.activeSlide - 1 + this.gallery.length) % this.gallery.length }
-             }">
-            
-            <!-- Main Carousel Display -->
-            <div class="relative h-[340px] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-slate-950 group shadow-lg border border-slate-200">
-                <template x-for="(img, idx) in gallery" :key="idx">
-                    <div x-show="activeSlide === idx" 
-                         x-transition:enter="transition ease-out duration-500"
-                         x-transition:enter-start="opacity-0 scale-105"
-                         x-transition:enter-end="opacity-100 scale-100"
-                         x-transition:leave="transition ease-in duration-300"
-                         x-transition:leave-start="opacity-100 scale-100"
-                         x-transition:leave-end="opacity-0 scale-95"
-                         class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
-                         @click="lightboxOpen = true">
-                        <img :src="img" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
-                            <span class="bg-slate-950/80 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold border border-white/20">
-                                <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Klik untuk Memperbesar
-                            </span>
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4"
+                 x-data="{ 
+                    activeSlide: 0, 
+                    gallery: {{ json_encode($galleryItems) }},
+                    lightboxOpen: false,
+                    next() { this.activeSlide = (this.activeSlide + 1) % this.gallery.length },
+                    prev() { this.activeSlide = (this.activeSlide - 1 + this.gallery.length) % this.gallery.length }
+                 }">
+                
+                <!-- Main Carousel Display -->
+                <div class="relative h-[340px] sm:h-[480px] w-full rounded-2xl overflow-hidden bg-slate-950 group shadow-lg border border-slate-200 dark:border-slate-800">
+                    <template x-for="(img, idx) in gallery" :key="idx">
+                        <div x-show="activeSlide === idx" 
+                             x-transition:enter="transition ease-out duration-500"
+                             x-transition:enter-start="opacity-0 scale-105"
+                             x-transition:enter-end="opacity-100 scale-100"
+                             x-transition:leave="transition ease-in duration-300"
+                             x-transition:leave-start="opacity-100 scale-100"
+                             x-transition:leave-end="opacity-0 scale-95"
+                             class="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
+                             @click="lightboxOpen = true">
+                            <img :src="img" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-slate-950/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                <span class="bg-slate-950/80 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold border border-white/20">
+                                    <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Klik untuk Memperbesar
+                                </span>
+                            </div>
                         </div>
+                    </template>
+
+                    <!-- Photo counter badge -->
+                    <div class="absolute top-4 right-4 bg-slate-950/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/20">
+                        <span x-text="activeSlide + 1"></span> / {{ $post->images->count() }} Foto
                     </div>
-                </template>
 
-                <!-- Photo counter badge -->
-                <div class="absolute top-4 right-4 bg-slate-950/70 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full border border-white/20">
-                    <span x-text="activeSlide + 1"></span> / {{ $post->images->count() }} Foto
-                </div>
-
-                <!-- Carousel Prev / Next Buttons -->
-                <button @click="prev()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-blue-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition opacity-80 hover:opacity-100 shadow-lg">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button @click="next()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-blue-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition opacity-80 hover:opacity-100 shadow-lg">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
-
-            <!-- Thumbnail Selector Strip -->
-            <div class="flex items-center gap-3 overflow-x-auto pb-2 pt-1">
-                <template x-for="(img, idx) in gallery" :key="idx">
-                    <button @click="activeSlide = idx" 
-                            :class="activeSlide === idx ? 'ring-4 ring-blue-600 scale-105 opacity-100' : 'opacity-60 hover:opacity-100'"
-                            class="w-20 h-16 sm:w-24 sm:h-18 rounded-xl overflow-hidden shrink-0 border border-slate-200 transition duration-200 bg-slate-900">
-                        <img :src="img" class="w-full h-full object-cover">
+                    <!-- Carousel Prev / Next Buttons -->
+                    <button @click="prev()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-blue-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition opacity-80 hover:opacity-100 shadow-lg" aria-label="Geser Foto Sebelumnya">
+                        <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                </template>
-            </div>
+                    <button @click="next()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-950/60 hover:bg-blue-600 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition opacity-80 hover:opacity-100 shadow-lg" aria-label="Geser Foto Selanjutnya">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
 
-            <!-- Lightbox Zoom Modal -->
-            <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="lightboxOpen = false">
-                <div class="relative max-w-5xl w-full">
-                    <button @click="lightboxOpen = false" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
-                    <img :src="gallery[activeSlide]" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+                <!-- Thumbnail Selector Strip -->
+                <div class="flex items-center gap-3 overflow-x-auto pb-2 pt-1">
+                    <template x-for="(img, idx) in gallery" :key="idx">
+                        <button @click="activeSlide = idx" 
+                                :class="activeSlide === idx ? 'ring-4 ring-blue-600 scale-105 opacity-100' : 'opacity-60 hover:opacity-100'"
+                                class="w-20 h-16 sm:w-24 sm:h-18 rounded-xl overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 transition duration-200 bg-slate-900">
+                            <img :src="img" class="w-full h-full object-cover">
+                        </button>
+                    </template>
+                </div>
+
+                <!-- Lightbox Zoom Modal -->
+                <div x-show="lightboxOpen" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="lightboxOpen = false">
+                    <div class="relative max-w-5xl w-full">
+                        <button @click="lightboxOpen = false" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
+                        <img :src="gallery[activeSlide]" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+                    </div>
+                </div>
+
+            </div>
+        @endif
+
+        <!-- Isi Teks Berita Utama (Article Content Body) -->
+        <div class="bg-white dark:bg-slate-900 rounded-2xl p-8 sm:p-12 border border-slate-200 dark:border-slate-800 shadow-sm prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200 leading-relaxed space-y-6">
+            {!! $post->content !!}
+        </div>
+
+        <!-- Recent Posts Sidebar Block -->
+        @if($recentPosts->count() > 0)
+            <div class="mt-12 bg-slate-100 dark:bg-slate-900/60 rounded-2xl p-8 border border-slate-200 dark:border-slate-800">
+                <h3 class="font-heading font-bold text-xl text-slate-900 dark:text-white mb-6 border-b border-slate-200 dark:border-slate-800 pb-3">Berita Lainnya</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    @foreach($recentPosts as $recent)
+                        <a href="{{ route('news.show', $recent->slug) }}" class="block bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-500 dark:hover:border-sky-400 transition">
+                            <div class="text-xs text-blue-700 dark:text-sky-400 font-bold mb-1">{{ $recent->category }}</div>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-blue-700 dark:hover:text-sky-400 transition">{{ $recent->title }}</h4>
+                        </a>
+                    @endforeach
                 </div>
             </div>
+        @endif
 
-        </div>
-    @endif
-
-    <!-- Isi Teks Berita Utama (Article Content Body) -->
-    <div class="bg-white rounded-2xl p-8 sm:p-12 border border-slate-200 shadow-sm prose max-w-none text-slate-800 leading-relaxed space-y-6">
-        {!! $post->content !!}
     </div>
-
-    <!-- Recent Posts Sidebar Block -->
-    @if($recentPosts->count() > 0)
-        <div class="mt-12 bg-slate-100 rounded-2xl p-8 border border-slate-200">
-            <h3 class="font-heading font-bold text-xl text-slate-900 mb-6 border-b border-slate-200 pb-3">Berita Lainnya</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                @foreach($recentPosts as $recent)
-                    <a href="{{ route('news.show', $recent->slug) }}" class="block bg-white p-4 rounded-xl border border-slate-200 hover:border-blue-500 transition">
-                        <div class="text-xs text-blue-700 font-bold mb-1">{{ $recent->category }}</div>
-                        <h4 class="font-bold text-sm text-slate-900 line-clamp-2 hover:text-blue-700">{{ $recent->title }}</h4>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    @endif
-
 </div>
 @endsection

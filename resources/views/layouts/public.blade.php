@@ -85,16 +85,16 @@
     <div class="bg-gradient-to-r from-blue-950 via-blue-900 to-navy-950 text-white text-xs py-2.5 px-4 border-b border-blue-800/40">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
             <div class="flex items-center gap-4">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500 text-slate-950 font-bold text-[11px] animate-pulse">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-slate-950 font-bold text-[11px] shadow-sm">
                     <i class="fa-solid fa-bullhorn text-xs"></i> {{ \App\Models\SiteSetting::get('announcement_badge', 'PMB 2026/2027') }}
                 </span>
-                <span class="hidden sm:inline font-medium">{{ \App\Models\SiteSetting::get('announcement_text', 'Pendaftaran Mahasiswa Baru D3/S1/Profesi Telah Dibuka!') }}</span>
+                <span class="hidden sm:inline font-medium text-slate-200">{{ \App\Models\SiteSetting::get('announcement_text', 'Pendaftaran Mahasiswa Baru D3/S1/Profesi Telah Dibuka!') }}</span>
             </div>
             <div class="flex items-center gap-5 text-slate-300">
-                <a href="tel:{{ \App\Models\SiteSetting::get('phone') }}" class="hover:text-amber-300 transition flex items-center gap-1.5">
+                <a href="tel:{{ \App\Models\SiteSetting::get('phone') }}" class="hover:text-amber-300 transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded">
                     <i class="fa-solid fa-phone text-blue-400"></i> {{ \App\Models\SiteSetting::get('phone', '(0341) 369003') }}
                 </a>
-                <a href="mailto:{{ \App\Models\SiteSetting::get('email') }}" class="hover:text-amber-300 transition flex items-center gap-1.5 hidden md:flex">
+                <a href="mailto:{{ \App\Models\SiteSetting::get('email') }}" class="hover:text-amber-300 transition flex items-center gap-1.5 hidden md:flex focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded">
                     <i class="fa-solid fa-envelope text-blue-400"></i> {{ \App\Models\SiteSetting::get('email') }}
                 </a>
             </div>
@@ -102,12 +102,12 @@
     </div>
 
     <!-- Main Navigation Bar -->
-    <header x-data="{ openMobile: false }" class="sticky top-0 z-50 glass-header text-white shadow-xl border-b border-blue-900/50">
+    <header x-data="{ openMobile: false, mobileExpanded: {} }" class="sticky top-0 z-50 glass-header text-white shadow-xl border-b border-blue-900/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 
                 <!-- Official Campus Logo & Brand -->
-                <a href="{{ route('home') }}" class="flex items-center gap-3.5 group">
+                <a href="{{ route('home') }}" class="flex items-center gap-3.5 group focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded-xl">
                     <div class="w-12 h-12 rounded-xl bg-white p-1 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition duration-300 flex items-center justify-center shrink-0 border border-blue-200/50">
                         <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya Malang" class="h-10 w-auto object-contain">
                     </div>
@@ -131,7 +131,7 @@
                         @if($navMenu->children->count() > 0)
                             <!-- Dropdown Parent Menu -->
                             <div class="relative" x-data="{ openDropdown: false }" @click.away="openDropdown = false">
-                                <button @click="openDropdown = !openDropdown" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-blue-900/60 hover:text-sky-300 transition flex items-center gap-1.5">
+                                <button @click="openDropdown = !openDropdown" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-200 hover:bg-blue-900/60 hover:text-sky-300 transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                                     @if($navMenu->icon)
                                         <i class="{{ \App\Helpers\IconHelper::format($navMenu->icon) }} text-xs text-sky-400"></i>
                                     @endif
@@ -139,9 +139,9 @@
                                     <i class="fa-solid fa-chevron-down text-xs transition duration-200" :class="{'rotate-180': openDropdown}"></i>
                                 </button>
 
-                                <div x-show="openDropdown" x-transition class="absolute left-0 mt-2 w-60 bg-blue-950 border border-blue-800 rounded-xl shadow-2xl py-2 z-50 text-sm">
+                                <div x-show="openDropdown" x-transition class="absolute left-0 mt-2 w-60 bg-slate-900 border border-blue-800 rounded-xl shadow-2xl py-2 z-50 text-sm">
                                     @foreach($navMenu->children as $child)
-                                        <a href="{{ $child->url }}" target="{{ $child->target }}" class="block px-4 py-2.5 text-slate-300 hover:bg-blue-600 hover:text-white transition flex items-center justify-between">
+                                        <a href="{{ $child->url }}" target="{{ $child->target }}" class="block px-4 py-2.5 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center justify-between focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                                             <span class="flex items-center gap-2">
                                                 @if($child->icon)
                                                     <i class="{{ \App\Helpers\IconHelper::format($child->icon) }} text-sky-400 text-xs w-4"></i>
@@ -154,7 +154,7 @@
                             </div>
                         @else
                             <!-- Single Link Menu -->
-                            <a href="{{ $navMenu->url }}" target="{{ $navMenu->target }}" class="px-3.5 py-2 rounded-lg text-sm font-medium transition {{ request()->url() === url($navMenu->url) ? 'bg-blue-600 text-white font-semibold shadow-md' : 'text-slate-200 hover:bg-blue-900/60 hover:text-sky-300' }}">
+                            <a href="{{ $navMenu->url }}" target="{{ $navMenu->target }}" class="px-3.5 py-2 rounded-lg text-sm font-medium transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->url() === url($navMenu->url) ? 'bg-blue-600 text-white font-semibold shadow-md' : 'text-slate-200 hover:bg-blue-900/60 hover:text-sky-300' }}">
                                 @if($navMenu->icon)
                                     <i class="{{ \App\Helpers\IconHelper::format($navMenu->icon) }} text-xs text-sky-400 mr-1"></i>
                                 @endif
@@ -167,7 +167,7 @@
                 <!-- PMB Action Button & Dark/Light Mode Switcher -->
                 <div class="hidden lg:flex items-center gap-3">
                     <!-- Dark / Light Mode Switcher Button -->
-                    <button @click="toggleTheme()" class="px-3 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-amber-400 transition flex items-center gap-1.5 text-xs font-bold" title="Ubah Mode Tampilan (Dark/Light)">
+                    <button @click="toggleTheme()" class="px-3.5 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-amber-400 transition flex items-center gap-1.5 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Ubah Mode Tampilan (Dark/Light)">
                         <template x-if="darkMode">
                             <span class="flex items-center gap-1.5 text-amber-400"><i class="fa-solid fa-sun text-amber-400"></i> Mode Terang</span>
                         </template>
@@ -176,18 +176,18 @@
                         </template>
                     </button>
 
-                    <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2">
+                    <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                         <i class="fa-solid fa-graduation-cap"></i> PMB Online
                     </a>
                 </div>
 
                 <!-- Mobile Menu Button & Dark Mode Switcher -->
                 <div class="lg:hidden flex items-center gap-2">
-                    <button @click="toggleTheme()" class="p-2 rounded-lg text-amber-400 bg-white/10 hover:bg-white/20 border border-white/20">
+                    <button @click="toggleTheme()" class="p-2 rounded-lg text-amber-400 bg-white/10 hover:bg-white/20 border border-white/20 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                         <i class="fa-solid" :class="darkMode ? 'fa-sun text-amber-400' : 'fa-moon text-amber-300'"></i>
                     </button>
                     
-                    <button @click="openMobile = !openMobile" class="p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
+                    <button @click="openMobile = !openMobile" class="p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" aria-label="Buka Menu Navigasi">
                         <i class="fa-solid" :class="openMobile ? 'fa-xmark text-xl' : 'fa-bars text-xl'"></i>
                     </button>
                 </div>
@@ -195,15 +195,39 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div x-show="openMobile" x-transition class="lg:hidden bg-blue-950 border-b border-blue-900 px-4 pt-2 pb-6 space-y-3">
+        <!-- Mobile Navigation Menu Accordion -->
+        <div x-show="openMobile" x-transition class="lg:hidden bg-slate-950 border-b border-blue-900 px-4 pt-2 pb-6 space-y-2">
             @foreach($dynamicMenus as $navMenu)
-                <a href="{{ $navMenu->url }}" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-blue-900 font-medium text-sm">
-                    {{ $navMenu->name }}
-                </a>
+                @if($navMenu->children->count() > 0)
+                    <div class="space-y-1">
+                        <button @click="mobileExpanded['menu_{{ $navMenu->id }}'] = !mobileExpanded['menu_{{ $navMenu->id }}']" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-slate-200 hover:bg-blue-900 font-medium text-sm">
+                            <span class="flex items-center gap-2">
+                                @if($navMenu->icon)
+                                    <i class="{{ \App\Helpers\IconHelper::format($navMenu->icon) }} text-xs text-sky-400"></i>
+                                @endif
+                                <span>{{ $navMenu->name }}</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" :class="{'rotate-180': mobileExpanded['menu_{{ $navMenu->id }}']}"></i>
+                        </button>
+                        <div x-show="mobileExpanded['menu_{{ $navMenu->id }}']" x-transition class="pl-6 space-y-1">
+                            @foreach($navMenu->children as $child)
+                                <a href="{{ $child->url }}" target="{{ $child->target }}" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-blue-900/60 font-medium text-xs">
+                                    {{ $child->name }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                @else
+                    <a href="{{ $navMenu->url }}" target="{{ $navMenu->target }}" class="block px-3 py-2 rounded-lg text-slate-200 hover:bg-blue-900 font-medium text-sm">
+                        @if($navMenu->icon)
+                            <i class="{{ \App\Helpers\IconHelper::format($navMenu->icon) }} text-xs text-sky-400 mr-1.5"></i>
+                        @endif
+                        {{ $navMenu->name }}
+                    </a>
+                @endif
             @endforeach
-            <div class="pt-2">
-                <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="block w-full text-center bg-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm">
+            <div class="pt-3">
+                <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="block w-full text-center bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-2.5 rounded-xl text-sm shadow">
                     Portal PMB Online &rarr;
                 </a>
             </div>

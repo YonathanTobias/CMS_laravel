@@ -72,7 +72,7 @@
         
         <!-- Header / Logo -->
         <div class="h-16 flex items-center justify-between px-4 border-b border-blue-900/60 bg-blue-950/80">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 overflow-hidden">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 overflow-hidden focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded-lg">
                 <div class="w-9 h-9 rounded-lg bg-white p-0.5 flex items-center justify-center shrink-0 shadow">
                     <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes" class="h-7 w-auto object-contain">
                 </div>
@@ -80,7 +80,7 @@
                     CMS STIKes PW
                 </div>
             </a>
-            <button @click="sidebarOpen = !sidebarOpen" class="text-slate-400 hover:text-white p-1 rounded-lg">
+            <button @click="sidebarOpen = !sidebarOpen" class="text-slate-400 hover:text-white p-1.5 rounded-lg focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" aria-label="Toggle Sidebar Navigation">
                 <i class="fa-solid" :class="sidebarOpen ? 'fa-angles-left' : 'fa-angles-right'"></i>
             </button>
         </div>
@@ -89,7 +89,7 @@
         <nav class="flex-1 overflow-y-auto py-4 px-2 space-y-1 text-sm">
             
             <!-- Dashboard -->
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-gauge-high w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Dashboard</span>
             </a>
@@ -99,31 +99,31 @@
             </div>
 
             <!-- Berita & Posts -->
-            <a href="{{ route('admin.posts.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.posts.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.posts.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.posts.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-newspaper w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Berita & Artikel</span>
             </a>
 
             <!-- Prestasi & Ucapan Selamat -->
-            <a href="{{ route('admin.achievements.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.achievements.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.achievements.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.achievements.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-trophy w-5 text-center text-base text-amber-400"></i>
                 <span x-show="sidebarOpen">Prestasi & Ucapan Selamat</span>
             </a>
 
             <!-- Halaman Statis -->
-            <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.pages.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.pages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.pages.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-file-lines w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Halaman Statis</span>
             </a>
 
             <!-- Program Studi -->
-            <a href="{{ route('admin.prodi.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.prodi.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.prodi.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.prodi.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-graduation-cap w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Program Studi</span>
             </a>
 
             <!-- Fasilitas Kampus -->
-            <a href="{{ route('admin.facilities.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.facilities.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.facilities.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.facilities.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-hospital-user w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Fasilitas Kampus</span>
             </a>
@@ -133,25 +133,25 @@
             </div>
 
             <!-- Slide Banner Carousel -->
-            <a href="{{ route('admin.slides.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.slides.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.slides.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.slides.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-images w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Slide Banner Hero</span>
             </a>
 
             <!-- Sertifikat Akreditasi & Piagam Institusi -->
-            <a href="{{ route('admin.certificates.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.certificates.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.certificates.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.certificates.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-award w-5 text-center text-base text-emerald-400"></i>
                 <span x-show="sidebarOpen">Sertifikat & Piagam</span>
             </a>
 
             <!-- Counter Stats Bar -->
-            <a href="{{ route('admin.stats.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.stats.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.stats.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.stats.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-chart-simple w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Statistik Beranda</span>
             </a>
 
             <!-- Menu Builder -->
-            <a href="{{ route('admin.menus.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.menus.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.menus.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.menus.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-bars-staggered w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Menu Navigasi</span>
             </a>
@@ -161,7 +161,7 @@
             </div>
 
             <!-- Pengaturan Situs -->
-            <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition {{ request()->routeIs('admin.settings.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+            <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.settings.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-gears w-5 text-center text-base"></i>
                 <span x-show="sidebarOpen">Pengaturan Situs</span>
             </a>
@@ -182,7 +182,7 @@
             
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="p-2 text-slate-400 hover:text-red-400 transition rounded-lg" title="Keluar / Logout">
+                <button type="submit" class="p-2 text-slate-400 hover:text-red-400 transition rounded-lg focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Keluar / Logout">
                     <i class="fa-solid fa-right-from-bracket text-base"></i>
                 </button>
             </form>
@@ -201,7 +201,7 @@
 
             <div class="flex items-center gap-3">
                 <!-- Dark / Light Mode Switcher Button -->
-                <button @click="toggleTheme()" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 border bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 border-slate-200 dark:border-slate-700 shadow-sm hover:border-blue-500" title="Ubah Mode Tampilan (Dark/Light)">
+                <button @click="toggleTheme()" class="px-3.5 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 border bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 border-slate-200 dark:border-slate-700 shadow-sm hover:border-blue-500 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Ubah Mode Tampilan (Dark/Light)">
                     <template x-if="darkMode">
                         <span class="flex items-center gap-1.5 text-amber-400 font-extrabold"><i class="fa-solid fa-sun text-amber-400"></i> Mode Terang</span>
                     </template>
@@ -210,7 +210,7 @@
                     </template>
                 </button>
 
-                <a href="{{ route('home') }}" target="_blank" class="text-xs font-bold text-blue-700 dark:text-sky-300 hover:text-blue-900 bg-blue-50 dark:bg-blue-950/60 px-3.5 py-2 rounded-xl border border-blue-200 dark:border-blue-800 transition flex items-center gap-1.5">
+                <a href="{{ route('home') }}" target="_blank" class="text-xs font-bold text-blue-700 dark:text-sky-300 hover:text-blue-900 bg-blue-50 dark:bg-blue-950/60 px-3.5 py-2 rounded-xl border border-blue-200 dark:border-blue-800 transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                     <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i> Lihat Website Publik
                 </a>
             </div>
