@@ -160,6 +160,12 @@
                 <div class="text-[11px] font-bold text-sky-400/80 uppercase tracking-wider px-3">Sistem</div>
             </div>
 
+            <!-- Kelola Administrator -->
+            <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.users.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+                <i class="fa-solid fa-users w-5 text-center text-base"></i>
+                <span x-show="sidebarOpen">Kelola Admin</span>
+            </a>
+
             <!-- Pengaturan Situs -->
             <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.settings.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
                 <i class="fa-solid fa-gears w-5 text-center text-base"></i>

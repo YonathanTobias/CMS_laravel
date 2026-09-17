@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProgramStudiController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\StatController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // CMS Menu Navigation Builder
     Route::resource('menus', MenuController::class);
+
+    // CMS User Administrator Manager
+    Route::resource('users', UserController::class);
 
     // Pengaturan Situs & PMB Online
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
