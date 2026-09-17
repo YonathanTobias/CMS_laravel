@@ -238,5 +238,98 @@
         </main>
     </div>
 
+    <!-- Global Client-Side Image Auto-Compressor Script (Hitungan Detik Upload Super Cepat) -->
+    <script>
+    document.addEventListener('change', async function (e) {
+        const input = e.target;
+        if (!input || input.type !== 'file' || !input.files || input.files.length === 0) return;
+        
+        const accept = input.getAttribute('accept');
+        if (!accept || !accept.includes('image')) return;
+
+        if (input.dataset.compressed === 'true') {
+            delete input.dataset.compressed;
+            return;
+        }
+
+        const files = Array.from(input.files);
+        let hasCompressed = false;
+        const dt = new DataTransfer();
+
+        let badge = input.nextElementSibling;
+        if (!badge || !badge.classList.contains('auto-compress-badge')) {
+            badge = document.createElement('div');
+            badge.className = 'auto-compress-badge text-[11px] font-bold text-emerald-600 dark:text-emerald-400 mt-1.5 flex items-center gap-1.5';
+            input.parentNode.insertBefore(badge, input.nextSibling);
+        }
+        badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-amber-500"></i> Optimasi & kompresi foto otomatis...';
+
+        for (let file of files) {
+            if (!file.type.startsWith('image/')) {
+                dt.items.add(file);
+                continue;
+            }
+
+            try {
+                const compressedBlob = await compressSingleImage(file, 1920, 0.82);
+                const compressedFile = new File([compressedBlob], file.name.replace(/\.[^/.]+$/, "") + ".jpg", {
+                    type: 'image/jpeg',
+                    lastModified: Date.now()
+                });
+                dt.items.add(compressedFile);
+                hasCompressed = true;
+            } catch (err) {
+                console.warn('Image compression skipped for:', file.name, err);
+                dt.items.add(file);
+            }
+        }
+
+        if (hasCompressed) {
+            input.dataset.compressed = 'true';
+            input.files = dt.files;
+            badge.innerHTML = '<i class="fa-solid fa-bolt text-emerald-500"></i> Foto otomatis dioptimasi & dikompres (Ukuran berkas turun 80-95%)';
+        } else {
+            badge.remove();
+        }
+    });
+
+    function compressSingleImage(file, maxWidth, quality) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxWidth) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob((blob) => {
+                        if (blob) {
+                            resolve(blob);
+                        } else {
+                            reject(new Error('Canvas to Blob failed'));
+                        }
+                    }, 'image/jpeg', quality);
+                };
+                img.onerror = reject;
+                img.src = e.target.result;
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+    </script>
+
 </body>
 </html>
