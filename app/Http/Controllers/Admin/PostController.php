@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\PostImage;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Post::query();
+        $query = Post::with('categories');
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -29,7 +30,9 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -38,12 +41,17 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
-            'category' => 'required|string',
+            'categories' => 'required|array|min:1',
+            'categories.*' => 'exists:categories,id',
             'status' => 'required|in:published,draft',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
             'gallery' => 'nullable|array',
             'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
         ]);
+
+        // String kategori utama untuk fallback
+        $firstCat = Category::find($validated['categories'][0]);
+        $validated['category'] = $firstCat ? $firstCat->name : 'Umum';
 
         $validated['slug'] = Str::slug($request->title).'-'.time();
         $validated['published_at'] = $request->status === 'published' ? now() : null;
@@ -55,6 +63,9 @@ class PostController extends Controller
         }
 
         $post = Post::create($validated);
+
+        // Sync Multi-Kategori (Bisa Pilih Lebih dari 1)
+        $post->categories()->sync($validated['categories']);
 
         // Upload Galeri Foto Tambahan (Banyak Gambar)
         if ($request->hasFile('gallery')) {
@@ -70,14 +81,15 @@ class PostController extends Controller
             }
         }
 
-        return redirect()->route('admin.posts.index')->with('success', 'Artikel berita & galeri foto berhasil ditambahkan!');
+        return redirect()->route('admin.posts.index')->with('success', 'Artikel berita & kategori berhasil ditambahkan!');
     }
 
     public function edit(Post $post)
     {
-        $post->load('images');
+        $post->load(['images', 'categories']);
+        $categories = Category::orderBy('name', 'asc')->get();
 
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     public function update(Request $request, Post $post)
@@ -86,13 +98,17 @@ class PostController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
-            'category' => 'required|string',
+            'categories' => 'required|array|min:1',
+            'categories.*' => 'exists:categories,id',
             'status' => 'required|in:published,draft',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
             'gallery' => 'nullable|array',
             'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:10240',
             'delete_images' => 'nullable|array',
         ]);
+
+        $firstCat = Category::find($validated['categories'][0]);
+        $validated['category'] = $firstCat ? $firstCat->name : 'Umum';
 
         if ($post->title !== $request->title) {
             $validated['slug'] = Str::slug($request->title).'-'.time();
@@ -109,6 +125,9 @@ class PostController extends Controller
         }
 
         $post->update($validated);
+
+        // Sync Multi-Kategori
+        $post->categories()->sync($validated['categories']);
 
         // Hapus Foto Galeri yang Dicentang Hapus
         if ($request->filled('delete_images')) {
@@ -130,11 +149,12 @@ class PostController extends Controller
             }
         }
 
-        return redirect()->route('admin.posts.index')->with('success', 'Artikel berita & galeri foto berhasil diperbarui!');
+        return redirect()->route('admin.posts.index')->with('success', 'Artikel berita & kategori berhasil diperbarui!');
     }
 
     public function destroy(Post $post)
     {
+        $post->categories()->detach();
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('success', 'Artikel berita berhasil dihapus!');

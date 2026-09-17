@@ -37,10 +37,18 @@
                         {{ $post->published_at ? $post->published_at->format('g:i a') : $post->created_at->format('g:i a') }}
                     </span>
                     <span>&bull;</span>
-                    <span class="inline-flex items-center gap-1 font-bold text-blue-700 dark:text-sky-300">
-                        <i class="fa-solid fa-tag text-[10px]"></i>
-                        {{ $post->category }}
-                    </span>
+                    <div class="inline-flex flex-wrap items-center gap-1.5">
+                        <i class="fa-solid fa-tag text-[10px] text-blue-600 dark:text-sky-400"></i>
+                        @if($post->categories && $post->categories->count() > 0)
+                            @foreach($post->categories as $c)
+                                <a href="{{ route('news.index', ['category' => $c->slug]) }}" class="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-sky-300 text-[11px] font-bold border border-blue-200 dark:border-blue-800 hover:underline">
+                                    {{ $c->name }}
+                                </a>
+                            @endforeach
+                        @else
+                            <span class="font-bold text-blue-700 dark:text-sky-300">{{ $post->category }}</span>
+                        @endif
+                    </div>
                 </div>
 
                 <!-- 3. Featured Image & Photo Gallery Carousel Slider -->

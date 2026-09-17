@@ -19,8 +19,12 @@
                     Semua Kategori
                 </a>
                 @foreach($categories as $cat)
-                    <a href="{{ route('news.index', ['category' => $cat]) }}" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap {{ request('category') === $cat ? 'bg-blue-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' }}">
-                        {{ $cat }}
+                    @php
+                        $catParam = is_object($cat) ? $cat->slug : $cat;
+                        $catName = is_object($cat) ? $cat->name : $cat;
+                    @endphp
+                    <a href="{{ route('news.index', ['category' => $catParam]) }}" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap {{ request('category') === $catParam || request('category') === $catName ? 'bg-blue-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' }}">
+                        {{ $catName }}
                     </a>
                 @endforeach
             </div>
@@ -45,9 +49,20 @@
                                         <i class="fa-solid fa-newspaper text-4xl"></i>
                                     </div>
                                 @endif
-                                <span class="absolute top-3 left-3 bg-blue-950/90 backdrop-blur-md text-sky-300 text-xs font-bold px-3 py-1 rounded-full border border-blue-800">
-                                    {{ $post->category }}
-                                </span>
+                                
+                                <div class="absolute top-3 left-3 flex flex-wrap gap-1 max-w-[90%]">
+                                    @if($post->categories && $post->categories->count() > 0)
+                                        @foreach($post->categories as $c)
+                                            <span class="bg-blue-950/90 backdrop-blur-md text-sky-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-800">
+                                                {{ $c->name }}
+                                            </span>
+                                        @endforeach
+                                    @else
+                                        <span class="bg-blue-950/90 backdrop-blur-md text-sky-300 text-[11px] font-bold px-2.5 py-0.5 rounded-full border border-blue-800">
+                                            {{ $post->category ?? 'Umum' }}
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
 
                             <div class="p-6">

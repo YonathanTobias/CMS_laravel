@@ -25,6 +25,11 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
     public function images()
     {
         return $this->hasMany(PostImage::class)->orderBy('order', 'asc');

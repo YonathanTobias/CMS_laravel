@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Achievement;
+use App\Models\Category;
 use App\Models\Certificate;
 use App\Models\Facility;
 use App\Models\Page;
@@ -20,7 +21,7 @@ class PublicController extends Controller
         $stats = Stat::where('is_active', true)->orderBy('order', 'asc')->get();
         $certificates = Certificate::where('is_active', true)->orderBy('order', 'asc')->get();
         $achievements = Achievement::where('is_active', true)->orderBy('order', 'asc')->orderBy('created_at', 'desc')->take(10)->get();
-        $posts = Post::where('status', 'published')->orderBy('published_at', 'desc')->take(10)->get();
+        $posts = Post::with('categories')->where('status', 'published')->orderBy('published_at', 'desc')->take(10)->get();
         $prodis = ProgramStudi::where('is_active', true)->get();
         $facilities = Facility::where('is_featured', true)->take(6)->get();
 
@@ -44,20 +45,24 @@ class PublicController extends Controller
 
     public function newsIndex(Request $request)
     {
-        $query = Post::where('status', 'published');
+        $query = Post::with('categories')->where('status', 'published');
 
-        if ($request->has('category') && $request->category != '') {
-            $query->where('category', $request->category);
+        if ($request->filled('category')) {
+            $query->where(function ($q) use ($request) {
+                $q->whereHas('categories', function ($cq) use ($request) {
+                    $cq->where('slug', $request->category)->orWhere('name', $request->category);
+                })->orWhere('category', $request->category);
+            });
         }
 
-        if ($request->has('search') && $request->search != '') {
+        if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%'.$request->search.'%')
                     ->orWhere('content', 'like', '%'.$request->search.'%');
             });
         }
 
-        $categories = Post::where('status', 'published')->whereNotNull('category')->distinct()->pluck('category');
+        $categories = Category::orderBy('name', 'asc')->get();
         $posts = $query->orderBy('published_at', 'desc')->paginate(9);
 
         return view('public.news.index', compact('posts', 'categories'));
@@ -65,10 +70,10 @@ class PublicController extends Controller
 
     public function newsShow($slug)
     {
-        $post = Post::where('slug', $slug)->where('status', 'published')->firstOrFail();
+        $post = Post::with(['categories', 'images'])->where('slug', $slug)->where('status', 'published')->firstOrFail();
         $post->increment('views');
 
-        $recentPosts = Post::where('status', 'published')->where('id', '!=', $post->id)->orderBy('published_at', 'desc')->take(5)->get();
+        $recentPosts = Post::with('categories')->where('status', 'published')->where('id', '!=', $post->id)->orderBy('published_at', 'desc')->take(6)->get();
 
         return view('public.news.show', compact('post', 'recentPosts'));
     }

@@ -7,11 +7,16 @@
 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
     <div>
         <h2 class="font-heading font-bold text-xl text-slate-900 dark:text-white">Daftar Berita & Pengumuman</h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400">Kelola artikel dan pengumuman publikasi kampus.</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Kelola artikel, multi-kategori, dan pengumuman publikasi kampus.</p>
     </div>
-    <a href="{{ route('admin.posts.create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
-        <i class="fa-solid fa-plus"></i> Tambah Berita Baru
-    </a>
+    <div class="flex items-center gap-2">
+        <a href="{{ route('admin.categories.index') }}" class="bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold px-3.5 py-2.5 rounded-xl text-xs transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
+            <i class="fa-solid fa-tags"></i> Kelola Kategori (+/-)
+        </a>
+        <a href="{{ route('admin.posts.create') }}" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs shadow transition flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
+            <i class="fa-solid fa-plus"></i> Tambah Berita Baru
+        </a>
+    </div>
 </div>
 
 <!-- Filter Bar -->
@@ -63,7 +68,15 @@
                             </div>
                         </td>
                         <td class="py-4 px-6">
-                            <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold">{{ $post->category }}</span>
+                            <div class="flex flex-wrap gap-1">
+                                @if($post->categories->count() > 0)
+                                    @foreach($post->categories as $c)
+                                        <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-bold border border-slate-200 dark:border-slate-700">{{ $c->name }}</span>
+                                    @endforeach
+                                @else
+                                    <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-bold">{{ $post->category ?? 'Umum' }}</span>
+                                @endif
+                            </div>
                         </td>
                         <td class="py-4 px-6">
                             @if($post->status === 'published')

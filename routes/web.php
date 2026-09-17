@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AchievementController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FacilityController;
@@ -48,8 +49,9 @@ Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // CRUD Posts / Berita
+    // CRUD Posts / Berita & Kategori
     Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class);
 
     // CRUD Pages / Halaman
     Route::resource('pages', PageController::class);
