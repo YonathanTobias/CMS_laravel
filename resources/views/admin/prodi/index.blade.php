@@ -41,6 +41,13 @@
                         <td class="py-4 px-6 font-bold text-slate-700 dark:text-slate-300">{{ $prodi->degree }}</td>
                         <td class="py-4 px-6">
                             <span class="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800">{{ $prodi->accreditation }}</span>
+                            @if($prodi->accreditation_certificate)
+                                <a href="{{ \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate) }}" target="_blank" download class="mt-1.5 flex items-center gap-1 text-[11px] text-emerald-600 dark:text-emerald-400 hover:underline font-medium">
+                                    <i class="fa-solid fa-file-circle-check"></i> Berkas Sertifikat
+                                </a>
+                            @else
+                                <span class="mt-1.5 block text-[11px] text-slate-400 dark:text-slate-500 italic">Belum ada berkas</span>
+                            @endif
                         </td>
                         <td class="py-4 px-6">
                             @if($prodi->is_active)
