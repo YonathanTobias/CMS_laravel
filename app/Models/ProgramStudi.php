@@ -15,6 +15,7 @@ class ProgramStudi extends Model
         'degree',
         'accreditation',
         'accreditation_certificate',
+        'rpl_certificate',
         'description',
         'curriculum_summary',
         'career_prospects',

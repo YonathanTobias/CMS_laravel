@@ -29,25 +29,52 @@
                         <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white mb-3 group-hover:text-blue-700 dark:group-hover:text-sky-400 transition">{{ $prodi->name }}</h2>
                         <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">{{ $prodi->description }}</p>
 
-                        <!-- Tampilan Langsung Sertifikat Akreditasi Utuh FULL Tanpa Terpotong -->
-                        @if($prodi->accreditation_certificate)
-                            @php
-                                $certUrl = \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate);
-                                $isPdf = \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf');
-                            @endphp
-                            <div class="mt-4 mb-3 p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/90 dark:border-slate-700 space-y-2">
-                                <div class="text-[11px] font-extrabold uppercase text-slate-600 dark:text-slate-300 flex items-center justify-between">
-                                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi Resmi</span>
-                                    <a href="{{ $certUrl }}" download target="_blank" class="text-emerald-700 dark:text-emerald-400 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh File</a>
-                                </div>
+                        <!-- Tampilan Sertifikat Resmi (Akreditasi & RPL) -->
+                        @if($prodi->accreditation_certificate || $prodi->rpl_certificate)
+                            <div class="mt-4 mb-3 space-y-3">
+                                @if($prodi->accreditation_certificate)
+                                    @php
+                                        $certUrl = \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate);
+                                        $isPdf = \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf');
+                                    @endphp
+                                    <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/90 dark:border-slate-700 space-y-2">
+                                        <div class="text-[11px] font-extrabold uppercase text-slate-600 dark:text-slate-300 flex items-center justify-between">
+                                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi</span>
+                                            <a href="{{ $certUrl }}" download target="_blank" class="text-emerald-700 dark:text-emerald-400 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh File</a>
+                                        </div>
 
-                                @if($isPdf)
-                                    <div class="w-full h-80 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white shadow-inner">
-                                        <iframe src="{{ $certUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
+                                        @if($isPdf)
+                                            <div class="w-full h-64 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white shadow-inner">
+                                                <iframe src="{{ $certUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900/5 p-1 flex items-center justify-center">
+                                                <img src="{{ $certUrl }}" alt="Sertifikat Akreditasi {{ $prodi->name }}" class="w-full h-auto rounded-lg object-contain shadow-sm max-h-64">
+                                            </div>
+                                        @endif
                                     </div>
-                                @else
-                                    <div class="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900/5 p-1 flex items-center justify-center">
-                                        <img src="{{ $certUrl }}" alt="Sertifikat Akreditasi {{ $prodi->name }}" class="w-full h-auto rounded-lg object-contain shadow-sm">
+                                @endif
+
+                                @if($prodi->rpl_certificate)
+                                    @php
+                                        $rplCertUrl = \Illuminate\Support\Str::startsWith($prodi->rpl_certificate, 'http') ? $prodi->rpl_certificate : asset($prodi->rpl_certificate);
+                                        $isRplPdf = \Illuminate\Support\Str::endsWith(strtolower($rplCertUrl), '.pdf');
+                                    @endphp
+                                    <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/90 dark:border-slate-700 space-y-2">
+                                        <div class="text-[11px] font-extrabold uppercase text-slate-600 dark:text-slate-300 flex items-center justify-between">
+                                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-certificate text-teal-500"></i> Sertifikat Kelayakan RPL</span>
+                                            <a href="{{ $rplCertUrl }}" download target="_blank" class="text-teal-700 dark:text-teal-400 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh File</a>
+                                        </div>
+
+                                        @if($isRplPdf)
+                                            <div class="w-full h-64 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white shadow-inner">
+                                                <iframe src="{{ $rplCertUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
+                                            </div>
+                                        @else
+                                            <div class="w-full rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900/5 p-1 flex items-center justify-center">
+                                                <img src="{{ $rplCertUrl }}" alt="Sertifikat Kelayakan RPL {{ $prodi->name }}" class="w-full h-auto rounded-lg object-contain shadow-sm max-h-64">
+                                            </div>
+                                        @endif
                                     </div>
                                 @endif
                             </div>

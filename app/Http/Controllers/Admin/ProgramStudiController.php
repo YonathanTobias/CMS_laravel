@@ -35,6 +35,8 @@ class ProgramStudiController extends Controller
             'image' => 'nullable|image|max:5120',
             'accreditation_certificate_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:10240',
             'accreditation_certificate_url' => 'nullable|string',
+            'rpl_certificate_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:10240',
+            'rpl_certificate_url' => 'nullable|string',
         ]);
 
         $validated['slug'] = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->name);
@@ -50,6 +52,13 @@ class ProgramStudiController extends Controller
             $validated['accreditation_certificate'] = '/storage/'.$path;
         } elseif ($request->filled('accreditation_certificate_url')) {
             $validated['accreditation_certificate'] = $request->accreditation_certificate_url;
+        }
+
+        if ($request->hasFile('rpl_certificate_file')) {
+            $path = $request->file('rpl_certificate_file')->store('prodi/certificates', 'public');
+            $validated['rpl_certificate'] = '/storage/'.$path;
+        } elseif ($request->filled('rpl_certificate_url')) {
+            $validated['rpl_certificate'] = $request->rpl_certificate_url;
         }
 
         ProgramStudi::create($validated);
@@ -76,6 +85,8 @@ class ProgramStudiController extends Controller
             'image' => 'nullable|image|max:5120',
             'accreditation_certificate_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:10240',
             'accreditation_certificate_url' => 'nullable|string',
+            'rpl_certificate_file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,webp|max:10240',
+            'rpl_certificate_url' => 'nullable|string',
         ]);
 
         $validated['slug'] = $request->filled('slug') ? Str::slug($request->slug) : Str::slug($request->name);
@@ -91,6 +102,13 @@ class ProgramStudiController extends Controller
             $validated['accreditation_certificate'] = '/storage/'.$path;
         } elseif ($request->filled('accreditation_certificate_url')) {
             $validated['accreditation_certificate'] = $request->accreditation_certificate_url;
+        }
+
+        if ($request->hasFile('rpl_certificate_file')) {
+            $path = $request->file('rpl_certificate_file')->store('prodi/certificates', 'public');
+            $validated['rpl_certificate'] = '/storage/'.$path;
+        } elseif ($request->filled('rpl_certificate_url')) {
+            $validated['rpl_certificate'] = $request->rpl_certificate_url;
         }
 
         $prodi->update($validated);

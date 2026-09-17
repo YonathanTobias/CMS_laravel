@@ -28,48 +28,98 @@
                     <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-base">{!! nl2br(e($prodi->description)) !!}</p>
                 </div>
 
-                <!-- Tampilan Visual Sertifikat Akreditasi Resmi (Embedded Preview) -->
-                @if($prodi->accreditation_certificate)
-                    @php
-                        $certUrl = \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate);
-                        $isPdf = \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf');
-                    @endphp
-                    <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6" x-data="{ modalOpen: false }">
-                        <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
-                            <div>
-                                <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
-                                    <i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi Resmi
-                                </h2>
-                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bukti fisik status akreditasi {{ $prodi->accreditation }} {{ $prodi->name }} {{ $prodi->degree }}.</p>
-                            </div>
-                            <a href="{{ $certUrl }}" target="_blank" download class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
-                                <i class="fa-solid fa-download"></i> Unduh File
-                            </a>
-                        </div>
-
-                        <!-- Visual Certificate Display -->
-                        @if($isPdf)
-                            <!-- PDF Embedded Viewer -->
-                            <div class="w-full h-[500px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 shadow-inner">
-                                <iframe src="{{ $certUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
-                            </div>
-                        @else
-                            <!-- Image Certificate Card with Lightbox Zoom -->
-                            <div class="relative group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900 max-h-[500px] flex items-center justify-center cursor-pointer shadow-lg" @click="modalOpen = true">
-                                <img src="{{ $certUrl }}" alt="Sertifikat Akreditasi {{ $prodi->name }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                                <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
-                                    <span class="bg-slate-950/80 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold border border-white/20">
-                                        <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Klik untuk Memperbesar Sertifikat
-                                    </span>
+                <!-- Tampilan Visual Sertifikat Resmi (Akreditasi & RPL) -->
+                @if($prodi->accreditation_certificate || $prodi->rpl_certificate)
+                    <div class="space-y-8">
+                        @if($prodi->accreditation_certificate)
+                            @php
+                                $certUrl = \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate);
+                                $isPdf = \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf');
+                            @endphp
+                            <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6" x-data="{ modalOpen: false }">
+                                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                                    <div>
+                                        <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
+                                            <i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi Resmi
+                                        </h2>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bukti fisik status akreditasi {{ $prodi->accreditation }} {{ $prodi->name }} {{ $prodi->degree }}.</p>
+                                    </div>
+                                    <a href="{{ $certUrl }}" target="_blank" download class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
+                                        <i class="fa-solid fa-download"></i> Unduh File
+                                    </a>
                                 </div>
-                            </div>
 
-                            <!-- Lightbox Modal Zoom -->
-                            <div x-show="modalOpen" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="modalOpen = false">
-                                <div class="relative max-w-5xl w-full">
-                                    <button @click="modalOpen = false" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
-                                    <img src="{{ $certUrl }}" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+                                <!-- Visual Certificate Display -->
+                                @if($isPdf)
+                                    <!-- PDF Embedded Viewer -->
+                                    <div class="w-full h-[500px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 shadow-inner">
+                                        <iframe src="{{ $certUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
+                                    </div>
+                                @else
+                                    <!-- Image Certificate Card with Lightbox Zoom -->
+                                    <div class="relative group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900 max-h-[500px] flex items-center justify-center cursor-pointer shadow-lg" @click="modalOpen = true">
+                                        <img src="{{ $certUrl }}" alt="Sertifikat Akreditasi {{ $prodi->name }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                            <span class="bg-slate-950/80 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold border border-white/20">
+                                                <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-amber-400"></i> Klik untuk Memperbesar Sertifikat
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Lightbox Modal Zoom -->
+                                    <div x-show="modalOpen" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="modalOpen = false">
+                                        <div class="relative max-w-5xl w-full">
+                                            <button @click="modalOpen = false" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-amber-400">&times;</button>
+                                            <img src="{{ $certUrl }}" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+
+                        @if($prodi->rpl_certificate)
+                            @php
+                                $rplCertUrl = \Illuminate\Support\Str::startsWith($prodi->rpl_certificate, 'http') ? $prodi->rpl_certificate : asset($prodi->rpl_certificate);
+                                $isRplPdf = \Illuminate\Support\Str::endsWith(strtolower($rplCertUrl), '.pdf');
+                            @endphp
+                            <div class="bg-white dark:bg-slate-900 rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6" x-data="{ rplModalOpen: false }">
+                                <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                                    <div>
+                                        <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
+                                            <i class="fa-solid fa-certificate text-teal-500"></i> Sertifikat Kelayakan Penyelenggaraan RPL
+                                        </h2>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sertifikat Resmi Kelayakan Rekognisi Pembelajaran Lampau (RPL) {{ $prodi->name }} {{ $prodi->degree }}.</p>
+                                    </div>
+                                    <a href="{{ $rplCertUrl }}" target="_blank" download class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:outline-none">
+                                        <i class="fa-solid fa-download"></i> Unduh File RPL
+                                    </a>
                                 </div>
+
+                                <!-- Visual Certificate Display -->
+                                @if($isRplPdf)
+                                    <!-- PDF Embedded Viewer -->
+                                    <div class="w-full h-[500px] rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 shadow-inner">
+                                        <iframe src="{{ $rplCertUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
+                                    </div>
+                                @else
+                                    <!-- Image Certificate Card with Lightbox Zoom -->
+                                    <div class="relative group rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-900 max-h-[500px] flex items-center justify-center cursor-pointer shadow-lg" @click="rplModalOpen = true">
+                                        <img src="{{ $rplCertUrl }}" alt="Sertifikat Kelayakan RPL {{ $prodi->name }}" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                                            <span class="bg-slate-950/80 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold border border-white/20">
+                                                <i class="fa-solid fa-magnifying-glass-plus mr-1.5 text-teal-400"></i> Klik untuk Memperbesar Sertifikat RPL
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Lightbox Modal Zoom -->
+                                    <div x-show="rplModalOpen" x-transition class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md p-4 flex items-center justify-center" @click.self="rplModalOpen = false">
+                                        <div class="relative max-w-5xl w-full">
+                                            <button @click="rplModalOpen = false" class="absolute -top-12 right-0 text-white text-3xl font-bold hover:text-teal-400">&times;</button>
+                                            <img src="{{ $rplCertUrl }}" class="max-h-[85vh] w-auto mx-auto rounded-2xl shadow-2xl border border-slate-700">
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         @endif
                     </div>

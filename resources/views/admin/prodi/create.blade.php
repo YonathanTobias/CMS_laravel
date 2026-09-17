@@ -69,6 +69,22 @@
         <p class="text-[11px] text-blue-700">File sertifikat ini akan dapat didownload oleh pengunjung di halaman beranda & detail prodi.</p>
     </div>
 
+    <!-- Sertifikat Kelayakan RPL Upload Section -->
+    <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100 space-y-3">
+        <label class="block text-xs font-bold uppercase text-emerald-900">Upload Berkas Sertifikat Kelayakan RPL (PDF / Gambar) - Opsional</label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-[11px] font-semibold text-slate-500 mb-1">Upload Berkas PDF / Foto Sertifikat RPL</label>
+                <input type="file" name="rpl_certificate_file" accept=".pdf,image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white">
+            </div>
+            <div>
+                <label class="block text-[11px] font-semibold text-slate-500 mb-1">Atau Masukkan Tautan URL Sertifikat RPL</label>
+                <input type="text" name="rpl_certificate_url" placeholder="https://..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
+            </div>
+        </div>
+        <p class="text-[11px] text-emerald-700">Sertifikat Kelayakan Rekognisi Pembelajaran Lampau (RPL) untuk prodi terkait.</p>
+    </div>
+
     <div>
         <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Deskripsi Umum Prodi</label>
         <textarea name="description" rows="4" required placeholder="Penjelasan profil dan keunggulan prodi..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">{{ old('description') }}</textarea>

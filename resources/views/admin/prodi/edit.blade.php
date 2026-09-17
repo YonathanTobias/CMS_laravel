@@ -59,7 +59,7 @@
         
         @if($prodi->accreditation_certificate)
             <div class="flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-2 rounded-xl border border-emerald-200 w-fit">
-                <i class="fa-solid fa-file-circle-check text-base"></i> Sertifikat Terpasang: 
+                <i class="fa-solid fa-file-circle-check text-base"></i> Sertifikat Akreditasi Terpasang: 
                 <a href="{{ \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate) }}" target="_blank" download class="underline hover:text-emerald-900">
                     Lihat / Unduh Berkas
                 </a>
@@ -74,6 +74,31 @@
             <div>
                 <label class="block text-[11px] font-semibold text-slate-500 mb-1">Atau Ubah Tautan URL Sertifikat</label>
                 <input type="text" name="accreditation_certificate_url" value="{{ old('accreditation_certificate_url', $prodi->accreditation_certificate) }}" placeholder="https://..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
+            </div>
+        </div>
+    </div>
+
+    <!-- Sertifikat Kelayakan RPL Upload Section -->
+    <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100 space-y-3">
+        <label class="block text-xs font-bold uppercase text-emerald-900">Berkas Sertifikat Kelayakan RPL (Opsional)</label>
+        
+        @if($prodi->rpl_certificate)
+            <div class="flex items-center gap-2 text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-2 rounded-xl border border-emerald-300 w-fit">
+                <i class="fa-solid fa-certificate text-base text-emerald-600"></i> Sertifikat RPL Terpasang: 
+                <a href="{{ \Illuminate\Support\Str::startsWith($prodi->rpl_certificate, 'http') ? $prodi->rpl_certificate : asset($prodi->rpl_certificate) }}" target="_blank" download class="underline hover:text-emerald-950">
+                    Lihat / Unduh Berkas RPL
+                </a>
+            </div>
+        @endif
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+            <div>
+                <label class="block text-[11px] font-semibold text-slate-500 mb-1">Ganti Berkas PDF / Foto Sertifikat RPL</label>
+                <input type="file" name="rpl_certificate_file" accept=".pdf,image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-600 file:text-white">
+            </div>
+            <div>
+                <label class="block text-[11px] font-semibold text-slate-500 mb-1">Atau Ubah Tautan URL Sertifikat RPL</label>
+                <input type="text" name="rpl_certificate_url" value="{{ old('rpl_certificate_url', $prodi->rpl_certificate) }}" placeholder="https://..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
             </div>
         </div>
     </div>
