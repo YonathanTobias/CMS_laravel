@@ -12,7 +12,7 @@
         </div>
         <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white drop-shadow">Selamat Datang di CMS STIKes Panti Waluya Malang!</h2>
         <p class="text-slate-200 text-sm leading-relaxed font-medium">
-            Kelola artikel berita, halaman profil prodi, dokumen akreditasi SPMI, galeri fasilitas, dan informasi pendaftaran PMB dengan mudah dari satu panel terpadu.
+            Kelola artikel berita, halaman profil prodi, galeri fasilitas, dan informasi pendaftaran PMB dengan mudah dari satu panel terpadu.
         </p>
         <div class="pt-4 flex flex-wrap gap-3">
             <a href="{{ route('admin.posts.create') }}" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-4.5 py-2.5 rounded-xl text-xs shadow-lg transition flex items-center gap-1.5">

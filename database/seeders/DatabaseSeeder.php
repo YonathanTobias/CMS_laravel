@@ -170,8 +170,8 @@ class DatabaseSeeder extends Seeder
                 'image' => 'https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1920&q=80',
                 'cta_text' => 'Profil Kampus & Visi Misi',
                 'cta_link' => '/halaman/visi-misi',
-                'secondary_text' => 'Lihat Dokumen SPMI',
-                'secondary_link' => '/spmi',
+                'secondary_text' => 'Lihat Fasilitas Kampus',
+                'secondary_link' => '/fasilitas',
                 'order' => 2,
             ],
         ];
