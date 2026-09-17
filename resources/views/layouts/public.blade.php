@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'STIKes Panti Waluya Malang - Kampus Kesehatan Terkemuka')</title>
     <meta name="description" content="Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang. Menghasilkan tenaga kesehatan profesional, berintegritas, dan siap kerja nasional maupun internasional.">
-    <link rel="icon" type="image/png" href="{{ asset('images/logo-stikes-pantiwaluya.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

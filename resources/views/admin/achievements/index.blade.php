@@ -14,71 +14,106 @@
     </a>
 </div>
 
-<div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden transition-colors">
     <div class="overflow-x-auto">
-        <table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-            <thead class="bg-slate-50 dark:bg-slate-800 text-xs font-extrabold uppercase text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
-                <tr>
-                    <th class="px-6 py-4">Urutan</th>
-                    <th class="px-6 py-4">Poster / Flyer</th>
-                    <th class="px-6 py-4">Nama Tokoh / Dosen / Mahasiswa / Tim</th>
-                    <th class="px-6 py-4">Lencana / Sertifikasi</th>
-                    <th class="px-6 py-4">Judul Prestasi & Event</th>
-                    <th class="px-6 py-4">Status</th>
-                    <th class="px-6 py-4 text-right">Aksi</th>
+        <table class="w-full text-left border-collapse text-sm">
+            <thead>
+                <tr class="bg-slate-900 text-white border-b border-slate-800 text-[11px] uppercase font-bold tracking-wider">
+                    <th class="py-4 px-5 text-center w-16">Urutan</th>
+                    <th class="py-4 px-5 text-center w-24">Poster / Flyer</th>
+                    <th class="py-4 px-6">Nama Tokoh / Dosen / Mahasiswa</th>
+                    <th class="py-4 px-5">Lencana / Sertifikasi</th>
+                    <th class="py-4 px-6">Judul Prestasi & Event</th>
+                    <th class="py-4 px-5 text-center w-28">Status</th>
+                    <th class="py-4 px-6 text-center w-36">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800/80">
                 @forelse($achievements as $item)
-                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/60 transition">
-                        <td class="px-6 py-4 font-bold text-slate-400">#{{ $item->order }}</td>
-                        <td class="px-6 py-4">
-                            @if($item->poster_image)
-                                <div class="w-16 h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-slate-700 shadow-sm">
-                                    <img src="{{ \Illuminate\Support\Str::startsWith($item->poster_image, 'http') ? $item->poster_image : asset($item->poster_image) }}" class="w-full h-full object-cover">
-                                </div>
-                            @else
-                                <div class="w-16 h-20 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400">
-                                    <i class="fa-solid fa-trophy text-xl"></i>
-                                </div>
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="font-bold text-slate-900 dark:text-white text-sm">{{ $item->student_name }}</div>
-                            <div class="text-xs text-slate-500 dark:text-slate-400">{{ $item->student_prodi ?? '-' }}</div>
-                        </td>
-                        <td class="px-6 py-4">
-                            <span class="inline-block px-3 py-1 rounded-full text-xs font-extrabold shadow-sm {{ $item->badge_color }}">
-                                {{ $item->badge_title }}
+                    <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
+                        <!-- Urutan -->
+                        <td class="py-4 px-5 text-center">
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono font-bold text-xs border border-slate-200/80 dark:border-slate-700">
+                                #{{ $item->order }}
                             </span>
                         </td>
-                        <td class="px-6 py-4">
-                            <div class="font-bold text-slate-800 dark:text-slate-200 text-xs line-clamp-2">{{ $item->title }}</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{{ $item->event_name }}</div>
-                        </td>
-                        <td class="px-6 py-4">
-                            @if($item->is_active)
-                                <span class="px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800">Tampil</span>
+
+                        <!-- Poster -->
+                        <td class="py-4 px-5 text-center">
+                            @if($item->poster_image)
+                                @php
+                                    $posterSrc = \Illuminate\Support\Str::startsWith($item->poster_image, 'http') ? $item->poster_image : asset($item->poster_image);
+                                @endphp
+                                <a href="{{ $posterSrc }}" target="_blank" class="inline-block relative group">
+                                    <img src="{{ $posterSrc }}" alt="{{ $item->title }}" class="w-14 h-18 object-cover rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm group-hover:scale-105 transition duration-200">
+                                    <div class="absolute inset-0 bg-slate-950/40 rounded-xl opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white text-[10px]">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </div>
+                                </a>
                             @else
-                                <span class="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold">Disembunyikan</span>
+                                <div class="w-14 h-18 mx-auto rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-400">
+                                    <i class="fa-solid fa-trophy text-lg"></i>
+                                </div>
                             @endif
                         </td>
-                        <td class="px-6 py-4 text-right space-x-2">
-                            <a href="{{ route('admin.achievements.edit', $item->id) }}" class="text-blue-700 dark:text-sky-400 hover:text-blue-900 font-bold text-xs bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1.5 rounded-lg border border-blue-200 dark:border-blue-800">
-                                Edit
-                            </a>
-                            <form action="{{ route('admin.achievements.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-900 font-bold text-xs bg-red-50 dark:bg-red-950/60 px-2.5 py-1.5 rounded-lg border border-red-200 dark:border-red-800">
-                                    Hapus
-                                </button>
-                            </form>
+
+                        <!-- Nama -->
+                        <td class="py-4 px-6">
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">{{ $item->student_name }}</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 flex items-center gap-1">
+                                <i class="fa-solid fa-graduation-cap text-[10px] text-blue-600 dark:text-sky-400"></i> {!! $item->student_prodi ?? '-' !!}
+                            </div>
+                        </td>
+
+                        <!-- Lencana -->
+                        <td class="py-4 px-5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border shadow-xs whitespace-nowrap {{ $item->badge_color }}">
+                                <i class="fa-solid fa-award text-[10px]"></i> {{ $item->badge_title }}
+                            </span>
+                        </td>
+
+                        <!-- Judul & Event -->
+                        <td class="py-4 px-6">
+                            <div class="font-bold text-slate-800 dark:text-slate-100 text-xs line-clamp-2 leading-snug">{{ $item->title }}</div>
+                            @if($item->event_name)
+                                <div class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex items-center gap-1 truncate">
+                                    <i class="fa-solid fa-building-columns text-[10px] text-amber-500"></i> {{ $item->event_name }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <!-- Status -->
+                        <td class="py-4 px-5 text-center">
+                            @if($item->is_active)
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Tampil
+                                </span>
+                            @else
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold border border-slate-200 dark:border-slate-700">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Sembunyi
+                                </span>
+                            @endif
+                        </td>
+
+                        <!-- Aksi -->
+                        <td class="py-4 px-6 text-center">
+                            <div class="flex items-center justify-center gap-1.5">
+                                <a href="{{ route('admin.achievements.edit', $item->id) }}" class="p-2 bg-amber-50 hover:bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 rounded-xl border border-amber-200 dark:border-amber-800 text-xs font-bold transition flex items-center gap-1 shadow-xs" title="Edit Prestasi">
+                                    <i class="fa-solid fa-pen-to-square"></i> Edit
+                                </a>
+                                <form action="{{ route('admin.achievements.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="p-2 bg-red-50 hover:bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 rounded-xl border border-red-200 dark:border-red-800 text-xs font-bold transition flex items-center gap-1 shadow-xs" title="Hapus Prestasi">
+                                        <i class="fa-solid fa-trash-can"></i> Hapus
+                                    </button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                        <td colspan="7" class="py-12 text-center text-slate-500 dark:text-slate-400">
                             Belum ada data ucapan / prestasi. Klik <strong>Tambah Ucapan / Prestasi Baru</strong> di atas.
                         </td>
                     </tr>
