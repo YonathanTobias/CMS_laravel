@@ -29,20 +29,47 @@
                         <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white mb-3 group-hover:text-blue-700 dark:group-hover:text-sky-400 transition">{{ $prodi->name }}</h2>
                         <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-4">{{ $prodi->description }}</p>
 
-                        <!-- Tampilan Sertifikat Resmi (Akreditasi & RPL) -->
+                        <!-- Tampilan Tab / Slider Sertifikat Resmi (Akreditasi & RPL) -->
                         @if($prodi->accreditation_certificate || $prodi->rpl_certificate)
-                            <div class="mt-4 mb-3 space-y-3">
-                                @if($prodi->accreditation_certificate)
-                                    @php
-                                        $certUrl = \Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate);
-                                        $isPdf = \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf');
-                                    @endphp
-                                    <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/90 dark:border-slate-700 space-y-2">
-                                        <div class="text-[11px] font-extrabold uppercase text-slate-600 dark:text-slate-300 flex items-center justify-between">
-                                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi</span>
-                                            <a href="{{ $certUrl }}" download target="_blank" class="text-emerald-700 dark:text-emerald-400 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh File</a>
-                                        </div>
+                            @php
+                                $certUrl = $prodi->accreditation_certificate ? (\Illuminate\Support\Str::startsWith($prodi->accreditation_certificate, 'http') ? $prodi->accreditation_certificate : asset($prodi->accreditation_certificate)) : null;
+                                $isPdf = $certUrl ? \Illuminate\Support\Str::endsWith(strtolower($certUrl), '.pdf') : false;
 
+                                $rplCertUrl = $prodi->rpl_certificate ? (\Illuminate\Support\Str::startsWith($prodi->rpl_certificate, 'http') ? $prodi->rpl_certificate : asset($prodi->rpl_certificate)) : null;
+                                $isRplPdf = $rplCertUrl ? \Illuminate\Support\Str::endsWith(strtolower($rplCertUrl), '.pdf') : false;
+                            @endphp
+                            <div class="mt-4 mb-3 p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/90 dark:border-slate-700 space-y-3" x-data="{ certTab: '{{ $prodi->accreditation_certificate ? 'accreditation' : 'rpl' }}' }">
+                                <!-- Header Slider/Tab Pills -->
+                                <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-700 pb-2">
+                                    <div class="flex items-center gap-1.5">
+                                        @if($prodi->accreditation_certificate)
+                                            <button type="button" @click="certTab = 'accreditation'" :class="certTab === 'accreditation' ? 'bg-amber-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
+                                                <i class="fa-solid fa-award"></i> Akreditasi
+                                            </button>
+                                        @endif
+                                        @if($prodi->rpl_certificate)
+                                            <button type="button" @click="certTab = 'rpl'" :class="certTab === 'rpl' ? 'bg-teal-600 text-white font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
+                                                <i class="fa-solid fa-certificate"></i> Kelayakan RPL
+                                            </button>
+                                        @endif
+                                    </div>
+
+                                    <!-- Action Download Switcher -->
+                                    @if($prodi->accreditation_certificate)
+                                        <a x-show="certTab === 'accreditation'" href="{{ $certUrl }}" download target="_blank" class="text-emerald-700 dark:text-emerald-400 hover:underline font-bold text-[10px] flex items-center gap-1">
+                                            <i class="fa-solid fa-download"></i> Unduh
+                                        </a>
+                                    @endif
+                                    @if($prodi->rpl_certificate)
+                                        <a x-show="certTab === 'rpl'" href="{{ $rplCertUrl }}" download target="_blank" class="text-teal-700 dark:text-teal-400 hover:underline font-bold text-[10px] flex items-center gap-1">
+                                            <i class="fa-solid fa-download"></i> Unduh RPL
+                                        </a>
+                                    @endif
+                                </div>
+
+                                <!-- Tab 1: Akreditasi -->
+                                @if($prodi->accreditation_certificate)
+                                    <div x-show="certTab === 'accreditation'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
                                         @if($isPdf)
                                             <div class="w-full h-64 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white shadow-inner">
                                                 <iframe src="{{ $certUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
@@ -55,17 +82,9 @@
                                     </div>
                                 @endif
 
+                                <!-- Tab 2: Kelayakan RPL -->
                                 @if($prodi->rpl_certificate)
-                                    @php
-                                        $rplCertUrl = \Illuminate\Support\Str::startsWith($prodi->rpl_certificate, 'http') ? $prodi->rpl_certificate : asset($prodi->rpl_certificate);
-                                        $isRplPdf = \Illuminate\Support\Str::endsWith(strtolower($rplCertUrl), '.pdf');
-                                    @endphp
-                                    <div class="p-3.5 bg-slate-50 dark:bg-slate-800/80 rounded-2xl border border-slate-200/90 dark:border-slate-700 space-y-2">
-                                        <div class="text-[11px] font-extrabold uppercase text-slate-600 dark:text-slate-300 flex items-center justify-between">
-                                            <span class="flex items-center gap-1.5"><i class="fa-solid fa-certificate text-teal-500"></i> Sertifikat Kelayakan RPL</span>
-                                            <a href="{{ $rplCertUrl }}" download target="_blank" class="text-teal-700 dark:text-teal-400 hover:underline font-bold text-[10px]"><i class="fa-solid fa-download"></i> Unduh File</a>
-                                        </div>
-
+                                    <div x-show="certTab === 'rpl'" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
                                         @if($isRplPdf)
                                             <div class="w-full h-64 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white shadow-inner">
                                                 <iframe src="{{ $rplCertUrl }}#toolbar=0" class="w-full h-full border-0"></iframe>
