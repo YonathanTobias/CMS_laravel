@@ -108,9 +108,7 @@
                 
                 <!-- Official Campus Logo & Brand -->
                 <a href="{{ route('home') }}" class="flex items-center gap-3.5 group focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded-xl">
-                    <div class="w-12 h-12 rounded-xl bg-white p-1 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition duration-300 flex items-center justify-center shrink-0 border border-blue-200/50">
-                        <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya Malang" class="h-10 w-auto object-contain">
-                    </div>
+                    <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya Malang" class="h-12 w-auto object-contain group-hover:scale-105 transition duration-300 drop-shadow-md shrink-0">
                     <div>
                         <div class="font-heading font-extrabold text-xl tracking-tight text-white group-hover:text-sky-300 transition leading-tight">
                             STIKes Panti Waluya
@@ -247,9 +245,7 @@
                 <!-- Campus Branding & Info -->
                 <div class="lg:col-span-4 space-y-4">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-white p-1 shadow flex items-center justify-center">
-                            <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya" class="h-8 w-auto object-contain">
-                        </div>
+                        <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya" class="h-10 w-auto object-contain drop-shadow shrink-0">
                         <span class="font-heading font-extrabold text-xl text-white">STIKes Panti Waluya Malang</span>
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed">

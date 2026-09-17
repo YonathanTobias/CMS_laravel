@@ -19,9 +19,7 @@
 
     <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-blue-900">
         <div class="bg-gradient-to-r from-blue-950 via-blue-900 to-navy-950 p-8 text-white text-center relative">
-            <div class="w-20 h-20 rounded-2xl bg-white p-2 flex items-center justify-center mx-auto shadow-xl shadow-blue-500/30 mb-4 border border-blue-200">
-                <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya Malang" class="h-16 w-auto object-contain">
-            </div>
+            <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya Malang" class="h-20 w-auto object-contain mx-auto mb-4 drop-shadow-lg">
             <h1 class="font-bold text-2xl tracking-tight">Admin CMS Portal</h1>
             <p class="text-xs text-sky-300 font-medium">STIKes Panti Waluya Malang</p>
         </div>

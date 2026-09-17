@@ -73,9 +73,7 @@
         <!-- Header / Logo -->
         <div class="h-16 flex items-center justify-between px-4 border-b border-blue-900/60 bg-blue-950/80">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 overflow-hidden focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none rounded-lg">
-                <div class="w-9 h-9 rounded-lg bg-white p-0.5 flex items-center justify-center shrink-0 shadow">
-                    <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes" class="h-7 w-auto object-contain">
-                </div>
+                <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes" class="h-9 w-auto object-contain drop-shadow shrink-0">
                 <div x-show="sidebarOpen" class="font-bold text-sm tracking-tight text-white whitespace-nowrap">
                     CMS STIKes PW
                 </div>
