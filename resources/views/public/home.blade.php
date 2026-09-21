@@ -18,7 +18,7 @@
 }" x-init="autoSlide()" class="relative bg-slate-950 text-white overflow-hidden group">
     
     <!-- Carousel Slides Container -->
-    <div class="relative h-[500px] sm:h-[580px] w-full">
+    <div class="relative h-[260px] sm:h-[380px] md:h-[480px] lg:h-[540px] w-full bg-slate-950 overflow-hidden">
         @foreach($slides as $index => $slide)
             @php
                 $hasTextContent = !empty(trim($slide->title ?? '')) || !empty(trim($slide->subtitle ?? '')) || !empty(trim($slide->badge ?? '')) || !empty(trim($slide->cta_text ?? ''));
@@ -33,10 +33,22 @@
                  x-transition:leave-end="opacity-0 scale-95"
                  class="absolute inset-0 w-full h-full">
                 
-                @if(!$hasTextContent && !empty(trim($slide->cta_link ?? '')))
-                    <a href="{{ $slide->cta_link }}" class="block w-full h-full cursor-pointer" title="Klik untuk membuka tautan banner">
-                        <img src="{{ $imgSrc }}" alt="{{ $slide->title ?? 'Banner STIKes Panti Waluya' }}" class="w-full h-full object-cover">
-                    </a>
+                @if(!$hasTextContent)
+                    @if(!empty(trim($slide->cta_link ?? '')))
+                        <a href="{{ $slide->cta_link }}" class="relative block w-full h-full overflow-hidden cursor-pointer bg-slate-950" title="Klik untuk membuka tautan banner">
+                            <!-- Ambient Glow Backdrop -->
+                            <img src="{{ $imgSrc }}" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110 pointer-events-none">
+                            <!-- Crisp Full Banner: 100% Fit & Utuh Tanpa Terpotong -->
+                            <img src="{{ $imgSrc }}" alt="{{ $slide->title ?? 'Banner STIKes Panti Waluya' }}" class="relative z-10 w-full h-full object-contain">
+                        </a>
+                    @else
+                        <div class="relative w-full h-full overflow-hidden bg-slate-950 flex items-center justify-center">
+                            <!-- Ambient Glow Backdrop -->
+                            <img src="{{ $imgSrc }}" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-40 scale-110 pointer-events-none">
+                            <!-- Crisp Full Banner: 100% Fit & Utuh Tanpa Terpotong -->
+                            <img src="{{ $imgSrc }}" alt="{{ $slide->title ?? 'Banner STIKes Panti Waluya' }}" class="relative z-10 w-full h-full object-contain">
+                        </div>
+                    @endif
                 @else
                     <img src="{{ $imgSrc }}" alt="{{ $slide->title ?? 'Banner STIKes Panti Waluya' }}" class="w-full h-full object-cover">
                 @endif
