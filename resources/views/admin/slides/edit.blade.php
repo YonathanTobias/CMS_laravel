@@ -16,19 +16,28 @@
     @method('PUT')
 
     <div>
-        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Judul Utama Banner Slide</label>
-        <input type="text" name="title" value="{{ old('title', $slide->title) }}" required class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-blue-500">
+        <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-bold uppercase text-slate-600">Judul Utama Banner Slide</label>
+            <span class="text-[11px] text-slate-400 font-semibold">(Opsional - Kosongkan jika ingin full banner gambar tanpa teks)</span>
+        </div>
+        <input type="text" name="title" value="{{ old('title', $slide->title) }}" placeholder="Contoh: Penerimaan Mahasiswa Baru (PMB) T.A. 2026/2027 (Boleh dikosongkan)" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-blue-500">
     </div>
 
     <div>
-        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Sub-Judul / Deskripsi Singkat</label>
-        <textarea name="subtitle" rows="3" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">{{ old('subtitle', $slide->subtitle) }}</textarea>
+        <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-bold uppercase text-slate-600">Sub-Judul / Deskripsi Singkat</label>
+            <span class="text-[11px] text-slate-400 font-semibold">(Opsional)</span>
+        </div>
+        <textarea name="subtitle" rows="2" placeholder="Penjelasan singkat banner (boleh dikosongkan)..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">{{ old('subtitle', $slide->subtitle) }}</textarea>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Teks Badge Label</label>
-            <input type="text" name="badge" value="{{ old('badge', $slide->badge) }}" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-blue-500">
+            <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-600">Teks Badge Label</label>
+                <span class="text-[11px] text-slate-400 font-semibold">(Opsional)</span>
+            </div>
+            <input type="text" name="badge" value="{{ old('badge', $slide->badge) }}" placeholder="Contoh: PMB 2026/2027 (Boleh dikosongkan)" class="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:border-blue-500">
         </div>
         <div>
             <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Urutan Slide (Order)</label>
@@ -57,23 +66,35 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
         <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Teks Tombol Utamanya (CTA)</label>
-            <input type="text" name="cta_text" value="{{ old('cta_text', $slide->cta_text) }}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:border-blue-500">
+            <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-600">Teks Tombol Utama (CTA)</label>
+                <span class="text-[11px] text-slate-400 font-semibold">(Opsional)</span>
+            </div>
+            <input type="text" name="cta_text" value="{{ old('cta_text', $slide->cta_text) }}" placeholder="Contoh: Daftar PMB Online (Boleh kosong)" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:border-blue-500">
         </div>
         <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Link URL Tombol Utama</label>
-            <input type="text" name="cta_link" value="{{ old('cta_link', $slide->cta_link) }}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
+            <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-600">Link URL Tombol / Klik Banner</label>
+                <span class="text-[11px] text-slate-400 font-semibold">(Opsional)</span>
+            </div>
+            <input type="text" name="cta_link" value="{{ old('cta_link', $slide->cta_link) }}" placeholder="Contoh: https://pmb.stikespantiwaluya.ac.id" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
         </div>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Teks Tombol Sekunder (Opsional)</label>
-            <input type="text" name="secondary_text" value="{{ old('secondary_text', $slide->secondary_text) }}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:border-blue-500">
+            <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-600">Teks Tombol Sekunder</label>
+                <span class="text-[11px] text-slate-400 font-semibold">(Opsional)</span>
+            </div>
+            <input type="text" name="secondary_text" value="{{ old('secondary_text', $slide->secondary_text) }}" placeholder="Contoh: Lihat Program Studi" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:border-blue-500">
         </div>
         <div>
-            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Link URL Tombol Sekunder</label>
-            <input type="text" name="secondary_link" value="{{ old('secondary_link', $slide->secondary_link) }}" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
+            <div class="flex items-center justify-between mb-1">
+                <label class="block text-xs font-bold uppercase text-slate-600">Link URL Tombol Sekunder</label>
+                <span class="text-[11px] text-slate-400 font-semibold">(Opsional)</span>
+            </div>
+            <input type="text" name="secondary_link" value="{{ old('secondary_link', $slide->secondary_link) }}" placeholder="/program-studi" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:border-blue-500">
         </div>
     </div>
 

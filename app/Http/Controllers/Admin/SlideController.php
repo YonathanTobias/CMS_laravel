@@ -11,7 +11,6 @@ class SlideController extends Controller
     public function index()
     {
         $slides = Slide::orderBy('order', 'asc')->get();
-
         return view('admin.slides.index', compact('slides'));
     }
 
@@ -23,7 +22,7 @@ class SlideController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
             'badge' => 'nullable|string|max:100',
             'badge_color' => 'nullable|string|max:100',
@@ -38,12 +37,12 @@ class SlideController extends Controller
 
         $validated['order'] = $request->input('order', 1);
         $validated['is_active'] = $request->has('is_active');
-        $validated['badge'] = $request->input('badge', 'INFO KAMPUS');
+        $validated['badge'] = $request->filled('badge') ? $request->badge : null;
         $validated['badge_color'] = $request->input('badge_color', 'bg-amber-500 text-slate-950');
 
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('slides', 'public');
-            $validated['image'] = '/storage/'.$path;
+            $validated['image'] = '/storage/' . $path;
         } elseif ($request->filled('image_url')) {
             $validated['image'] = $request->image_url;
         } else {
@@ -63,7 +62,7 @@ class SlideController extends Controller
     public function update(Request $request, Slide $slide)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'nullable|string|max:255',
             'subtitle' => 'nullable|string',
             'badge' => 'nullable|string|max:100',
             'badge_color' => 'nullable|string|max:100',
@@ -78,10 +77,11 @@ class SlideController extends Controller
 
         $validated['order'] = $request->input('order', 1);
         $validated['is_active'] = $request->has('is_active');
+        $validated['badge'] = $request->filled('badge') ? $request->badge : null;
 
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('slides', 'public');
-            $validated['image'] = '/storage/'.$path;
+            $validated['image'] = '/storage/' . $path;
         } elseif ($request->filled('image_url')) {
             $validated['image'] = $request->image_url;
         }
@@ -94,7 +94,6 @@ class SlideController extends Controller
     public function destroy(Slide $slide)
     {
         $slide->delete();
-
         return redirect()->route('admin.slides.index')->with('success', 'Slide banner carousel berhasil dihapus!');
     }
 }
