@@ -19,6 +19,7 @@
     
     <!-- Carousel Slides Container -->
     <div class="relative h-[500px] sm:h-[580px] w-full">
+        @foreach($slides as $index => $slide)
             @php
                 $hasTextContent = !empty(trim($slide->title ?? '')) || !empty(trim($slide->subtitle ?? '')) || !empty(trim($slide->badge ?? '')) || !empty(trim($slide->cta_text ?? ''));
                 $imgSrc = \Illuminate\Support\Str::startsWith($slide->image, 'http') ? $slide->image : asset($slide->image);
