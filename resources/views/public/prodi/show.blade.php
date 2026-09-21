@@ -42,7 +42,7 @@
                                         <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
                                             <i class="fa-solid fa-award text-amber-500"></i> Sertifikat Akreditasi Resmi
                                         </h2>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bukti fisik status akreditasi {{ $prodi->accreditation }} {{ $prodi->name }} {{ $prodi->degree }}.</p>
+                                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Bukti fisik status akreditasi {{ $prodi->accreditation }} {{ $prodi->name }} {{ $prodi->degree }}.</p>
                                     </div>
                                     <a href="{{ $certUrl }}" target="_blank" download class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                                         <i class="fa-solid fa-download"></i> Unduh File
@@ -88,7 +88,7 @@
                                         <h2 class="font-heading font-bold text-2xl text-slate-900 dark:text-white flex items-center gap-2">
                                             <i class="fa-solid fa-certificate text-teal-500"></i> Sertifikat Kelayakan Penyelenggaraan RPL
                                         </h2>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Sertifikat Resmi Kelayakan Rekognisi Pembelajaran Lampau (RPL) {{ $prodi->name }} {{ $prodi->degree }}.</p>
+                                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Sertifikat Resmi Kelayakan Rekognisi Pembelajaran Lampau (RPL) {{ $prodi->name }} {{ $prodi->degree }}.</p>
                                     </div>
                                     <a href="{{ $rplCertUrl }}" target="_blank" download class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-4 py-2 rounded-xl text-xs shadow transition flex items-center gap-1.5 shrink-0 focus-visible:ring-2 focus-visible:ring-teal-400 focus-visible:outline-none">
                                         <i class="fa-solid fa-download"></i> Unduh File RPL

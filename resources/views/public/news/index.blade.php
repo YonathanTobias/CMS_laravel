@@ -15,7 +15,7 @@
         <!-- Filter & Search Bar -->
         <form action="{{ route('news.index') }}" method="GET" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm mb-12 flex flex-col md:flex-row gap-4 justify-between items-center">
             <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
-                <a href="{{ route('news.index') }}" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap {{ !request('category') ? 'bg-blue-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' }}">
+                <a href="{{ route('news.index') }}" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap {{ !request('category') ? 'bg-blue-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700' }}">
                     Semua Kategori
                 </a>
                 @foreach($categories as $cat)
@@ -23,14 +23,14 @@
                         $catParam = is_object($cat) ? $cat->slug : $cat;
                         $catName = is_object($cat) ? $cat->name : $cat;
                     @endphp
-                    <a href="{{ route('news.index', ['category' => $catParam]) }}" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap {{ request('category') === $catParam || request('category') === $catName ? 'bg-blue-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700' }}">
+                    <a href="{{ route('news.index', ['category' => $catParam]) }}" class="px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap {{ request('category') === $catParam || request('category') === $catName ? 'bg-blue-700 text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700' }}">
                         {{ $catName }}
                     </a>
                 @endforeach
             </div>
 
             <div class="relative w-full md:w-72">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari kata kunci berita..." class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari kata kunci berita..." class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
             </div>
         </form>
@@ -91,10 +91,10 @@
                 {{ $posts->links() }}
             </div>
         @else
-            <div class="bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400">
-                <i class="fa-solid fa-newspaper text-5xl mb-4 text-slate-300 dark:text-slate-700"></i>
-                <h3 class="font-bold text-lg text-slate-800 dark:text-white">Tidak ada berita yang ditemukan</h3>
-                <p class="text-sm">Coba kata kunci pencarian lain atau pilih kategori berbeda.</p>
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300">
+                <i class="fa-solid fa-newspaper text-5xl mb-4 text-slate-300 dark:text-slate-600"></i>
+                <h3 class="font-bold text-lg text-slate-900 dark:text-white">Tidak ada berita yang ditemukan</h3>
+                <p class="text-sm text-slate-600 dark:text-slate-300">Coba kata kunci pencarian lain atau pilih kategori berbeda.</p>
             </div>
         @endif
     </div>

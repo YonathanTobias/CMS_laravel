@@ -68,6 +68,15 @@
     <!-- AlpineJS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+    <script>
+        // Set initial dark mode before page render to avoid flash
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+
     <style>
         .glass-header {
             background: rgba(15, 23, 42, 0.94);
@@ -76,6 +85,63 @@
         }
         .hero-gradient {
             background: linear-gradient(135deg, #090d16 0%, #1e3a8a 55%, #1d4ed8 100%);
+        }
+
+        /* Typography & Prose Dark Mode Contrast */
+        .dark .prose {
+            color: #cbd5e1;
+        }
+        .dark .prose p,
+        .dark .prose li,
+        .dark .prose div {
+            color: #cbd5e1;
+        }
+        .dark .prose h1,
+        .dark .prose h2,
+        .dark .prose h3,
+        .dark .prose h4,
+        .dark .prose h5,
+        .dark .prose h6,
+        .dark .prose strong,
+        .dark .prose b,
+        .dark .prose th {
+            color: #f8fafc !important;
+        }
+        .dark .prose a {
+            color: #38bdf8 !important;
+        }
+        .dark .prose a:hover {
+            color: #7dd3fc !important;
+        }
+        .dark .prose table,
+        .dark .prose tr,
+        .dark .prose td,
+        .dark .prose th {
+            border-color: #334155 !important;
+            color: #cbd5e1;
+        }
+        .dark .prose blockquote {
+            color: #94a3b8 !important;
+            border-left-color: #3b82f6 !important;
+        }
+        /* Override any inline hardcoded dark text colors from WYSIWYG editors */
+        .dark .prose [style*="color: rgb(0, 0, 0)"],
+        .dark .prose [style*="color: #000000"],
+        .dark .prose [style*="color:#000000"],
+        .dark .prose [style*="color: #000"],
+        .dark .prose [style*="color:#000"],
+        .dark .prose [style*="color: rgb(33, 37, 41)"],
+        .dark .prose [style*="color: #212529"],
+        .dark .prose [style*="color: #333333"],
+        .dark .prose [style*="color: #444444"],
+        .dark .prose [style*="color: black"] {
+            color: #e2e8f0 !important;
+        }
+        .dark .prose [style*="background-color: rgb(255, 255, 255)"],
+        .dark .prose [style*="background-color: #ffffff"],
+        .dark .prose [style*="background-color:#ffffff"],
+        .dark .prose [style*="background-color: white"] {
+            background-color: transparent !important;
         }
     </style>
 </head>
@@ -248,12 +314,12 @@
                         <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes Panti Waluya" class="h-10 w-auto object-contain drop-shadow shrink-0">
                         <span class="font-heading font-extrabold text-xl text-white">STIKes Panti Waluya Malang</span>
                     </div>
-                    <p class="text-xs text-slate-400 leading-relaxed">
+                    <p class="text-xs text-slate-300 leading-relaxed">
                         {{ \App\Models\SiteSetting::get('footer_description', 'Sekolah Tinggi Ilmu Kesehatan Panti Waluya Malang melahirkan tenaga kesehatan profesional, berintegritas, dan siap kerja nasional maupun internasional.') }}
                     </p>
-                    <div class="text-xs text-slate-400 space-y-1 pt-1">
-                        <p><i class="fa-solid fa-location-dot text-amber-500 mr-2"></i> {{ \App\Models\SiteSetting::get('address', 'Jl. Yulius Riefbuilder No. 5, Malang') }}</p>
-                        <p><i class="fa-solid fa-phone text-blue-400 mr-2"></i> {{ \App\Models\SiteSetting::get('phone', '(0341) 369003') }}</p>
+                    <div class="text-xs text-slate-300 space-y-1.5 pt-1">
+                        <p><i class="fa-solid fa-location-dot text-amber-400 mr-2"></i> {{ \App\Models\SiteSetting::get('address', 'Jl. Yulius Riefbuilder No. 5, Malang') }}</p>
+                        <p><i class="fa-solid fa-phone text-sky-400 mr-2"></i> {{ \App\Models\SiteSetting::get('phone', '(0341) 369003') }}</p>
                         <p><i class="fa-solid fa-envelope text-sky-400 mr-2"></i> {{ \App\Models\SiteSetting::get('email', 'info@stikespantiwaluya.ac.id') }}</p>
                     </div>
                 </div>
@@ -261,7 +327,7 @@
                 <!-- Quick Links -->
                 <div class="lg:col-span-3 space-y-3">
                     <h4 class="font-heading font-bold text-white text-base">Tautan Cepat</h4>
-                    <ul class="space-y-2 text-xs text-slate-400">
+                    <ul class="space-y-2 text-xs text-slate-300">
                         <li><a href="{{ route('home') }}" class="hover:text-amber-400 transition">&bull; Beranda Utama</a></li>
                         <li><a href="{{ route('prodi.index') }}" class="hover:text-amber-400 transition">&bull; Program Studi D3/S1/Profesi</a></li>
                         <li><a href="{{ route('facilities.index') }}" class="hover:text-amber-400 transition">&bull; Fasilitas Kampus</a></li>
@@ -271,7 +337,7 @@
                 <!-- Google Maps Embed Footer Card -->
                 <div class="lg:col-span-5 space-y-3">
                     <h4 class="font-heading font-bold text-white text-base flex items-center gap-2">
-                        <i class="fa-solid fa-map-location-dot text-amber-500"></i> Lokasi Kampus
+                        <i class="fa-solid fa-map-location-dot text-amber-400"></i> Lokasi Kampus
                     </h4>
                     <div class="w-full h-44 rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-md">
                         <iframe src="{{ \App\Models\SiteSetting::get('maps_embed_url', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.1327435545477!2d112.62282707488443!3d-7.985224792040181!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6281ed19836a9%3A0xa3b7da4959b42040!2sSekolah%20Tinggi%20Ilmu%20kesehatan%20Panti%20Waluya!5e0!3m2!1sid!2sid!4v1789012783861!5m2!1sid!2sid') }}" class="w-full h-full border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -281,7 +347,7 @@
             </div>
 
             <!-- Copyright Bar -->
-            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
                 <div>
                     {{ \App\Models\SiteSetting::get('footer_copyright', '© ' . date('Y') . ' STIKes Panti Waluya Malang. All rights reserved.') }}
                 </div>

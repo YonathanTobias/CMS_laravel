@@ -9,7 +9,7 @@
         
         <!-- Breadcrumb & Back Navigation -->
         <div class="mb-6">
-            <a href="{{ route('news.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-sky-400 transition">
+            <a href="{{ route('news.index') }}" class="inline-flex items-center gap-2 text-xs font-bold text-slate-600 dark:text-slate-300 hover:text-blue-700 dark:hover:text-sky-400 transition">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Berita & Pengumuman
             </a>
         </div>
@@ -148,7 +148,7 @@
 
                 <!-- 1. Widget Bagikan Berita -->
                 <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-slate-200/90 dark:border-slate-800 shadow-sm text-center space-y-4">
-                    <h3 class="font-heading font-extrabold text-sm uppercase tracking-wider text-slate-800 dark:text-slate-200">
+                    <h3 class="font-heading font-extrabold text-sm uppercase tracking-wider text-slate-900 dark:text-white">
                         Bagikan Berita
                     </h3>
                     @php
@@ -184,8 +184,8 @@
                 </div>
 
                 <!-- 2. Widget Kartu Informasi PMB & Logo Kampus -->
-                <div class="bg-slate-100/80 dark:bg-slate-900/80 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-sm">
-                    <div class="w-16 h-16 mx-auto bg-white p-2 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center">
+                <div class="bg-slate-100/80 dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 text-center space-y-4 shadow-sm">
+                    <div class="w-16 h-16 mx-auto bg-white dark:bg-slate-800 p-2 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 flex items-center justify-center">
                         <img src="{{ asset('images/logo-stikes-pantiwaluya.png') }}" alt="Logo STIKes" class="h-12 w-auto object-contain">
                     </div>
                     <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium px-2">
@@ -207,7 +207,7 @@
                         <div class="space-y-3">
                             @foreach($recentPosts as $recent)
                                 <a href="{{ route('news.show', $recent->slug) }}" 
-                                   class="block bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700/60 hover:border-blue-500 dark:hover:border-sky-400 transition group space-y-1">
+                                   class="block bg-slate-50 dark:bg-slate-800/80 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-700 hover:border-blue-500 dark:hover:border-sky-400 transition group space-y-1">
                                     <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-sky-400 line-clamp-2 leading-snug">
                                         {{ $recent->title }}
                                     </h4>

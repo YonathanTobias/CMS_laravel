@@ -62,16 +62,16 @@
                 <form action="#" method="POST" class="space-y-4" onsubmit="event.preventDefault(); alert('Terima kasih! Pesan Anda telah terkirim ke Sekretariat STIKes Panti Waluya Malang.');">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Nama Lengkap</label>
-                            <input type="text" required placeholder="Masukkan nama Anda" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-200 mb-1">Nama Lengkap</label>
+                            <input type="text" required placeholder="Masukkan nama Anda" class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Email / Telepon</label>
-                            <input type="text" required placeholder="0812xxxx atau email@..." class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-200 mb-1">Email / Telepon</label>
+                            <input type="text" required placeholder="0812xxxx atau email@..." class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Subjek Pertanyaan</label>
+                        <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-200 mb-1">Subjek Pertanyaan</label>
                         <select class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option class="dark:bg-slate-800">Informasi Pendaftaran PMB</option>
                             <option class="dark:bg-slate-800">Informasi Program Studi & SPP</option>
@@ -80,8 +80,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Pesan Anda</label>
-                        <textarea rows="4" required placeholder="Tuliskan pertanyaan Anda..." class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-200 mb-1">Pesan Anda</label>
+                        <textarea rows="4" required placeholder="Tuliskan pertanyaan Anda..." class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-400 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                     </div>
                     <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl shadow transition focus:ring-2 focus:ring-amber-400 focus:outline-none">
                         <i class="fa-solid fa-paper-plane mr-2"></i> Kirim Pesan

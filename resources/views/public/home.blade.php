@@ -301,10 +301,10 @@
                                 </div>
 
                                 <div class="p-4 space-y-2">
-                                    <div class="text-[11px] text-slate-400 dark:text-slate-400 flex items-center gap-1.5">
+                                    <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                                         <i class="fa-regular fa-calendar text-blue-600 dark:text-sky-400"></i> {{ $post->published_at ? $post->published_at->format('d M Y') : $post->created_at->format('d M Y') }}
                                     </div>
-                                    <h4 class="font-heading font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 hover:text-blue-700 dark:hover:text-sky-400 transition leading-snug">
+                                    <h4 class="font-heading font-bold text-xs sm:text-sm text-slate-900 dark:text-white line-clamp-2 hover:text-blue-700 dark:hover:text-sky-400 transition leading-snug">
                                         <a href="{{ route('news.show', $post->slug) }}">{{ $post->title }}</a>
                                     </h4>
                                 </div>
@@ -348,10 +348,10 @@
 
             <!-- Controls: Left & Right Navigation Arrows -->
             <div class="flex items-center gap-3">
-                <button @click="scrollPrev()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kiri">
+                <button @click="scrollPrev()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kiri">
                     <i class="fa-solid fa-chevron-left text-base"></i>
                 </button>
-                <button @click="scrollNext()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kanan">
+                <button @click="scrollNext()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kanan">
                     <i class="fa-solid fa-chevron-right text-base"></i>
                 </button>
             </div>
@@ -363,7 +363,7 @@
                 @php
                     $posterUrl = \Illuminate\Support\Str::startsWith($ach->poster_image, 'http') ? $ach->poster_image : asset($ach->poster_image);
                 @endphp
-                <div class="w-72 sm:w-80 shrink-0 snap-start bg-white dark:bg-slate-950 rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                <div class="w-72 sm:w-80 shrink-0 snap-start bg-slate-50 dark:bg-slate-950 rounded-3xl border border-slate-200/90 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group">
                     <div class="relative h-72 bg-slate-100 dark:bg-slate-800 overflow-hidden cursor-pointer" @click="activePoster = '{{ $posterUrl }}'">
                         @if($ach->poster_image)
                             <img src="{{ $posterUrl }}" alt="{{ $ach->title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -394,16 +394,16 @@
                                 </div>
                                 <div class="overflow-hidden">
                                     <h4 class="font-bold text-slate-900 dark:text-white text-sm leading-tight truncate">{{ $ach->student_name }}</h4>
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate">{!! $ach->student_prodi !!}</p>
+                                    <p class="text-[11px] text-slate-600 dark:text-slate-300 truncate">{!! $ach->student_prodi !!}</p>
                                 </div>
                             </div>
 
-                            <div class="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-1">
-                                <h3 class="font-heading font-bold text-xs text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                            <div class="pt-2 border-t border-slate-200/80 dark:border-slate-800 space-y-1">
+                                <h3 class="font-heading font-bold text-xs text-slate-900 dark:text-white line-clamp-2 leading-snug">
                                     {{ $ach->title }}
                                 </h3>
                                 @if($ach->event_name)
-                                    <p class="text-[11px] text-slate-500 dark:text-slate-400 truncate flex items-center gap-1">
+                                    <p class="text-[11px] text-slate-600 dark:text-slate-300 truncate flex items-center gap-1">
                                         <i class="fa-solid fa-building-columns text-[10px] text-amber-500"></i> {{ $ach->event_name }}
                                     </p>
                                 @endif
@@ -472,7 +472,7 @@
                         </div>
                         <div>
                             <div class="text-slate-900 dark:text-white font-bold">{{ \App\Models\SiteSetting::get('profile_box1_title', 'Visi Kampus Unggul') }}</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">{{ \App\Models\SiteSetting::get('profile_box1_sub', 'Berdaya Saing Global') }}</div>
+                            <div class="text-[11px] text-slate-600 dark:text-slate-300 font-medium">{{ \App\Models\SiteSetting::get('profile_box1_sub', 'Berdaya Saing Global') }}</div>
                         </div>
                     </div>
                     <div class="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
@@ -481,7 +481,7 @@
                         </div>
                         <div>
                             <div class="text-slate-900 dark:text-white font-bold">{{ \App\Models\SiteSetting::get('profile_box2_title', 'Akreditasi BAN-PT') }}</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400 font-normal">{{ \App\Models\SiteSetting::get('profile_box2_sub', 'Terakreditasi Baik Sekali') }}</div>
+                            <div class="text-[11px] text-slate-600 dark:text-slate-300 font-medium">{{ \App\Models\SiteSetting::get('profile_box2_sub', 'Terakreditasi Baik Sekali') }}</div>
                         </div>
                     </div>
                 </div>
@@ -525,10 +525,10 @@
 
             <!-- Controls: Left & Right Navigation Arrows -->
             <div class="flex items-center gap-3">
-                <button @click="scrollPrevCert()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kiri">
+                <button @click="scrollPrevCert()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kiri">
                     <i class="fa-solid fa-chevron-left text-base"></i>
                 </button>
-                <button @click="scrollNextCert()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition flex items-center justify-center shadow-sm" title="Geser Kanan">
+                <button @click="scrollNextCert()" class="w-11 h-11 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition flex items-center justify-center shadow-sm" title="Geser Kanan">
                     <i class="fa-solid fa-chevron-right text-base"></i>
                 </button>
             </div>
@@ -555,11 +555,11 @@
                     </div>
                     <div>
                         <h3 class="text-sm font-extrabold text-slate-900 dark:text-white line-clamp-1">{{ $cert->title }}</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{{ $cert->issuer ?? '-' }}</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">{{ $cert->issuer ?? '-' }}</p>
                     </div>
                 </div>
             @empty
-                <div class="w-full py-8 text-center text-slate-400 text-xs font-bold">
+                <div class="w-full py-8 text-center text-slate-500 dark:text-slate-400 text-xs font-bold">
                     Belum ada dokumen sertifikat akreditasi yang diunggah.
                 </div>
             @endforelse
@@ -633,7 +633,7 @@
                                 </div>
                             </div>
                             <div class="flex gap-2 mb-2">
-                                <span class="px-3 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-bold">{{ $prodi->degree }}</span>
+                                <span class="px-3 py-0.5 rounded-full bg-slate-900 dark:bg-slate-800 text-white dark:text-slate-200 border border-transparent dark:border-slate-700 text-[11px] font-bold">{{ $prodi->degree }}</span>
                                 <span class="px-3 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-[11px] font-bold">Akred: {{ $prodi->accreditation }}</span>
                             </div>
                             <h3 class="font-heading font-bold text-2xl text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-sky-400 transition">
@@ -659,12 +659,12 @@
                                 <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-700 pb-2">
                                     <div class="flex items-center gap-1.5">
                                         @if($prodi->accreditation_certificate)
-                                            <button type="button" @click="certTab = 'accreditation'" :class="certTab === 'accreditation' ? 'bg-amber-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
+                                            <button type="button" @click="certTab = 'accreditation'" :class="certTab === 'accreditation' ? 'bg-amber-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
                                                 <i class="fa-solid fa-award"></i> Akreditasi
                                             </button>
                                         @endif
                                         @if($prodi->rpl_certificate)
-                                            <button type="button" @click="certTab = 'rpl'" :class="certTab === 'rpl' ? 'bg-teal-600 text-white font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
+                                            <button type="button" @click="certTab = 'rpl'" :class="certTab === 'rpl' ? 'bg-teal-600 text-white font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
                                                 <i class="fa-solid fa-certificate"></i> Kelayakan RPL
                                             </button>
                                         @endif
@@ -751,10 +751,10 @@
                 <div class="w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-800 text-amber-600 dark:text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-600 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 transition">
                     {{ \App\Models\SiteSetting::get('icon1_title', 'PMB Online') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon1_sub', 'Pendaftaran Mahasiswa Baru') }}
                 </p>
             </a>
@@ -764,10 +764,10 @@
                 <div class="w-20 h-20 rounded-full bg-blue-100 dark:bg-blue-950/60 border border-blue-300 dark:border-blue-800 text-blue-700 dark:text-sky-400 group-hover:bg-blue-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-users"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-sky-400 transition">
                     {{ \App\Models\SiteSetting::get('icon2_title', 'Kemahasiswaan') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon2_sub', 'UKM & Organisasi Kampus') }}
                 </p>
             </a>
@@ -777,10 +777,10 @@
                 <div class="w-20 h-20 rounded-full bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-laptop-code"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-emerald-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition">
                     {{ \App\Models\SiteSetting::get('icon3_title', 'LMS E-Learning') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon3_sub', 'Pembelajaran Digital') }}
                 </p>
             </a>
@@ -790,10 +790,10 @@
                 <div class="w-20 h-20 rounded-full bg-indigo-100 dark:bg-indigo-950/60 border border-indigo-300 dark:border-indigo-800 text-indigo-700 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-square-check"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-indigo-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-indigo-700 dark:group-hover:text-indigo-400 transition">
                     {{ \App\Models\SiteSetting::get('icon4_title', 'CBT Ujian Online') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon4_sub', 'Sistem Evaluasi Digital') }}
                 </p>
             </a>
@@ -803,10 +803,10 @@
                 <div class="w-20 h-20 rounded-full bg-purple-100 dark:bg-purple-950/60 border border-purple-300 dark:border-purple-800 text-purple-700 dark:text-purple-400 group-hover:bg-purple-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-book-bookmark"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-purple-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-400 transition">
                     {{ \App\Models\SiteSetting::get('icon5_title', 'E-Library') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon5_sub', 'Perpustakaan Digital') }}
                 </p>
             </a>
@@ -816,10 +816,10 @@
                 <div class="w-20 h-20 rounded-full bg-rose-100 dark:bg-rose-950/60 border border-rose-300 dark:border-rose-800 text-rose-700 dark:text-rose-400 group-hover:bg-rose-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-newspaper"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-rose-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-rose-700 dark:group-hover:text-rose-400 transition">
                     {{ \App\Models\SiteSetting::get('icon6_title', 'Jurnal Online') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon6_sub', 'Publikasi Riset Kesehatan') }}
                 </p>
             </a>
@@ -829,10 +829,10 @@
                 <div class="w-20 h-20 rounded-full bg-teal-100 dark:bg-teal-950/60 border border-teal-300 dark:border-teal-800 text-teal-700 dark:text-teal-400 group-hover:bg-teal-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-microscope"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-teal-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition">
                     {{ \App\Models\SiteSetting::get('icon7_title', 'Laboratorium') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon7_sub', 'Sarana Practical Medis') }}
                 </p>
             </a>
@@ -842,10 +842,10 @@
                 <div class="w-20 h-20 rounded-full bg-sky-100 dark:bg-sky-950/60 border border-sky-300 dark:border-sky-800 text-sky-700 dark:text-sky-400 group-hover:bg-sky-600 group-hover:text-white transition duration-300 flex items-center justify-center text-3xl shadow-md group-hover:scale-110">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
-                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-700 transition">
+                <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-400 transition">
                     {{ \App\Models\SiteSetting::get('icon8_title', 'SIAKAD Online') }}
                 </h4>
-                <p class="text-xs text-slate-500 dark:text-slate-400">
+                <p class="text-xs text-slate-600 dark:text-slate-300">
                     {{ \App\Models\SiteSetting::get('icon8_sub', 'Sistem Informasi Akademik') }}
                 </p>
             </a>

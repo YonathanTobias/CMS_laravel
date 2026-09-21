@@ -21,7 +21,7 @@
                                 <i class="{{ \App\Helpers\IconHelper::format($prodi->icon, 'fa-solid fa-user-nurse') }}"></i>
                             </div>
                             <div class="flex gap-2">
-                                <span class="px-3 py-1 rounded-md bg-slate-900 text-white text-xs font-bold">{{ $prodi->degree }}</span>
+                                <span class="px-3 py-1 rounded-md bg-slate-900 dark:bg-slate-800 text-white dark:text-slate-200 border border-transparent dark:border-slate-700 text-xs font-bold">{{ $prodi->degree }}</span>
                                 <span class="px-3 py-1 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-bold">Akred: {{ $prodi->accreditation }}</span>
                             </div>
                         </div>
@@ -43,12 +43,12 @@
                                 <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-700 pb-2">
                                     <div class="flex items-center gap-1.5">
                                         @if($prodi->accreditation_certificate)
-                                            <button type="button" @click="certTab = 'accreditation'" :class="certTab === 'accreditation' ? 'bg-amber-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
+                                            <button type="button" @click="certTab = 'accreditation'" :class="certTab === 'accreditation' ? 'bg-amber-500 text-slate-950 font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
                                                 <i class="fa-solid fa-award"></i> Akreditasi
                                             </button>
                                         @endif
                                         @if($prodi->rpl_certificate)
-                                            <button type="button" @click="certTab = 'rpl'" :class="certTab === 'rpl' ? 'bg-teal-600 text-white font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
+                                            <button type="button" @click="certTab = 'rpl'" :class="certTab === 'rpl' ? 'bg-teal-600 text-white font-bold shadow-sm' : 'bg-slate-200/70 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600'" class="px-2.5 py-1 rounded-xl text-[10px] uppercase tracking-wide transition flex items-center gap-1">
                                                 <i class="fa-solid fa-certificate"></i> Kelayakan RPL
                                             </button>
                                         @endif
