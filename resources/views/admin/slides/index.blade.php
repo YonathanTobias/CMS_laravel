@@ -1,4 +1,4 @@
-﻿@extends('layouts.admin')
+@extends('layouts.admin')
 
 @section('page_title', 'Kelola Banner Carousel')
 
@@ -11,8 +11,8 @@
     modalBadge: '',
     openPreview(image, title, badge) {
         this.modalImg = image;
-        this.modalTitle = title || 'Full Banner Tanpa Judul';
-        this.modalBadge = badge || 'Banner Carousel';
+        this.modalTitle = title;
+        this.modalBadge = badge;
         this.showModal = true;
     }
 }" class="space-y-6">
@@ -43,17 +43,17 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                    @forelse( as )
+                    @forelse($slides as $slide)
                         @php
-                             = \Illuminate\Support\Str::startsWith(->image, 'http') ? ->image : asset(->image);
+                            $imgSrc = \Illuminate\Support\Str::startsWith($slide->image, 'http') ? $slide->image : asset($slide->image);
                         @endphp
                         <tr class="hover:bg-slate-50/80 dark:hover:bg-slate-800/50 transition">
                             <!-- Column 1: Gambar Slide + Hover Preview Button -->
                             <td class="py-4 px-6">
-                                <div @click="openPreview(@js(), @js(->title), @js(->badge))" 
+                                <div @click="openPreview(@js($imgSrc), @js($slide->title), @js($slide->badge))" 
                                      class="group relative w-32 h-16 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm bg-slate-900 cursor-pointer" 
                                      title="Klik untuk lihat gambar full">
-                                    <img src="{{  }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                    <img src="{{ $imgSrc }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                     <div class="absolute inset-0 bg-slate-950/70 opacity-0 group-hover:opacity-100 transition duration-200 flex flex-col items-center justify-center text-white text-xs font-bold gap-1">
                                         <i class="fa-solid fa-eye text-amber-400 text-sm"></i>
                                         <span class="text-[10px] tracking-wide">Lihat Gambar</span>
@@ -63,31 +63,31 @@
 
                             <!-- Column 2: Judul -->
                             <td class="py-4 px-6 font-bold text-slate-900 dark:text-white">
-                                @if(->title)
-                                    <div>{{ ->title }}</div>
+                                @if(!empty(trim($slide->title ?? '')))
+                                    <div>{{ $slide->title }}</div>
                                 @else
                                     <div class="text-slate-400 italic text-xs font-normal">(Full Banner Tanpa Teks)</div>
                                 @endif
-                                @if(->subtitle)
-                                    <div class="text-xs text-slate-400 font-normal line-clamp-1 mt-0.5">{{ ->subtitle }}</div>
+                                @if(!empty(trim($slide->subtitle ?? '')))
+                                    <div class="text-xs text-slate-400 font-normal line-clamp-1 mt-0.5">{{ $slide->subtitle }}</div>
                                 @endif
                             </td>
 
                             <!-- Column 3: Badge -->
                             <td class="py-4 px-6">
-                                @if(->badge)
-                                    <span class="px-2.5 py-1 rounded text-xs font-bold {{ ->badge_color }}">{{ ->badge }}</span>
+                                @if(!empty(trim($slide->badge ?? '')))
+                                    <span class="px-2.5 py-1 rounded text-xs font-bold {{ $slide->badge_color }}">{{ $slide->badge }}</span>
                                 @else
                                     <span class="text-slate-400 text-xs">-</span>
                                 @endif
                             </td>
 
                             <!-- Column 4: Urutan -->
-                            <td class="py-4 px-6 text-center font-extrabold text-slate-800 dark:text-slate-200">{{ ->order }}</td>
+                            <td class="py-4 px-6 text-center font-extrabold text-slate-800 dark:text-slate-200">{{ $slide->order }}</td>
 
                             <!-- Column 5: Status -->
                             <td class="py-4 px-6">
-                                @if(->is_active)
+                                @if($slide->is_active)
                                     <span class="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold">Aktif</span>
                                 @else
                                     <span class="px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold">Nonaktif</span>
@@ -99,7 +99,7 @@
                                 <div class="flex items-center justify-center gap-2">
                                     <!-- Tombol Lihat Gambar Modal -->
                                     <button type="button" 
-                                            @click="openPreview(@js(), @js(->title), @js(->badge))" 
+                                            @click="openPreview(@js($imgSrc), @js($slide->title), @js($slide->badge))" 
                                             class="px-2.5 py-1.5 bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-sky-300 hover:bg-blue-100 rounded-lg font-bold text-xs transition flex items-center gap-1 border border-blue-200 dark:border-blue-800" 
                                             title="Lihat Gambar Banner Utuh">
                                         <i class="fa-solid fa-eye text-blue-600"></i>
@@ -107,12 +107,12 @@
                                     </button>
 
                                     <!-- Tombol Edit -->
-                                    <a href="{{ route('admin.slides.edit', ->id) }}" class="p-1.5 text-slate-500 hover:text-amber-600 dark:text-slate-400 dark:hover:text-amber-400 transition" title="Edit Slide">
+                                    <a href="{{ route('admin.slides.edit', $slide->id) }}" class="p-1.5 text-slate-500 hover:text-amber-600 dark:text-slate-400 dark:hover:text-amber-400 transition" title="Edit Slide">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
 
                                     <!-- Tombol Hapus -->
-                                    <form action="{{ route('admin.slides.destroy', ->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus slide banner ini?');">
+                                    <form action="{{ route('admin.slides.destroy', $slide->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus slide banner ini?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="p-1.5 text-slate-500 hover:text-red-600 dark:text-slate-400 dark:hover:text-red-400 transition" title="Hapus Slide">
