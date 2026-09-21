@@ -169,31 +169,51 @@ if (typeof window.dualEditorComponent === 'undefined') {
             background-color: #f1f5f9;
             font-weight: 600;
         }
+        .dark .editor-visual-content {
+            color: #f8fafc;
+            background-color: #1e293b;
+        }
+        .dark .editor-visual-content h2,
+        .dark .editor-visual-content h3,
+        .dark .editor-visual-content h4 {
+            color: #f8fafc;
+        }
+        .dark .editor-visual-content blockquote {
+            background-color: #0f172a;
+            color: #cbd5e1;
+        }
+        .dark .editor-visual-content th {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .dark .editor-visual-content td, .dark .editor-visual-content th {
+            border-color: #334155;
+        }
     </style>
 
     <!-- Header Label & Switcher Tabs -->
     <div class="flex flex-wrap items-center justify-between gap-2 pb-1">
         <div class="flex items-center gap-2">
-            <label class="block text-xs font-bold uppercase text-slate-700 tracking-wide">
+            <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-200 tracking-wide">
                 {{ $label }}
             </label>
             <template x-if="isComplexHtml">
-                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-200">
-                    <i class="fa-solid fa-code text-amber-600 mr-1"></i> Terdeteksi HTML Custom (Tim IT)
+                <span class="bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded-md border border-amber-200 dark:border-amber-800">
+                    <i class="fa-solid fa-code text-amber-600 dark:text-amber-400 mr-1"></i> Terdeteksi HTML Custom (Tim IT)
                 </span>
             </template>
         </div>
         
         <!-- Mode Switcher Buttons -->
-        <div class="flex items-center bg-slate-200/80 p-1 rounded-xl gap-1 text-xs font-bold shadow-inner">
+        <div class="flex items-center bg-slate-200/80 dark:bg-slate-800 p-1 rounded-xl gap-1 text-xs font-bold shadow-inner">
             <button type="button" @click="switchToVisual()" 
-                :class="mode === 'visual' ? 'bg-white text-blue-700 shadow-sm border border-slate-200 font-extrabold' : 'text-slate-600 hover:text-slate-900'" 
+                :class="mode === 'visual' ? 'bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-400 shadow-sm border border-slate-200 dark:border-slate-700 font-extrabold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" 
                 class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
-                <i class="fa-solid fa-pen-to-square text-emerald-600"></i> 
+                <i class="fa-solid fa-pen-to-square text-emerald-600 dark:text-emerald-400"></i> 
                 <span>Editor Visual (Teks Biasa / Non-IT)</span>
             </button>
             <button type="button" @click="switchToCode()" 
-                :class="mode === 'code' ? 'bg-slate-900 text-sky-300 shadow-sm font-extrabold' : 'text-slate-600 hover:text-slate-900'" 
+                :class="mode === 'code' ? 'bg-slate-900 dark:bg-slate-950 text-sky-300 shadow-sm font-extrabold border border-slate-700' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'" 
                 class="px-3.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5">
                 <i class="fa-solid fa-code text-amber-400"></i> 
                 <span>Editor Kode HTML (Tim IT)</span>
@@ -202,17 +222,17 @@ if (typeof window.dualEditorComponent === 'undefined') {
     </div>
 
     <!-- Info Helper Banner -->
-    <div x-show="mode === 'visual'" class="bg-blue-50 border border-blue-200 text-blue-900 text-xs p-3 rounded-xl space-y-1">
-        <div class="flex items-center gap-2 font-bold text-blue-800">
-            <i class="fa-solid fa-circle-info text-blue-600"></i>
+    <div x-show="mode === 'visual'" class="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-blue-900 dark:text-blue-200 text-xs p-3 rounded-xl space-y-1">
+        <div class="flex items-center gap-2 font-bold text-blue-800 dark:text-blue-300">
+            <i class="fa-solid fa-circle-info text-blue-600 dark:text-blue-400"></i>
             <span>Mode Editor Visual (Untuk Admin Non-IT):</span>
         </div>
-        <p class="text-slate-600 leading-relaxed pl-6">
+        <p class="text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
             Ketik dan format tulisan secara langsung seperti di Microsoft Word (Tebal, Miring, Heading, List, Warna Teks) tanpa perlu mengerti kode HTML.
         </p>
         <template x-if="isComplexHtml">
-            <div class="mt-2 p-2 bg-amber-50 border border-amber-200 text-amber-900 rounded-lg text-[11px] font-medium flex items-center gap-2">
-                <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+            <div class="mt-2 p-2 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 text-amber-900 dark:text-amber-200 rounded-lg text-[11px] font-medium flex items-center gap-2">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 dark:text-amber-400"></i>
                 <span><strong>Perhatian:</strong> Halaman ini sebelumnya dibuat dengan struktur kode HTML custom. Jika Anda mengubahnya di Mode Visual, tata letak khusus buatan Tim IT dapat berubah. Disarankan tetap gunakan <strong>Editor Kode HTML</strong>.</span>
             </div>
         </template>
@@ -232,84 +252,84 @@ if (typeof window.dualEditorComponent === 'undefined') {
     <textarea name="{{ $name }}" x-model="content" class="hidden" {{ $required ? 'required' : '' }}></textarea>
 
     <!-- Main Container Box -->
-    <div class="border border-slate-300 rounded-xl overflow-hidden shadow-sm bg-white">
+    <div class="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm bg-white dark:bg-slate-900">
         
         <!-- Toolbar Formatting (Shown in Visual Mode) -->
-        <div x-show="mode === 'visual'" class="bg-slate-100 border-b border-slate-200 p-2 flex flex-wrap items-center gap-1 text-xs select-none">
+        <div x-show="mode === 'visual'" class="bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 p-2 flex flex-wrap items-center gap-1 text-xs select-none">
             
             <!-- Headings -->
-            <button type="button" @click="exec('formatBlock', '<h2>')" title="Judul Utama (H2)" class="px-2.5 py-1 rounded hover:bg-slate-200 font-bold text-slate-700 border border-slate-300 bg-white">
+            <button type="button" @click="exec('formatBlock', '<h2>')" title="Judul Utama (H2)" class="px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
                 H2
             </button>
-            <button type="button" @click="exec('formatBlock', '<h3>')" title="Sub Judul (H3)" class="px-2.5 py-1 rounded hover:bg-slate-200 font-bold text-slate-700 border border-slate-300 bg-white">
+            <button type="button" @click="exec('formatBlock', '<h3>')" title="Sub Judul (H3)" class="px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
                 H3
             </button>
-            <button type="button" @click="exec('formatBlock', '<h4>')" title="Judul Kecil (H4)" class="px-2.5 py-1 rounded hover:bg-slate-200 font-bold text-slate-700 border border-slate-300 bg-white">
+            <button type="button" @click="exec('formatBlock', '<h4>')" title="Judul Kecil (H4)" class="px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
                 H4
             </button>
-            <button type="button" @click="exec('formatBlock', '<p>')" title="Paragraf Normal" class="px-2.5 py-1 rounded hover:bg-slate-200 font-medium text-slate-600 border border-slate-300 bg-white">
+            <button type="button" @click="exec('formatBlock', '<p>')" title="Paragraf Normal" class="px-2.5 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 font-medium text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
                 Teks Normal
             </button>
 
-            <div class="h-5 w-px bg-slate-300 mx-1"></div>
+            <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-1"></div>
 
             <!-- Formatting Actions -->
-            <button type="button" @click="exec('bold')" title="Tebal (Bold)" class="w-8 h-8 rounded hover:bg-slate-200 font-extrabold text-slate-800 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('bold')" title="Tebal (Bold)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 font-extrabold text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 B
             </button>
-            <button type="button" @click="exec('italic')" title="Miring (Italic)" class="w-8 h-8 rounded hover:bg-slate-200 italic font-bold text-slate-800 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('italic')" title="Miring (Italic)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 italic font-bold text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 I
             </button>
-            <button type="button" @click="exec('underline')" title="Garis Bawah (Underline)" class="w-8 h-8 rounded hover:bg-slate-200 underline font-bold text-slate-800 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('underline')" title="Garis Bawah (Underline)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 underline font-bold text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 U
             </button>
-            <button type="button" @click="exec('strikeThrough')" title="Coret (Strikethrough)" class="w-8 h-8 rounded hover:bg-slate-200 line-through font-bold text-slate-800 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('strikeThrough')" title="Coret (Strikethrough)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 line-through font-bold text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 S
             </button>
 
-            <div class="h-5 w-px bg-slate-300 mx-1"></div>
+            <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-1"></div>
 
             <!-- Lists -->
-            <button type="button" @click="exec('insertUnorderedList')" title="List Poin (Bulleted List)" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('insertUnorderedList')" title="List Poin (Bulleted List)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-list-ul"></i>
             </button>
-            <button type="button" @click="exec('insertOrderedList')" title="List Angka (Numbered List)" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('insertOrderedList')" title="List Angka (Numbered List)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-list-ol"></i>
             </button>
 
-            <div class="h-5 w-px bg-slate-300 mx-1"></div>
+            <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-1"></div>
 
             <!-- Alignment -->
-            <button type="button" @click="exec('justifyLeft')" title="Rata Kiri" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('justifyLeft')" title="Rata Kiri" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-align-left"></i>
             </button>
-            <button type="button" @click="exec('justifyCenter')" title="Rata Tengah" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('justifyCenter')" title="Rata Tengah" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-align-center"></i>
             </button>
-            <button type="button" @click="exec('justifyRight')" title="Rata Kanan" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('justifyRight')" title="Rata Kanan" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-align-right"></i>
             </button>
-            <button type="button" @click="exec('justifyFull')" title="Rata Kanan Kiri (Justify)" class="w-8 h-8 rounded hover:bg-slate-200 text-slate-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('justifyFull')" title="Rata Kanan Kiri (Justify)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-align-justify"></i>
             </button>
 
-            <div class="h-5 w-px bg-slate-300 mx-1"></div>
+            <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-1"></div>
 
             <!-- Quote, Link, Table -->
-            <button type="button" @click="exec('formatBlock', '<blockquote>')" title="Sisipkan Kutipan (Quote)" class="w-8 h-8 rounded hover:bg-slate-200 text-blue-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('formatBlock', '<blockquote>')" title="Sisipkan Kutipan (Quote)" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-blue-700 dark:text-blue-400 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-quote-left"></i>
             </button>
-            <button type="button" @click="insertLink()" title="Sisipkan Link Website" class="w-8 h-8 rounded hover:bg-slate-200 text-blue-700 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="insertLink()" title="Sisipkan Link Website" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-blue-700 dark:text-blue-400 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-link"></i>
             </button>
-            <button type="button" @click="exec('unlink')" title="Hapus Link" class="w-8 h-8 rounded hover:bg-slate-200 text-red-600 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('unlink')" title="Hapus Link" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-red-600 dark:text-red-400 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-link-slash"></i>
             </button>
-            <button type="button" @click="insertTable()" title="Sisipkan Tabel Sederhana" class="px-2 py-1 rounded hover:bg-slate-200 font-bold text-slate-700 border border-slate-300 bg-white flex items-center gap-1">
-                <i class="fa-solid fa-table text-emerald-600"></i> Tabel
+            <button type="button" @click="insertTable()" title="Sisipkan Tabel Sederhana" class="px-2 py-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 font-bold text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center gap-1">
+                <i class="fa-solid fa-table text-emerald-600 dark:text-emerald-400"></i> Tabel
             </button>
 
-            <div class="h-5 w-px bg-slate-300 mx-1"></div>
+            <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-1"></div>
 
             <!-- Colors -->
             <div class="flex items-center gap-1 px-1">
@@ -319,10 +339,10 @@ if (typeof window.dualEditorComponent === 'undefined') {
                 <button type="button" @click="exec('foreColor', '#16a34a')" title="Warna Hijau" class="w-5 h-5 rounded-full bg-emerald-600 border border-slate-300 hover:scale-110 transition"></button>
             </div>
 
-            <div class="h-5 w-px bg-slate-300 mx-1"></div>
+            <div class="h-5 w-px bg-slate-300 dark:bg-slate-700 mx-1"></div>
 
             <!-- Clear formatting -->
-            <button type="button" @click="exec('removeFormat')" title="Hapus Format Teks" class="w-8 h-8 rounded hover:bg-slate-200 text-amber-600 border border-slate-300 bg-white flex items-center justify-center">
+            <button type="button" @click="exec('removeFormat')" title="Hapus Format Teks" class="w-8 h-8 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-amber-600 dark:text-amber-400 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 flex items-center justify-center">
                 <i class="fa-solid fa-eraser"></i>
             </button>
         </div>

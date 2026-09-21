@@ -64,6 +64,137 @@
     
     <!-- AlpineJS -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+    <style>
+        /* Global Admin Dark Mode Styling for Cards, Typography & Form Controls */
+        .dark .bg-white {
+            background-color: #0f172a !important;
+        }
+        .dark .bg-slate-50, .dark .bg-gray-50, .dark .bg-gray-100 {
+            background-color: #1e293b !important;
+        }
+        .dark .bg-slate-100, .dark .bg-gray-200 {
+            background-color: #1e293b !important;
+        }
+        .dark .bg-blue-50, .dark .bg-blue-50\/50 {
+            background-color: rgba(23, 37, 84, 0.4) !important;
+        }
+        .dark .bg-emerald-50, .dark .bg-emerald-50\/50 {
+            background-color: rgba(6, 78, 59, 0.4) !important;
+        }
+        .dark .bg-amber-50, .dark .bg-amber-50\/50 {
+            background-color: rgba(69, 26, 3, 0.4) !important;
+        }
+        .dark .bg-teal-50, .dark .bg-teal-50\/50 {
+            background-color: rgba(19, 78, 74, 0.4) !important;
+        }
+        .dark .border-slate-200,
+        .dark .border-slate-100,
+        .dark .border-slate-300,
+        .dark .border-gray-200,
+        .dark .border-gray-300 {
+            border-color: #334155 !important;
+        }
+        .dark .border-blue-100, .dark .border-blue-200 {
+            border-color: #1e3a8a !important;
+        }
+        .dark .border-emerald-100, .dark .border-emerald-200 {
+            border-color: #065f46 !important;
+        }
+        .dark .border-amber-100, .dark .border-amber-200 {
+            border-color: #78350f !important;
+        }
+        .dark .border-teal-100, .dark .border-teal-200 {
+            border-color: #115e59 !important;
+        }
+        .dark .divide-slate-200,
+        .dark .divide-slate-100,
+        .dark .divide-slate-300,
+        .dark .divide-gray-200 {
+            border-color: #334155 !important;
+        }
+        .dark .text-slate-900, .dark .text-gray-900 {
+            color: #f8fafc !important;
+        }
+        .dark .text-slate-800, .dark .text-gray-800 {
+            color: #f1f5f9 !important;
+        }
+        .dark .text-slate-700, .dark .text-gray-700 {
+            color: #e2e8f0 !important;
+        }
+        .dark .text-slate-600, .dark .text-gray-600 {
+            color: #cbd5e1 !important;
+        }
+        .dark .text-slate-500, .dark .text-gray-500 {
+            color: #94a3b8 !important;
+        }
+        .dark .text-slate-400, .dark .text-gray-400 {
+            color: #94a3b8 !important;
+        }
+        .dark .text-blue-900, .dark .text-blue-800 {
+            color: #7dd3fc !important;
+        }
+        .dark .text-blue-700, .dark .text-blue-600 {
+            color: #93c5fd !important;
+        }
+        .dark .text-emerald-900, .dark .text-emerald-800 {
+            color: #6ee7b7 !important;
+        }
+        .dark .text-emerald-700, .dark .text-emerald-600 {
+            color: #a7f3d0 !important;
+        }
+        .dark .text-amber-900, .dark .text-amber-800 {
+            color: #fde68a !important;
+        }
+        .dark .text-amber-700, .dark .text-amber-600 {
+            color: #fde68a !important;
+        }
+        .dark .text-teal-900, .dark .text-teal-800 {
+            color: #5eead4 !important;
+        }
+        .dark .text-teal-700, .dark .text-teal-600 {
+            color: #99f6e4 !important;
+        }
+        .dark label {
+            color: #e2e8f0 !important;
+        }
+        .dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="file"]):not([type="range"]):not([type="color"]),
+        .dark select,
+        .dark textarea {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+            color: #f8fafc !important;
+        }
+        .dark input[type="file"] {
+            color: #cbd5e1 !important;
+        }
+        .dark input::placeholder,
+        .dark textarea::placeholder {
+            color: #94a3b8 !important;
+        }
+        .dark select option {
+            background-color: #0f172a !important;
+            color: #f8fafc !important;
+        }
+        .dark table thead tr {
+            background-color: #020617 !important;
+            border-color: #334155 !important;
+        }
+        .dark table tbody tr {
+            border-color: #1e293b !important;
+        }
+        .dark code {
+            background-color: #0f172a !important;
+            color: #38bdf8 !important;
+        }
+    </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased flex h-screen overflow-hidden transition-colors duration-200">
 
