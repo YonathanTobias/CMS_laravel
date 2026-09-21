@@ -15,7 +15,7 @@
 
     # 2. Block Access to Hidden & Sensitive System Files (.env, .git, .sqlite, logs, etc.)
     RewriteCond %{REQUEST_URI} ^/.*(\.env|\.git|\.htaccess|\.config|\.sql|\.sqlite|\.log|\.sh|composer\.(json|lock)|package\.(json|lock)|artisan)$ [NC,OR]
-    RewriteCond %{REQUEST_URI} ^/(app|bootstrap|config|database|resources|routes|storage|vendor)/ [NC]
+    RewriteCond %{REQUEST_URI} ^/(app|bootstrap|config|database|resources|routes|vendor)/ [NC]
     RewriteRule .* - [F,L]
 
     # 3. Block Malicious Attack Payloads (SQL Injection, Path Traversal, Script Injection)
