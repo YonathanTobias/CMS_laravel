@@ -35,10 +35,16 @@ class SlideController extends Controller
             'image_file' => 'nullable|image|max:3072',
         ]);
 
+        $validated['title'] = $request->input('title') ?? '';
+        $validated['subtitle'] = $request->input('subtitle') ?? '';
+        $validated['badge'] = $request->input('badge') ?? '';
+        $validated['badge_color'] = $request->input('badge_color', 'bg-amber-500 text-slate-950') ?? '';
+        $validated['cta_text'] = $request->input('cta_text') ?? '';
+        $validated['cta_link'] = $request->input('cta_link') ?? '';
+        $validated['secondary_text'] = $request->input('secondary_text') ?? '';
+        $validated['secondary_link'] = $request->input('secondary_link') ?? '';
         $validated['order'] = $request->input('order', 1);
         $validated['is_active'] = $request->has('is_active');
-        $validated['badge'] = $request->filled('badge') ? $request->badge : null;
-        $validated['badge_color'] = $request->input('badge_color', 'bg-amber-500 text-slate-950');
 
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('slides', 'public');
@@ -75,9 +81,16 @@ class SlideController extends Controller
             'image_file' => 'nullable|image|max:3072',
         ]);
 
+        $validated['title'] = $request->input('title') ?? '';
+        $validated['subtitle'] = $request->input('subtitle') ?? '';
+        $validated['badge'] = $request->input('badge') ?? '';
+        $validated['badge_color'] = $request->input('badge_color', 'bg-amber-500 text-slate-950') ?? '';
+        $validated['cta_text'] = $request->input('cta_text') ?? '';
+        $validated['cta_link'] = $request->input('cta_link') ?? '';
+        $validated['secondary_text'] = $request->input('secondary_text') ?? '';
+        $validated['secondary_link'] = $request->input('secondary_link') ?? '';
         $validated['order'] = $request->input('order', 1);
         $validated['is_active'] = $request->has('is_active');
-        $validated['badge'] = $request->filled('badge') ? $request->badge : null;
 
         if ($request->hasFile('image_file')) {
             $path = $request->file('image_file')->store('slides', 'public');

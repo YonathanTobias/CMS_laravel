@@ -20,7 +20,7 @@
     <!-- Carousel Slides Container -->
     <div class="relative h-[500px] sm:h-[580px] w-full">
             @php
-                $hasTextContent = !empty($slide->title) || !empty($slide->subtitle) || !empty($slide->badge) || !empty($slide->cta_text);
+                $hasTextContent = !empty(trim($slide->title ?? '')) || !empty(trim($slide->subtitle ?? '')) || !empty(trim($slide->badge ?? '')) || !empty(trim($slide->cta_text ?? ''));
                 $imgSrc = \Illuminate\Support\Str::startsWith($slide->image, 'http') ? $slide->image : asset($slide->image);
             @endphp
             <div x-show="activeSlide === {{ $index }}" 
@@ -32,7 +32,7 @@
                  x-transition:leave-end="opacity-0 scale-95"
                  class="absolute inset-0 w-full h-full">
                 
-                @if(!$hasTextContent && !empty($slide->cta_link))
+                @if(!$hasTextContent && !empty(trim($slide->cta_link ?? '')))
                     <a href="{{ $slide->cta_link }}" class="block w-full h-full cursor-pointer" title="Klik untuk membuka tautan banner">
                         <img src="{{ $imgSrc }}" alt="{{ $slide->title ?? 'Banner STIKes Panti Waluya' }}" class="w-full h-full object-cover">
                     </a>
@@ -49,19 +49,19 @@
                     <div class="absolute inset-0 flex items-center pointer-events-none">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                             <div class="max-w-2xl space-y-5">
-                                @if($slide->badge)
+                                @if(!empty(trim($slide->badge ?? '')))
                                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full {{ $slide->badge_color }} text-xs font-extrabold uppercase tracking-wider shadow-lg pointer-events-auto">
                                         <i class="fa-solid fa-star text-[10px]"></i> {{ $slide->badge }}
                                     </div>
                                 @endif
                                 
-                                @if($slide->title)
+                                @if(!empty(trim($slide->title ?? '')))
                                     <h1 class="font-heading font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white leading-tight drop-shadow-md pointer-events-auto">
                                         {{ $slide->title }}
                                     </h1>
                                 @endif
                                 
-                                @if($slide->subtitle)
+                                @if(!empty(trim($slide->subtitle ?? '')))
                                     <p class="text-slate-200 text-sm sm:text-lg leading-relaxed drop-shadow max-w-xl pointer-events-auto">
                                         {{ $slide->subtitle }}
                                     </p>
