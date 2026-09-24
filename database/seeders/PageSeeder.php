@@ -32,6 +32,23 @@ class PageSeeder extends Seeder
                             </p>
                         </div>
 
+                        <!-- Video Profil Kampus STIKes Panti Waluya -->
+                        <div class="space-y-4">
+                            <h4 class="font-heading font-bold text-slate-900 dark:text-white text-2xl border-b-2 border-blue-600 pb-2 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-play text-red-600"></i> Video Profil STIKes Panti Waluya
+                            </h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Mengenal lebih dekat lingkungan akademik, fasilitas pembelajaran, dan kehidupan kampus di STIKes Panti Waluya Malang.</p>
+
+                            <div class="relative w-full aspect-video rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-800 bg-slate-950">
+                                <iframe class="absolute inset-0 w-full h-full" 
+                                        src="https://www.youtube.com/embed/MSfWvJv-_js" 
+                                        title="Video Profil STIKes Panti Waluya Malang" 
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
+
                         <!-- Timeline Sejarah Transformasi -->
                         <div class="space-y-6">
                             <h4 class="font-heading font-bold text-slate-900 text-2xl border-b-2 border-blue-600 pb-2 flex items-center gap-2">
