@@ -44,6 +44,25 @@
         </div>
     </div>
 
+    <!-- Pengaturan Fitur Multi-Bahasa (Pilihan Bahasa / Translation) -->
+    <div class="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+        <h3 class="font-heading font-bold text-slate-900 dark:text-white text-lg border-b border-slate-100 dark:border-slate-800 pb-2 text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
+            <i class="fa-solid fa-globe text-indigo-500"></i> Pengaturan Fitur Multi-Bahasa (Pilihan Bahasa Website)
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Status Tombol Pilihan Bahasa di Navbar</label>
+                <select name="enable_translation" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+                    <option value="1" {{ ($settings['enable_translation'] ?? '1') === '1' ? 'selected' : '' }}>Aktif (ON) - Tampilkan Pilihan Bahasa (ID, EN, CN, AR)</option>
+                    <option value="0" {{ ($settings['enable_translation'] ?? '1') === '0' ? 'selected' : '' }}>Nonaktif (OFF) - Sembunyikan Pilihan Bahasa</option>
+                </select>
+            </div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                <p><i class="fa-solid fa-circle-info text-indigo-500 mr-1.5"></i> Jika <strong>Aktif (ON)</strong>, pengunjung web dapat memilih bahasa (Indonesia, English, Mandarin, Arab) secara otomatis di menu atas navbar.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Pengaturan Widget PMB Online Beranda (100% Editable) -->
     <div class="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
         <h3 class="font-heading font-bold text-slate-900 dark:text-white text-lg border-b border-slate-100 dark:border-slate-800 pb-2 text-emerald-600 dark:text-emerald-400 flex items-center gap-2">
