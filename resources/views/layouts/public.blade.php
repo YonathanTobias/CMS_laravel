@@ -143,6 +143,27 @@
         .dark .prose [style*="background-color: white"] {
             background-color: transparent !important;
         }
+
+        /* Clean Google Translate Integration */
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame,
+        iframe.goog-te-banner-frame {
+            display: none !important;
+        }
+        body {
+            top: 0px !important;
+        }
+        .goog-tooltip,
+        .goog-tooltip:hover,
+        #goog-gt-tt,
+        .goog-te-balloon-frame {
+            display: none !important;
+        }
+        .goog-text-highlight {
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans antialiased flex flex-col min-h-screen transition-colors duration-200">
@@ -228,8 +249,35 @@
                     @endforeach
                 </nav>
 
-                <!-- PMB Action Button & Dark/Light Mode Switcher -->
+                <!-- PMB Action Button, Language Selector & Dark/Light Mode Switcher -->
                 <div class="hidden lg:flex items-center gap-3">
+                    <!-- Language Selector Dropdown -->
+                    <div class="relative" x-data="{ openLang: false, currentLang: (document.cookie.match(/googtrans=\/id\/([a-zA-Z\-]+)/) || [null, 'id'])[1] || 'id' }" @click.away="openLang = false">
+                        <button @click="openLang = !openLang" class="px-3 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-white transition flex items-center gap-1.5 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Pilih Bahasa / Select Language">
+                            <i class="fa-solid fa-globe text-sky-300 text-xs"></i>
+                            <span x-show="currentLang === 'id'">🇮🇩 ID</span>
+                            <span x-show="currentLang === 'en'">🇬🇧 EN</span>
+                            <span x-show="currentLang === 'zh-CN'">🇨🇳 CN</span>
+                            <span x-show="currentLang === 'ar'">🇸🇦 AR</span>
+                            <i class="fa-solid fa-chevron-down text-[9px] opacity-70 transition duration-200" :class="{'rotate-180': openLang}"></i>
+                        </button>
+                        
+                        <div x-show="openLang" x-transition class="absolute right-0 mt-2 w-36 bg-slate-900 border border-blue-800 rounded-xl shadow-2xl py-1 z-50 text-xs">
+                            <button type="button" @click="setSiteLanguage('id'); openLang = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇮🇩</span> <span>Indonesia</span>
+                            </button>
+                            <button type="button" @click="setSiteLanguage('en'); openLang = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇬🇧</span> <span>English</span>
+                            </button>
+                            <button type="button" @click="setSiteLanguage('zh-CN'); openLang = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇨🇳</span> <span>Mandarin</span>
+                            </button>
+                            <button type="button" @click="setSiteLanguage('ar'); openLang = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇸🇦</span> <span>Arabic</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <!-- Dark / Light Mode Switcher Button -->
                     <button @click="toggleTheme()" class="px-3.5 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-amber-400 transition flex items-center gap-1.5 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Ubah Mode Tampilan (Dark/Light)">
                         <template x-if="darkMode">
@@ -247,6 +295,32 @@
 
                 <!-- Mobile Menu Button & Dark Mode Switcher -->
                 <div class="lg:hidden flex items-center gap-2">
+                    <!-- Mobile Language Switcher Dropdown -->
+                    <div class="relative" x-data="{ openLangMobile: false, currentLang: (document.cookie.match(/googtrans=\/id\/([a-zA-Z\-]+)/) || [null, 'id'])[1] || 'id' }" @click.away="openLangMobile = false">
+                        <button @click="openLangMobile = !openLangMobile" class="p-2 rounded-lg text-white bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none flex items-center gap-1">
+                            <i class="fa-solid fa-globe text-sky-300"></i>
+                            <span x-show="currentLang === 'id'">ID</span>
+                            <span x-show="currentLang === 'en'">EN</span>
+                            <span x-show="currentLang === 'zh-CN'">CN</span>
+                            <span x-show="currentLang === 'ar'">AR</span>
+                        </button>
+                        
+                        <div x-show="openLangMobile" x-transition class="absolute right-0 mt-2 w-36 bg-slate-900 border border-blue-800 rounded-xl shadow-2xl py-1 z-50 text-xs">
+                            <button type="button" @click="setSiteLanguage('id'); openLangMobile = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇮🇩</span> <span>Indonesia</span>
+                            </button>
+                            <button type="button" @click="setSiteLanguage('en'); openLangMobile = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇬🇧</span> <span>English</span>
+                            </button>
+                            <button type="button" @click="setSiteLanguage('zh-CN'); openLangMobile = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇨🇳</span> <span>Mandarin</span>
+                            </button>
+                            <button type="button" @click="setSiteLanguage('ar'); openLangMobile = false;" class="w-full text-left px-3.5 py-2 text-slate-200 hover:bg-blue-600 hover:text-white transition flex items-center gap-2">
+                                <span>🇸🇦</span> <span>Arabic</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <button @click="toggleTheme()" class="p-2 rounded-lg text-amber-400 bg-white/10 hover:bg-white/20 border border-white/20 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
                         <i class="fa-solid" :class="darkMode ? 'fa-sun text-amber-400' : 'fa-moon text-amber-300'"></i>
                     </button>
@@ -358,6 +432,41 @@
 
         </div>
     </footer>
+
+    <!-- Google Translate Hidden Element & Script -->
+    <div id="google_translate_element" class="hidden"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'id',
+                includedLanguages: 'id,en,zh-CN,ar',
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+
+        function setSiteLanguage(langCode) {
+            if (langCode === 'id') {
+                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + window.location.hostname;
+                window.location.reload();
+                return;
+            }
+            
+            document.cookie = 'googtrans=/id/' + langCode + '; path=/;';
+            document.cookie = 'googtrans=/id/' + langCode + '; path=/; domain=' + window.location.hostname;
+            document.cookie = 'googtrans=/id/' + langCode + '; path=/; domain=.' + window.location.hostname;
+            
+            const combo = document.querySelector('.goog-te-combo');
+            if (combo) {
+                combo.value = langCode;
+                combo.dispatchEvent(new Event('change'));
+            } else {
+                window.location.reload();
+            }
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
