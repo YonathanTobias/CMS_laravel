@@ -36,7 +36,7 @@
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Email Administrator</label>
                     <div class="relative">
-                        <input type="email" name="email" value="{{ old('email', 'admin@stikespantiwaluya.ac.id') }}" required placeholder="admin@stikespantiwaluya.ac.id" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">
+                        <input type="email" name="email" value="{{ old('email') }}" required placeholder="Masukkan email administrator..." autocomplete="email" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">
                         <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Password</label>
                     <div class="relative">
-                        <input type="password" name="password" value="password123" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">
+                        <input type="password" name="password" required placeholder="Masukkan password..." autocomplete="current-password" class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500">
                         <i class="fa-solid fa-lock absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
                     </div>
                 </div>
@@ -54,7 +54,6 @@
                         <input type="checkbox" name="remember" class="rounded text-blue-600">
                         <span>Ingat Saya</span>
                     </label>
-                    <span class="text-slate-400">Default: password123</span>
                 </div>
 
                 <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition duration-200">
