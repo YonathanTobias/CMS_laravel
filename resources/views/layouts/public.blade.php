@@ -381,14 +381,9 @@
                         </div>
                     @endif
 
-                    <!-- Dark / Light Mode Switcher Button -->
-                    <button @click="toggleTheme()" class="px-3.5 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-amber-400 transition flex items-center gap-1.5 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Ubah Mode Tampilan (Dark/Light)">
-                        <template x-if="darkMode">
-                            <span class="flex items-center gap-1.5 text-amber-400"><i class="fa-solid fa-sun text-amber-400"></i> Mode Terang</span>
-                        </template>
-                        <template x-if="!darkMode">
-                            <span class="flex items-center gap-1.5 text-sky-200"><i class="fa-solid fa-moon text-amber-300"></i> Mode Gelap</span>
-                        </template>
+                    <!-- Dark / Light Mode Switcher Button (Icon Only) -->
+                    <button @click="toggleTheme()" class="w-10 h-10 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 transition flex items-center justify-center focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Ubah Mode Tampilan (Dark/Light)" aria-label="Ubah Mode Tampilan">
+                        <i class="fa-solid" :class="darkMode ? 'fa-sun text-amber-400 text-base' : 'fa-moon text-amber-300 text-base'"></i>
                     </button>
 
                     <a href="{{ \App\Models\SiteSetting::get('pmb_link', '#') }}" target="_blank" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5 transition duration-200 flex items-center gap-2 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none">
