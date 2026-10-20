@@ -124,6 +124,92 @@
             color: #94a3b8 !important;
             border-left-color: #3b82f6 !important;
         }
+
+        /* Dark Mode Card Containers inside Page Content & Prose */
+        .dark .prose .bg-white {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+        .dark .prose .bg-slate-50,
+        .dark .prose .bg-gray-50,
+        .dark .prose .bg-slate-100 {
+            background-color: #1e293b !important;
+            border-color: #334155 !important;
+        }
+        .dark .prose .bg-blue-50,
+        .dark .prose [class*="bg-blue-50"] {
+            background-color: rgba(30, 58, 138, 0.35) !important;
+            border-color: #1e3a8a !important;
+        }
+        .dark .prose .bg-emerald-50,
+        .dark .prose [class*="bg-emerald-50"] {
+            background-color: rgba(6, 78, 59, 0.35) !important;
+            border-color: #065f46 !important;
+        }
+        .dark .prose .bg-amber-50,
+        .dark .prose [class*="bg-amber-50"] {
+            background-color: rgba(120, 53, 15, 0.35) !important;
+            border-color: #78350f !important;
+        }
+
+        /* Timeline Dots, Borders & Dividers in Dark Mode */
+        .dark .prose .border-white {
+            border-color: #0f172a !important;
+        }
+        .dark .prose .border-slate-200,
+        .dark .prose .border-slate-100,
+        .dark .prose .border-slate-300 {
+            border-color: #334155 !important;
+        }
+        .dark .prose .border-blue-200,
+        .dark .prose .border-blue-100 {
+            border-color: #1e3a8a !important;
+        }
+        .dark .prose .border-emerald-200 {
+            border-color: #065f46 !important;
+        }
+        .dark .prose .border-amber-200 {
+            border-color: #78350f !important;
+        }
+
+        /* Badges & Tags inside cards in Dark Mode */
+        .dark .prose .bg-blue-100 {
+            background-color: #1e3a8a !important;
+            color: #bfdbfe !important;
+        }
+        .dark .prose .bg-emerald-100 {
+            background-color: #065f46 !important;
+            color: #a7f3d0 !important;
+        }
+        .dark .prose .bg-amber-100,
+        .dark .prose .bg-amber-200 {
+            background-color: #78350f !important;
+            color: #fde68a !important;
+        }
+
+        /* Typography Color Adaptations inside Cards */
+        .dark .prose .text-slate-900,
+        .dark .prose .text-slate-800,
+        .dark .prose .text-slate-700 {
+            color: #f1f5f9 !important;
+        }
+        .dark .prose .text-slate-600,
+        .dark .prose .text-slate-500 {
+            color: #cbd5e1 !important;
+        }
+        .dark .prose .text-emerald-900,
+        .dark .prose .text-emerald-800 {
+            color: #6ee7b7 !important;
+        }
+        .dark .prose .text-amber-950,
+        .dark .prose .text-amber-900 {
+            color: #fde68a !important;
+        }
+        .dark .prose .text-blue-900,
+        .dark .prose .text-blue-800 {
+            color: #93c5fd !important;
+        }
+
         /* Override any inline hardcoded dark text colors from WYSIWYG editors */
         .dark .prose [style*="color: rgb(0, 0, 0)"],
         .dark .prose [style*="color: #000000"],
