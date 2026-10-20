@@ -352,7 +352,7 @@
 
                 <!-- PMB Action Button, Language Selector & Dark/Light Mode Switcher -->
                 <div class="hidden lg:flex items-center gap-3">
-                    @if(\App\Models\SiteSetting::get('enable_translation', '1') === '1')
+                    @if(\App\Models\SiteSetting::get('enable_translation', '0') === '1')
                         <!-- Language Selector Dropdown -->
                         <div class="relative" x-data="{ openLang: false, currentLang: (document.cookie.match(/googtrans=\/id\/([a-zA-Z\-]+)/) || [null, 'id'])[1] || 'id' }" @click.away="openLang = false">
                             <button @click="openLang = !openLang" class="px-3 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-white transition flex items-center gap-1.5 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none" title="Pilih Bahasa / Select Language">
@@ -398,7 +398,7 @@
 
                 <!-- Mobile Menu Button & Dark Mode Switcher -->
                 <div class="lg:hidden flex items-center gap-2">
-                    @if(\App\Models\SiteSetting::get('enable_translation', '1') === '1')
+                    @if(\App\Models\SiteSetting::get('enable_translation', '0') === '1')
                         <!-- Mobile Language Switcher Dropdown -->
                         <div class="relative" x-data="{ openLangMobile: false, currentLang: (document.cookie.match(/googtrans=\/id\/([a-zA-Z\-]+)/) || [null, 'id'])[1] || 'id' }" @click.away="openLangMobile = false">
                             <button @click="openLangMobile = !openLangMobile" class="p-2 rounded-lg text-white bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-bold focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none flex items-center gap-1">
@@ -538,7 +538,7 @@
         </div>
     </footer>
 
-    @if(\App\Models\SiteSetting::get('enable_translation', '1') === '1')
+    @if(\App\Models\SiteSetting::get('enable_translation', '0') === '1')
         <!-- Google Translate Hidden Element & Script -->
         <div id="google_translate_element" class="hidden"></div>
         <script type="text/javascript">
