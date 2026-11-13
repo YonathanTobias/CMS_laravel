@@ -69,7 +69,7 @@
                 </div>
 
                 <!-- Thumbnail Selector Strip -->
-                <div class="flex items-center gap-3 overflow-x-auto pb-2 pt-1">
+                <div class="flex items-center gap-3 overflow-x-auto no-scrollbar scroll-smooth pb-2 pt-1">
                     <template x-for="(img, idx) in gallery" :key="idx">
                         <button @click="activeSlide = idx" 
                                 :class="activeSlide === idx ? 'ring-4 ring-blue-600 scale-105 opacity-100' : 'opacity-60 hover:opacity-100'"
