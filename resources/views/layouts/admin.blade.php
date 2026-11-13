@@ -291,21 +291,23 @@
                 <span x-show="sidebarOpen">Menu Navigasi</span>
             </a>
 
-            <div class="pt-4 pb-1" x-show="sidebarOpen">
-                <div class="text-[11px] font-bold text-sky-400/80 uppercase tracking-wider px-3">Sistem</div>
-            </div>
+            @if(auth()->user() && auth()->user()->isSuperAdmin())
+                <div class="pt-4 pb-1" x-show="sidebarOpen">
+                    <div class="text-[11px] font-bold text-sky-400/80 uppercase tracking-wider px-3">Sistem (Super Admin)</div>
+                </div>
 
-            <!-- Kelola Administrator -->
-            <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.users.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
-                <i class="fa-solid fa-users w-5 text-center text-base"></i>
-                <span x-show="sidebarOpen">Kelola Admin</span>
-            </a>
+                <!-- Kelola Administrator -->
+                <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.users.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+                    <i class="fa-solid fa-users w-5 text-center text-base"></i>
+                    <span x-show="sidebarOpen">Kelola Admin</span>
+                </a>
 
-            <!-- Pengaturan Situs -->
-            <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.settings.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
-                <i class="fa-solid fa-gears w-5 text-center text-base"></i>
-                <span x-show="sidebarOpen">Pengaturan Situs</span>
-            </a>
+                <!-- Pengaturan Situs -->
+                <a href="{{ route('admin.settings.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none {{ request()->routeIs('admin.settings.*') ? 'bg-blue-700 text-white font-bold shadow-md' : 'hover:bg-blue-900/60 text-slate-300' }}">
+                    <i class="fa-solid fa-gears w-5 text-center text-base"></i>
+                    <span x-show="sidebarOpen">Pengaturan Situs</span>
+                </a>
+            @endif
 
         </nav>
 
@@ -317,7 +319,9 @@
                 </div>
                 <div class="truncate">
                     <div class="text-xs font-bold text-white truncate">{{ auth()->user()->name ?? 'Administrator' }}</div>
-                    <div class="text-[10px] text-sky-400 font-semibold">Admin Utama</div>
+                    <div class="text-[10px] {{ (auth()->user() && auth()->user()->isSuperAdmin()) ? 'text-amber-300 font-bold' : 'text-sky-400 font-semibold' }}">
+                        {{ auth()->user()->role_name ?? 'Administrator' }}
+                    </div>
                 </div>
             </div>
             

@@ -33,6 +33,18 @@
     </div>
 
     <div>
+        <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Peran Akses (Role)</label>
+        <select name="role" required class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-amber-400">
+            <option value="admin" {{ old('role', $user->isSuperAdmin() ? 'super_admin' : 'admin') === 'admin' ? 'selected' : '' }}>Admin (Pengelola Konten - Tanpa Akses Pengaturan & Kelola Admin)</option>
+            <option value="super_admin" {{ old('role', $user->isSuperAdmin() ? 'super_admin' : 'admin') === 'super_admin' ? 'selected' : '' }}>Super Admin (Akses Penuh Seluruh Sistem)</option>
+        </select>
+        <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1">Role <strong>Admin</strong> dapat mengelola semua konten berita, prodi, halaman, fasilitas, menu, dll. Namun tidak dapat mengakses Pengaturan Situs dan Kelola Admin.</p>
+        @error('role')
+            <p class="text-xs text-red-500 mt-1 font-bold">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
         <label class="block text-xs font-bold uppercase text-slate-700 dark:text-slate-300 mb-1">Kata Sandi Baru (Opsional)</label>
         <input type="password" name="password" placeholder="Biarkan kosong jika tidak ingin mengubah password..." class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500 focus-visible:ring-2 focus-visible:ring-amber-400">
         <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">Kosongkan kolom password jika hanya ingin memperbarui nama/email.</p>

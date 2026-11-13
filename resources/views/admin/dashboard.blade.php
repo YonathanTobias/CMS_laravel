@@ -18,9 +18,15 @@
             <a href="{{ route('admin.posts.create') }}" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-4.5 py-2.5 rounded-xl text-xs shadow-lg transition flex items-center gap-1.5">
                 <i class="fa-solid fa-plus"></i> Tulis Berita Baru
             </a>
-            <a href="{{ route('admin.settings.index') }}" class="bg-white/15 hover:bg-white/25 text-white font-bold px-4.5 py-2.5 rounded-xl text-xs border border-white/30 backdrop-blur-md transition flex items-center gap-1.5">
-                <i class="fa-solid fa-sliders"></i> Pengaturan PMB & Situs
-            </a>
+            @if(auth()->user() && auth()->user()->isSuperAdmin())
+                <a href="{{ route('admin.settings.index') }}" class="bg-white/15 hover:bg-white/25 text-white font-bold px-4.5 py-2.5 rounded-xl text-xs border border-white/30 backdrop-blur-md transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders"></i> Pengaturan PMB & Situs
+                </a>
+            @else
+                <a href="{{ route('admin.posts.index') }}" class="bg-white/15 hover:bg-white/25 text-white font-bold px-4.5 py-2.5 rounded-xl text-xs border border-white/30 backdrop-blur-md transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-check"></i> Kelola Berita & Artikel
+                </a>
+            @endif
         </div>
     </div>
 </div>

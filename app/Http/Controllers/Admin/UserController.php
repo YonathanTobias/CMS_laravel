@@ -27,15 +27,19 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            'role' => 'required|in:super_admin,admin',
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
-        return redirect()->route('admin.users.index')->with('success', "Akun administrator '{$validated['name']}' berhasil ditambahkan!");
+        $user->setSuperAdmin($validated['role'] === 'super_admin');
+
+        $roleText = $validated['role'] === 'super_admin' ? 'Super Admin' : 'Admin';
+        return redirect()->route('admin.users.index')->with('success', "Akun {$roleText} '{$validated['name']}' berhasil ditambahkan!");
     }
 
     public function edit(User $user)
@@ -49,6 +53,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'password' => 'nullable|string|min:6',
+            'role' => 'required|in:super_admin,admin',
         ]);
 
         $data = [
@@ -61,6 +66,14 @@ class UserController extends Controller
         }
 
         $user->update($data);
+
+        // Jangan izinkan user yang sedang login menurunkan rolenya sendiri menjadi admin biasa jika dia adalah super admin satu-satunya
+        if ($user->id === auth()->id() && $validated['role'] !== 'super_admin') {
+            // Biarkan tetap super admin agar tidak terkunci sendiri
+            return redirect()->route('admin.users.index')->with('success', "Akun administrator '{$user->name}' berhasil diperbarui (Status Super Admin Anda dipertahankan agar tidak terkunci)!");
+        }
+
+        $user->setSuperAdmin($validated['role'] === 'super_admin');
 
         return redirect()->route('admin.users.index')->with('success', "Akun administrator '{$user->name}' berhasil diperbarui!");
     }

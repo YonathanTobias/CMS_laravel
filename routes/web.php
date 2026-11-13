@@ -77,10 +77,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // CMS Menu Navigation Builder
     Route::resource('menus', MenuController::class);
 
-    // CMS User Administrator Manager
-    Route::resource('users', UserController::class);
-
-    // Pengaturan Situs & PMB Online
-    Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
-    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    // CMS User Administrator Manager & Pengaturan Situs (Khusus Super Admin)
+    Route::middleware(['super_admin'])->group(function () {
+        Route::resource('users', UserController::class);
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
+        Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    });
 });

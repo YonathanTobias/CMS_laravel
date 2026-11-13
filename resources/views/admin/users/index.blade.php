@@ -53,9 +53,15 @@
                             {{ $user->created_at ? $user->created_at->format('d M Y, H:i') : '-' }}
                         </td>
                         <td class="py-4 px-6 text-center">
-                            <span class="px-2.5 py-1 rounded bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-xs font-bold border border-emerald-200 dark:border-emerald-800">
-                                Administrator
-                            </span>
+                            @if($user->isSuperAdmin())
+                                <span class="px-2.5 py-1 rounded bg-indigo-100 dark:bg-indigo-950/70 text-indigo-800 dark:text-indigo-300 text-xs font-bold border border-indigo-200 dark:border-indigo-800 flex items-center justify-center gap-1 w-fit mx-auto">
+                                    <i class="fa-solid fa-shield-halved text-[11px] text-indigo-600 dark:text-indigo-400"></i> Super Admin
+                                </span>
+                            @else
+                                <span class="px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold border border-slate-200 dark:border-slate-700 flex items-center justify-center gap-1 w-fit mx-auto">
+                                    <i class="fa-solid fa-user-gear text-[11px] text-slate-500"></i> Admin
+                                </span>
+                            @endif
                         </td>
                         <td class="py-4 px-6 text-center">
                             <div class="flex items-center justify-center gap-2">
