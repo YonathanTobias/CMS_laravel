@@ -533,6 +533,49 @@
         </div>
     </footer>
 
+    @if(\App\Models\SiteSetting::get('whatsapp_floating_enabled', '1') === '1' && ($rawWa = \App\Models\SiteSetting::get('whatsapp')))
+        @php
+            $cleanWa = preg_replace('/[^0-9]/', '', (string)$rawWa);
+            if (\Illuminate\Support\Str::startsWith($cleanWa, '0')) {
+                $cleanWa = '62' . substr($cleanWa, 1);
+            } elseif (!\Illuminate\Support\Str::startsWith($cleanWa, '62')) {
+                $cleanWa = '62' . $cleanWa;
+            }
+            $defaultMsg = \App\Models\SiteSetting::get('whatsapp_default_message', 'Halo Admin STIKes Panti Waluya Malang, saya ingin bertanya tentang informasi pendaftaran PMB / kampus.');
+            $waUrl = 'https://wa.me/' . $cleanWa . '?text=' . urlencode($defaultMsg);
+            $tooltipText = \App\Models\SiteSetting::get('whatsapp_button_text', 'Chat via WhatsApp');
+        @endphp
+
+        <!-- WhatsApp Floating Chat Button -->
+        <aside aria-label="Layanan WhatsApp" class="fixed bottom-6 right-6 z-50 flex items-center group">
+            <!-- Tooltip Label on Hover / Focus -->
+            <a href="{{ $waUrl }}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="mr-3 px-3.5 py-2 bg-slate-900/90 dark:bg-slate-800/95 backdrop-blur-md text-white text-xs font-semibold rounded-xl shadow-xl border border-slate-700/60 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0 group-focus-within:translate-x-0 hidden sm:flex items-center gap-2 select-none pointer-events-none group-hover:pointer-events-auto group-focus-within:pointer-events-auto">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>{{ $tooltipText }}</span>
+            </a>
+
+            <!-- Floating Button with Pulse Effect -->
+            <div class="relative flex items-center justify-center">
+                <!-- Ping / Ripple Animation -->
+                <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-30 animate-ping"></span>
+                
+                <a href="{{ $waUrl }}" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   aria-label="{{ $tooltipText }}"
+                   class="relative w-14 h-14 bg-gradient-to-tr from-emerald-600 to-green-500 hover:from-emerald-500 hover:to-green-400 text-white rounded-full flex items-center justify-center shadow-2xl shadow-emerald-600/50 hover:shadow-emerald-500/70 transform hover:scale-110 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400/50">
+                    <!-- WhatsApp Official SVG Icon -->
+                    <svg class="w-8 h-8 fill-current drop-shadow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.031 0C5.394 0 0 5.394 0 12.031c0 2.12.553 4.188 1.602 6.009L.07 24l6.125-1.606a11.966 11.966 0 005.836 1.506h.005c6.633 0 12.027-5.394 12.027-12.031A12.035 12.035 0 0012.031 0zm0 21.884h-.004a9.92 9.92 0 01-5.06-1.39l-.363-.215-3.763.987 1.004-3.668-.236-.376A9.912 9.912 0 012.052 12.03C2.052 6.526 6.527 2.052 12.031 2.052c2.666 0 5.172 1.037 7.054 2.919 1.882 1.882 2.918 4.388 2.918 7.054 0 5.505-4.474 9.859-9.972 9.859zm5.474-7.477c-.3-.15-1.777-.876-2.052-.976-.276-.101-.476-.15-.677.15-.2.3-.776.976-.951 1.176-.176.201-.351.226-.651.076-.3-.15-1.268-.467-2.416-1.491-.894-.798-1.497-1.783-1.673-2.083-.175-.3-.019-.462.132-.612.135-.135.3-.35.45-.526.151-.175.201-.3.301-.501.101-.2.05-.375-.025-.525-.075-.15-.676-1.628-.926-2.228-.244-.585-.492-.505-.676-.514-.175-.009-.376-.01-.577-.01-.2 0-.526.075-.801.375-.276.3-1.053 1.028-1.053 2.508 0 1.48 1.078 2.909 1.228 3.11.15.2 2.122 3.24 5.141 4.544.719.31 1.28.496 1.718.636.721.229 1.378.196 1.897.119.578-.087 1.777-.726 2.027-1.427.251-.701.251-1.302.176-1.427-.076-.125-.276-.2-.576-.35z"/>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+    @endif
+
     @if(\App\Models\SiteSetting::get('enable_translation', '0') === '1')
         <!-- Google Translate Hidden Element & Script -->
         <div id="google_translate_element" class="hidden"></div>

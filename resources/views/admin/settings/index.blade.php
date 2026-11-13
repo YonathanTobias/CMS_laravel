@@ -462,17 +462,41 @@
         </div>
     </div>
 
-    <!-- Informasi Kontak -->
+    <!-- Informasi Kontak & WhatsApp Floating Button -->
     <div class="space-y-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-        <h3 class="font-heading font-bold text-slate-900 dark:text-white text-lg border-b border-slate-100 dark:border-slate-800 pb-2 text-blue-700 dark:text-sky-400">Informasi Kontak & Alamat</h3>
+        <h3 class="font-heading font-bold text-slate-900 dark:text-white text-lg border-b border-slate-100 dark:border-slate-800 pb-2 text-emerald-700 dark:text-emerald-400 flex items-center gap-2">
+            <i class="fa-brands fa-whatsapp text-emerald-600 text-xl"></i> Pengaturan WhatsApp & Floating Chat Button
+        </h3>
+        
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Status Floating Button</label>
+                <select name="whatsapp_floating_enabled" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                    <option value="1" {{ ($settings['whatsapp_floating_enabled'] ?? '1') === '1' ? 'selected' : '' }}>Aktif (ON) - Tampilkan Tombol Melayang</option>
+                    <option value="0" {{ ($settings['whatsapp_floating_enabled'] ?? '1') === '0' ? 'selected' : '' }}>Nonaktif (OFF) - Sembunyikan</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Nomor WhatsApp PMB / CS</label>
+                <input type="text" name="whatsapp" value="{{ $settings['whatsapp'] ?? '0812-3456-7890' }}" placeholder="Contoh: 081234567890" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+                <p class="text-[11px] text-slate-500 mt-1">Otomatis diformat ke format internasional (62...)</p>
+            </div>
+            <div>
+                <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Tooltip / Label Teks (Hover)</label>
+                <input type="text" name="whatsapp_button_text" value="{{ $settings['whatsapp_button_text'] ?? 'Hubungi Kami via WhatsApp' }}" placeholder="Hubungi Kami..." class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Pesan Pembuka Otomatis (Pre-filled Message)</label>
+            <textarea name="whatsapp_default_message" rows="2" placeholder="Halo Admin STIKes Panti Waluya, saya ingin bertanya mengenai..." class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500">{{ $settings['whatsapp_default_message'] ?? 'Halo Admin STIKes Panti Waluya Malang, saya ingin bertanya tentang informasi pendaftaran PMB / kampus.' }}</textarea>
+            <p class="text-[11px] text-slate-500 mt-1">Pesan ini akan otomatis terisi saat pengunjung mengklik tombol WhatsApp.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
             <div>
                 <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Telepon Kantor</label>
                 <input type="text" name="phone" value="{{ $settings['phone'] ?? '' }}" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
-            </div>
-            <div>
-                <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">WhatsApp PMB</label>
-                <input type="text" name="whatsapp" value="{{ $settings['whatsapp'] ?? '' }}" class="w-full px-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
             </div>
             <div>
                 <label class="block text-xs font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">Email Resmi</label>
